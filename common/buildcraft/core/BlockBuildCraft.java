@@ -1,16 +1,16 @@
-/**
- * Copyright (c) 2011-2014, SpaceToad and the BuildCraft Team
- * http://www.mod-buildcraft.com
+/** Copyright (c) 2011-2014, SpaceToad and the BuildCraft Team http://www.mod-buildcraft.com
  *
- * BuildCraft is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
- * http://www.mod-buildcraft.com/MMPL-1.0.txt
- */
+ * BuildCraft is distributed under the terms of the Minecraft Mod Public License 1.0, or MMPL. Please check the contents
+ * of the license located in http://www.mod-buildcraft.com/MMPL-1.0.txt */
 package buildcraft.core;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Random;
+
+import com.google.common.collect.HashBiMap;
+import com.google.common.collect.Lists;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -29,26 +29,28 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+
 import buildcraft.api.core.BuildCraftProperties;
+import buildcraft.api.core.PropertyUnlistedEnum;
+import buildcraft.api.enums.EnumFillerPattern;
 import buildcraft.api.events.BlockPlacedDownEvent;
 import buildcraft.api.tiles.IHasWork;
 import buildcraft.core.utils.Utils;
-
-import com.google.common.collect.HashBiMap;
-import com.google.common.collect.Lists;
 
 public abstract class BlockBuildCraft extends BlockContainer {
 
 	protected static boolean keepInventory = false;
 	protected final Random rand = new Random();
-	
+
 	public static final PropertyDirection FACING_PROP = BuildCraftProperties.BLOCK_FACING;
 	public static final PropertyDirection FACING_6_PROP = BuildCraftProperties.BLOCK_FACING_6;
 
 	public static final PropertyEnum COLOR_PROP = BuildCraftProperties.BLOCK_COLOR;
 	public static final PropertyEnum MACHINE_STATE = BuildCraftProperties.MACHINE_STATE;
-	
+	public static final PropertyUnlistedEnum<EnumFillerPattern> FILLER_PATTERN = BuildCraftProperties.FILLER_PATTERN;
+
 	public static final PropertyBool JOINED_BELOW = BuildCraftProperties.JOINED_BELOW;
 
 	protected final IProperty[] properties;
@@ -57,18 +59,22 @@ public abstract class BlockBuildCraft extends BlockContainer {
 	private final BlockState myBlockState;
 
 	protected BlockBuildCraft(Material material) {
-		this(material, CreativeTabBuildCraft.BLOCKS, new IProperty[]{});
+		this(material, CreativeTabBuildCraft.BLOCKS, new IProperty[0], new IProperty[0]);
 	}
 
 	protected BlockBuildCraft(Material material, CreativeTabBuildCraft creativeTab) {
-		this(material, creativeTab, new IProperty[0]);
+		this(material, creativeTab, new IProperty[0], new IProperty[0]);
 	}
 
 	protected BlockBuildCraft(Material material, IProperty[] properties) {
-		this(material, CreativeTabBuildCraft.BLOCKS, properties);
+		this(material, CreativeTabBuildCraft.BLOCKS, properties, new IProperty[0]);
+	}
+	
+	protected BlockBuildCraft(Material material, IProperty[] properties, IProperty[] nonMetaProperties) {
+		this(material, CreativeTabBuildCraft.BLOCKS, properties, nonMetaProperties);
 	}
 
-	protected BlockBuildCraft(Material material, CreativeTabBuildCraft creativeTab, IProperty[] properties) {
+	protected BlockBuildCraft(Material material, CreativeTabBuildCraft creativeTab, IProperty[] properties, IProperty[] nonMetaProperties) {
 		super(material);
 		setCreativeTab(creativeTab.get());
 		setHardness(5F);
@@ -82,34 +88,42 @@ public abstract class BlockBuildCraft extends BlockContainer {
 		int total = 1;
 		List<IBlockState> tempValidStates = Lists.newArrayList();
 		tempValidStates.add(defaultState);
-		for (IProperty prop: properties) {
-		    total *= prop.getAllowedValues().size();
-		    if (total > 16)
-		        throw new IllegalArgumentException("Cannot have more than 16 properties in a block!");
-		    Collection<Comparable<?>> allowedValues = prop.getAllowedValues();
-		    defaultState = defaultState.withProperty(prop, allowedValues.iterator().next());
+		for (IProperty prop : properties) {
+			total *= prop.getAllowedValues().size();
+			if (total > 16)
+				throw new IllegalArgumentException("Cannot have more than 16 properties in a block!");
+			Collection<Comparable<?>> allowedValues = prop.getAllowedValues();
+			defaultState = defaultState.withProperty(prop, allowedValues.iterator().next());
 
-		    List<IBlockState> newValidStates = Lists.newArrayList();
-		    for (IBlockState state: tempValidStates) {
-		        for (Comparable<?> comp : allowedValues) {
-		            newValidStates.add(state.withProperty(prop, comp));
-		        }
-		    }
-		    tempValidStates = newValidStates;
+			List<IBlockState> newValidStates = Lists.newArrayList();
+			for (IBlockState state : tempValidStates) {
+				for (Comparable<?> comp : allowedValues) {
+					newValidStates.add(state.withProperty(prop, comp));
+				}
+			}
+			tempValidStates = newValidStates;
 		}
 
 		int i = 0;
-		for (IBlockState state: tempValidStates) {
-		    validStates.put(i, state);
-	        i++;
+		for (IBlockState state : tempValidStates) {
+			validStates.put(i, state);
+			i++;
 		}
+		
+//		HashBiMap<Integer, IBlockState> newMap = HashBiMap.create();
+//		for (IProperty prop : nonMetaProperties) {
+//			for (Entry<Integer, IBlockState> entry : validStates.entrySet()) {
+//				for (Object obj : prop.getAllowedValues()) {
+//					newMap.put
+//				}
+//			}
+//		}
 
 		setDefaultState(defaultState);
 	}
 
 	@Override
-	public BlockState getBlockState()
-	{
+	public BlockState getBlockState() {
 		return this.myBlockState;
 	}
 
@@ -117,7 +131,7 @@ public abstract class BlockBuildCraft extends BlockContainer {
 	protected BlockState createBlockState() {
 		if (properties == null) {
 			// Will be overridden later
-			return new BlockState(this, new IProperty[]{});
+			return new BlockState(this, new IProperty[] {});
 		}
 
 		return new BlockState(this, properties);
@@ -125,7 +139,7 @@ public abstract class BlockBuildCraft extends BlockContainer {
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
-	    return validStates.inverse().get(state);
+		return validStates.inverse().get(state);
 	}
 
 	@Override
@@ -159,37 +173,35 @@ public abstract class BlockBuildCraft extends BlockContainer {
 		}
 		return super.getLightValue(world, pos);
 	}
-	
-    public void dropItemStack(World world, BlockPos pos, ItemStack itemstack)
-    {
-        float f = RANDOM.nextFloat() * 0.8F + 0.1F;
-        float f1 = RANDOM.nextFloat() * 0.8F + 0.1F;
-        float f2 = RANDOM.nextFloat() * 0.8F + 0.1F;
 
-        while (itemstack.stackSize > 0)
-        {
-            int i = RANDOM.nextInt(21) + 10;
+	public void dropItemStack(World world, BlockPos pos, ItemStack itemstack) {
+		float f = RANDOM.nextFloat() * 0.8F + 0.1F;
+		float f1 = RANDOM.nextFloat() * 0.8F + 0.1F;
+		float f2 = RANDOM.nextFloat() * 0.8F + 0.1F;
 
-            if (i > itemstack.stackSize)
-            {
-                i = itemstack.stackSize;
-            }
+		while (itemstack.stackSize > 0) {
+			int i = RANDOM.nextInt(21) + 10;
 
-            itemstack.stackSize -= i;
-            EntityItem entityitem = new EntityItem(world, pos.getX() + (double)f, pos.getY() + (double)f1, pos.getZ() + (double)f2, new ItemStack(itemstack.getItem(), i, itemstack.getMetadata()));
+			if (i > itemstack.stackSize) {
+				i = itemstack.stackSize;
+			}
 
-            if (itemstack.hasTagCompound())
-            {
-                entityitem.getEntityItem().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
-            }
+			itemstack.stackSize -= i;
+			EntityItem entityitem =
+				new EntityItem(world, pos.getX() + (double) f, pos.getY() + (double) f1, pos.getZ() + (double) f2, new ItemStack(itemstack.getItem(),
+					i, itemstack.getMetadata()));
 
-            float f3 = 0.05F;
-            entityitem.motionX = RANDOM.nextGaussian() * (double)f3;
-            entityitem.motionY = RANDOM.nextGaussian() * (double)f3 + 0.20000000298023224D;
-            entityitem.motionZ = RANDOM.nextGaussian() * (double)f3;
-            world.spawnEntityInWorld(entityitem);
-        }
-    }
+			if (itemstack.hasTagCompound()) {
+				entityitem.getEntityItem().setTagCompound((NBTTagCompound) itemstack.getTagCompound().copy());
+			}
+
+			float f3 = 0.05F;
+			entityitem.motionX = RANDOM.nextGaussian() * (double) f3;
+			entityitem.motionY = RANDOM.nextGaussian() * (double) f3 + 0.20000000298023224D;
+			entityitem.motionZ = RANDOM.nextGaussian() * (double) f3;
+			world.spawnEntityInWorld(entityitem);
+		}
+	}
 
 	@Override
 	public int getRenderType() {

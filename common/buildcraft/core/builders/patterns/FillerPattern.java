@@ -18,8 +18,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
 import buildcraft.api.blueprints.SchematicMask;
 import buildcraft.api.core.SheetIcon;
+import buildcraft.api.enums.EnumFillerPattern;
 import buildcraft.api.filler.IFillerPattern;
 import buildcraft.core.Box;
 import buildcraft.core.blueprints.Blueprint;
@@ -34,13 +36,15 @@ public abstract class FillerPattern implements IFillerPattern {
 	public static final Map<String, FillerPattern> patterns = new TreeMap<String, FillerPattern>();
 	private static final ResourceLocation PATTERN_ICONS = new ResourceLocation("buildcraft", "textures/gui/sheet_fillerPatterns.png");
 	private final String tag;
+	public final EnumFillerPattern pattern;
 	
 	@SideOnly(Side.CLIENT)
 	private SheetIcon icon;
 
-	public FillerPattern(String tag) {
+	public FillerPattern(String tag, EnumFillerPattern pattern) {
 		this.tag = tag;
 		patterns.put(getUniqueTag (), this);
+		this.pattern = pattern;
 	}
 
 	protected abstract int getIconPosition();

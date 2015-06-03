@@ -36,7 +36,7 @@ public class ContainerFiller extends BuildCraftContainer {
 		@SideOnly(Side.CLIENT)
 		@Override
 		public void draw(GuiBuildCraft gui, int guiX, int guiY, int mouseX, int mouseY) {
-			SheetIcon icon = tile.currentPattern.getIcon();
+			SheetIcon icon = tile.getCurrentPattern().getIcon();
 			gui.bindTexture(icon.getTexture());
 			gui.drawTexturedModalRect(guiX + x, guiY + y, icon.getU(), icon.getV(), 16, 16);
 		}

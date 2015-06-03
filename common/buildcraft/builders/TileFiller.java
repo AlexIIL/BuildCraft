@@ -9,13 +9,16 @@
 package buildcraft.builders;
 
 import io.netty.buffer.ByteBuf;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.fml.relauncher.Side;
+
 import buildcraft.BuildCraftCore;
 import buildcraft.api.core.IAreaProvider;
+import buildcraft.api.enums.EnumFillerPattern;
 import buildcraft.api.filler.FillerManager;
 import buildcraft.api.tiles.IControllable;
 import buildcraft.api.tiles.IHasWork;
@@ -36,7 +39,8 @@ public class TileFiller extends TileAbstractBuilder implements IHasWork, IContro
 
 	private static int POWER_ACTIVATION = 500;
 
-	public FillerPattern currentPattern = PatternFill.INSTANCE;
+	private FillerPattern currentPattern = PatternFill.INSTANCE;
+	private EnumFillerPattern enumPattern = null;
 
 	private BptBuilderTemplate currentTemplate;
 	private BptContext context;
@@ -73,8 +77,8 @@ public class TileFiller extends TileAbstractBuilder implements IHasWork, IContro
 			sendNetworkUpdate();
 		}
 
-		if (currentPattern != null && currentTemplate == null) {
-			currentTemplate = currentPattern
+		if (getCurrentPattern() != null && currentTemplate == null) {
+			currentTemplate = getCurrentPattern()
 					.getTemplateBuilder(box, getWorld());
 			context = currentTemplate.getContext();
 		}
@@ -117,8 +121,8 @@ public class TileFiller extends TileAbstractBuilder implements IHasWork, IContro
 			}
 		}
 
-		if (currentPattern != null && currentTemplate == null) {
-			currentTemplate = currentPattern.getTemplateBuilder(box, getWorld());
+		if (getCurrentPattern() != null && currentTemplate == null) {
+			currentTemplate = getCurrentPattern().getTemplateBuilder(box, getWorld());
 			context = currentTemplate.getContext();
 		}
 
@@ -134,6 +138,10 @@ public class TileFiller extends TileAbstractBuilder implements IHasWork, IContro
 		if (oldDone != done) {
 			sendNetworkUpdate();
 		}
+	}
+	
+	public EnumFillerPattern getCurrentEnumPattern() {
+		return enumPattern;
 	}
 
 	@Override
@@ -173,11 +181,11 @@ public class TileFiller extends TileAbstractBuilder implements IHasWork, IContro
 		inv.readFromNBT(nbt);
 
 		if (nbt.hasKey("pattern")) {
-			currentPattern = (FillerPattern) FillerManager.registry.getPattern(nbt.getString("pattern"));
+			setCurrentPattern((FillerPattern) FillerManager.registry.getPattern(nbt.getString("pattern")));
 		}
 
-		if (currentPattern == null) {
-			currentPattern = PatternFill.INSTANCE;
+		if (getCurrentPattern() == null) {
+			setCurrentPattern(PatternFill.INSTANCE);
 		}
 
 		if (nbt.hasKey("box")) {
@@ -197,8 +205,8 @@ public class TileFiller extends TileAbstractBuilder implements IHasWork, IContro
 
 		inv.writeToNBT(nbt);
 
-		if (currentPattern != null) {
-			nbt.setString("pattern", currentPattern.getUniqueTag());
+		if (getCurrentPattern() != null) {
+			nbt.setString("pattern", getCurrentPattern().getUniqueTag());
 		}
 
 		NBTTagCompound boxStore = new NBTTagCompound();
@@ -231,8 +239,8 @@ public class TileFiller extends TileAbstractBuilder implements IHasWork, IContro
 	}
 
 	public void setPattern(FillerPattern pattern) {
-		if (pattern != null && currentPattern != pattern) {
-			currentPattern = pattern;
+		if (pattern != null && getCurrentPattern() != pattern) {
+			setCurrentPattern(pattern);
 			currentTemplate = null;
 			done = false;
 			sendNetworkUpdate();
@@ -243,7 +251,7 @@ public class TileFiller extends TileAbstractBuilder implements IHasWork, IContro
 	public void writeData(ByteBuf data) {
 		box.writeData(data);
 		data.writeBoolean(done);
-		Utils.writeUTF(data, currentPattern.getUniqueTag());
+		Utils.writeUTF(data, getCurrentPattern().getUniqueTag());
 	}
 
 	@Override
@@ -320,6 +328,15 @@ public class TileFiller extends TileAbstractBuilder implements IHasWork, IContro
 		return mode == IControllable.Mode.On ||
 				mode == IControllable.Mode.Off ||
 				mode == IControllable.Mode.Loop;
+	}
+
+	public FillerPattern getCurrentPattern() {
+		return currentPattern;
+	}
+
+	public void setCurrentPattern(FillerPattern currentPattern) {
+		this.currentPattern = currentPattern;
+		enumPattern = currentPattern == null ? EnumFillerPattern.NONE : currentPattern.pattern;
 	}
 
 }

@@ -9,13 +9,15 @@
 package buildcraft.core.builders.patterns;
 
 import net.minecraft.world.World;
+
+import buildcraft.api.enums.EnumFillerPattern;
 import buildcraft.core.Box;
 import buildcraft.core.blueprints.Template;
 
 public class PatternCylinder extends FillerPattern {
 
 	public PatternCylinder() {
-		super("cylinder");
+		super("cylinder", EnumFillerPattern.CYLINDER);
 	}
 
 	@Override

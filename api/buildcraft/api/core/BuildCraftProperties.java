@@ -5,8 +5,10 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.util.EnumFacing;
+
 import buildcraft.api.enums.EnumColor;
 import buildcraft.api.enums.EnumEngineType;
+import buildcraft.api.enums.EnumFillerPattern;
 import buildcraft.api.enums.EnumLaserTableType;
 import buildcraft.api.enums.EnumMachineState;
 import buildcraft.api.enums.EnumSpring;
@@ -36,6 +38,7 @@ public final class BuildCraftProperties {
 	public static final PropertyDouble FLUID_HEIGHT_SE = new PropertyDouble("height_se", 0, 1);
 	public static final PropertyDouble FLUID_HEIGHT_SW = new PropertyDouble("height_sw", 0, 1);
 	public static final PropertyDouble FLUID_FLOW_DIRECTION = new PropertyDouble("direction", Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+	public static final PropertyUnlistedEnum<EnumFillerPattern> FILLER_PATTERN = new PropertyUnlistedEnum<EnumFillerPattern>("pattern", EnumFillerPattern.class);
 
 	// Block state setting flags -these are used by World.markAndNotifyBlock and World.setBlockState. These flags can be
 	// added together to pass the additions

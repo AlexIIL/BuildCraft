@@ -53,12 +53,12 @@ public class GuiFiller extends GuiBuildCraft {
 		super.actionPerformed(button);
 
 		if (button.id == 0) {
-			filler.currentPattern = (FillerPattern) FillerManager.registry.getPreviousPattern(filler.currentPattern);
+			filler.setCurrentPattern((FillerPattern) FillerManager.registry.getPreviousPattern(filler.getCurrentPattern()));
 		} else if (button.id == 1) {
-			filler.currentPattern = (FillerPattern) FillerManager.registry.getNextPattern(filler.currentPattern);
+			filler.setCurrentPattern((FillerPattern) FillerManager.registry.getNextPattern(filler.getCurrentPattern()));
 		}
 
-		filler.rpcSetPatternFromString(filler.currentPattern.getUniqueTag());
+		filler.rpcSetPatternFromString(filler.getCurrentPattern().getUniqueTag());
 	}
 
 	@Override
@@ -67,6 +67,6 @@ public class GuiFiller extends GuiBuildCraft {
 		fontRendererObj.drawString(title, getCenteredOffset(title), 6, 0x404040);
 		fontRendererObj.drawString(StringUtils.localize("gui.filling.resources"), 8, 74, 0x404040);
 		fontRendererObj.drawString(StringUtils.localize("gui.inventory"), 8, 142, 0x404040);
-		GuiTools.drawCenteredString(fontRendererObj, filler.currentPattern.getDisplayName(), 56);
+		GuiTools.drawCenteredString(fontRendererObj, filler.getCurrentPattern().getDisplayName(), 56);
 	}
 }

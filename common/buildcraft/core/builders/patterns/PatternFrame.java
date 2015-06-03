@@ -9,7 +9,9 @@
 package buildcraft.core.builders.patterns;
 
 import net.minecraft.world.World;
+
 import buildcraft.api.blueprints.SchematicMask;
+import buildcraft.api.enums.EnumFillerPattern;
 import buildcraft.core.Box;
 import buildcraft.core.blueprints.Template;
 
@@ -17,7 +19,7 @@ import buildcraft.core.blueprints.Template;
 public class PatternFrame extends FillerPattern {
 
 	public PatternFrame() {
-		super("frame");
+		super("frame",  EnumFillerPattern.FRAME);
 	}
 
 	@Override

@@ -10,7 +10,9 @@ package buildcraft.core.builders.patterns;
 
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+
 import buildcraft.api.blueprints.SchematicMask;
+import buildcraft.api.enums.EnumFillerPattern;
 import buildcraft.core.Box;
 import buildcraft.core.blueprints.BptBuilderTemplate;
 import buildcraft.core.blueprints.Template;
@@ -18,7 +20,7 @@ import buildcraft.core.blueprints.Template;
 public class PatternFlatten extends FillerPattern {
 
 	public PatternFlatten() {
-		super("flatten");
+		super("flatten",  EnumFillerPattern.FLATTERN);
 	}
 
 	@Override

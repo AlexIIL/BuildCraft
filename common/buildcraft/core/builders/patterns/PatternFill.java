@@ -10,6 +10,7 @@ package buildcraft.core.builders.patterns;
 
 import net.minecraft.world.World;
 
+import buildcraft.api.enums.EnumFillerPattern;
 import buildcraft.core.Box;
 import buildcraft.core.blueprints.Template;
 
@@ -18,7 +19,7 @@ public final class PatternFill extends FillerPattern {
 	public static final PatternFill INSTANCE = new PatternFill();
 
 	private PatternFill() {
-		super("fill");
+		super("fill", EnumFillerPattern.FILL);
 	}
 
 	@Override
