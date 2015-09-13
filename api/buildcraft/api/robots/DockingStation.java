@@ -184,16 +184,32 @@ public abstract class DockingStation {
 		return null;
 	}
 
+	public ForgeDirection getItemOutputSide() {
+		return ForgeDirection.UNKNOWN;
+	}
+
 	public IInventory getItemInput() {
 		return null;
+	}
+
+	public ForgeDirection getItemInputSide() {
+		return ForgeDirection.UNKNOWN;
 	}
 
 	public IFluidHandler getFluidOutput() {
 		return null;
 	}
 
+	public ForgeDirection getFluidOutputSide() {
+		return ForgeDirection.UNKNOWN;
+	}
+
 	public IFluidHandler getFluidInput() {
 		return null;
+	}
+
+	public ForgeDirection getFluidInputSide() {
+		return ForgeDirection.UNKNOWN;
 	}
 
 	public boolean providesPower() {

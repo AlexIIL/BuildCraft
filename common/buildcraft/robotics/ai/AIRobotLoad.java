@@ -69,11 +69,13 @@ public class AIRobotLoad extends AIRobot {
 			return false;
 		}
 
-		for (IInvSlot slot : InventoryIterator.getIterable(tileInventory)) {
+		for (IInvSlot slot : InventoryIterator.getIterable(tileInventory, station.getItemInputSide())) {
 			ItemStack stack = slot.getStackInSlot();
 
 			if (stack == null
+					|| !slot.canTakeStackFromSlot(stack)
 					|| !filter.matches(stack)
+					|| !ActionStationProvideItems.canExtractItem(station, stack)
 					|| !ActionRobotFilter.canInteractWithItem(station, filter,
 							ActionStationProvideItems.class)) {
 				continue;

@@ -119,6 +119,7 @@ import buildcraft.core.lib.commands.RootCommand;
 import buildcraft.core.lib.engines.ItemEngine;
 import buildcraft.core.lib.engines.TileEngineBase;
 import buildcraft.core.lib.network.ChannelHandler;
+import buildcraft.core.lib.render.FluidRenderer;
 import buildcraft.core.lib.utils.ColorUtils;
 import buildcraft.core.lib.utils.NBTUtils;
 import buildcraft.core.lib.utils.Utils;
@@ -130,6 +131,7 @@ import buildcraft.core.properties.WorldPropertyIsFluidSource;
 import buildcraft.core.properties.WorldPropertyIsHarvestable;
 import buildcraft.core.properties.WorldPropertyIsLeaf;
 import buildcraft.core.properties.WorldPropertyIsOre;
+import buildcraft.core.properties.WorldPropertyIsReplaceable;
 import buildcraft.core.properties.WorldPropertyIsShoveled;
 import buildcraft.core.properties.WorldPropertyIsSoft;
 import buildcraft.core.properties.WorldPropertyIsWood;
@@ -140,11 +142,13 @@ import buildcraft.core.recipes.ProgrammingRecipeManager;
 import buildcraft.core.recipes.RefineryRecipeManager;
 import buildcraft.core.render.BlockHighlightHandler;
 import buildcraft.core.render.RenderLEDTile;
+import buildcraft.core.render.RenderLaser;
 import buildcraft.core.statements.ActionMachineControl;
 import buildcraft.core.statements.ActionRedstoneOutput;
 import buildcraft.core.statements.DefaultActionProvider;
 import buildcraft.core.statements.DefaultTriggerProvider;
 import buildcraft.core.statements.StatementParameterDirection;
+import buildcraft.core.statements.StatementParameterItemStackExact;
 import buildcraft.core.statements.StatementParameterRedstoneGateSideOnly;
 import buildcraft.core.statements.TriggerEnergy;
 import buildcraft.core.statements.TriggerFluidContainer;
@@ -362,6 +366,9 @@ public class BuildCraftCore extends BuildCraftMod {
 		FMLCommonHandler.instance().bus().register(this);
 		MinecraftForge.EVENT_BUS.register(this);
 		MinecraftForge.EVENT_BUS.register(new BlockHighlightHandler());
+
+		OreDictionary.registerOre("chestWood", Blocks.chest);
+		OreDictionary.registerOre("craftingTableWood", Blocks.crafting_table);
 	}
 
 	@Mod.EventHandler
@@ -390,6 +397,7 @@ public class BuildCraftCore extends BuildCraftMod {
 		StatementManager.registerParameterClass("buildcraft:stackAction", StatementParameterItemStack.class);
 				
 		StatementManager.registerParameterClass(StatementParameterItemStack.class);
+		StatementManager.registerParameterClass(StatementParameterItemStackExact.class);
 		StatementManager.registerParameterClass(StatementParameterDirection.class);
 		StatementManager.registerParameterClass(StatementParameterRedstoneGateSideOnly.class);
 		StatementManager.registerTriggerProvider(new DefaultTriggerProvider());
@@ -472,6 +480,7 @@ public class BuildCraftCore extends BuildCraftMod {
 		CropManager.setDefaultHandler(new CropHandlerPlantable());
 		CropManager.registerHandler(new CropHandlerReeds());
 
+		BuildCraftAPI.registerWorldProperty("replaceable", new WorldPropertyIsReplaceable());
 		BuildCraftAPI.registerWorldProperty("soft", new WorldPropertyIsSoft());
 		BuildCraftAPI.registerWorldProperty("wood", new WorldPropertyIsWood());
 		BuildCraftAPI.registerWorldProperty("leaves", new WorldPropertyIsLeaf());
@@ -546,6 +555,13 @@ public class BuildCraftCore extends BuildCraftMod {
 			BuildCraftCore.transparentTexture = event.map.registerIcon("buildcraftcore:misc/transparent");
 			RenderLEDTile.registerBlockIcons(event.map);
 		}
+	}
+
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
+	public void textureHook(TextureStitchEvent.Post event) {
+		FluidRenderer.onTextureReload();
+		RenderLaser.onTextureReload();
 	}
 
 	public void reloadConfig(ConfigManager.RestartRequirement restartType) {
