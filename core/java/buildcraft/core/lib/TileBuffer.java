@@ -14,10 +14,6 @@ import buildcraft.api.core.BCLog;
 import buildcraft.api.core.SafeTimeTracker;
 
 public final class TileBuffer {
-
-    private static long microSecondsTaken = 0;
-    private static long timesCalled = 0;
-
     private IBlockState state = null;
     private TileEntity tile;
 
@@ -50,12 +46,6 @@ public final class TileBuffer {
         tile = world.getTileEntity(pos);
 
         long taken = System.nanoTime() - start;
-        microSecondsTaken += taken / 1000;
-        timesCalled++;
-        if (timesCalled % (1 << 8) == 0) {
-            BCLog.logger.info("World#getTileEntity took " + microSecondsTaken + "us for " + timesCalled + ", avg = " + (microSecondsTaken
-                / timesCalled));
-        }
         // }
     }
 

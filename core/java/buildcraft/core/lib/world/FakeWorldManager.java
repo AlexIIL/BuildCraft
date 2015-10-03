@@ -139,7 +139,7 @@ public class FakeWorldManager {
         if (displayListMap.containsKey(layer)) {
             GL11.glCallList(displayListMap.get(layer));
             // tess.draw();
-        } else {
+        } else if (world.hasDeployed) {
             int list = GLAllocation.generateDisplayLists(1);
             GL11.glNewList(list, GL11.GL_COMPILE);
             renderer.startDrawingQuads();

@@ -24,7 +24,7 @@ allprojects {
     apply plugin: "net.minecraftforge.gradle.forge"
     apply plugin: "maven"
 
-    version = "0.1"
+    version = "2"
     group= "com.mod-buildcraft"
 
     minecraft {
@@ -59,7 +59,7 @@ sourceSets {
 
 task ("deobfJar", type: Jar) {
     from sourceSets.main.allSource
-    archiveName = "buildcraft-all-" + project.version + "-dev.jar"
+    archiveName = "buildcraft-all-ALPHA" + project.version + "-dev.jar"
 }
 
 build.dependsOn deobfJar
@@ -67,7 +67,7 @@ build.dependsOn deobfJar
 // Applied for each module
 subprojects {
     // Artifacts names follow this pattern: [baseName]-[appendix]-[version]-[classifier].[extension]
-    archivesBaseName = "buildcraft-" + project.name
+    archivesBaseName = "buildcraft-" + project.name + "-ALPHA"
 
     // Define a standard source set
     sourceSets {
@@ -119,7 +119,7 @@ subprojects {
 
     task ("deobfJar", type: Jar) {
         from sourceSets.main.allSource
-        archiveName = "buildcraft-" + project.name + "-" + project.version + "-dev.jar"
+        archiveName = "buildcraft-" + project.name + "-ALPHA-ki" + project.version + "-dev.jar"
     }
 
     task ("copyOut", type: Copy) {

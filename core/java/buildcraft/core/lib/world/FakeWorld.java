@@ -22,6 +22,7 @@ import buildcraft.core.lib.utils.Utils;
 
 public class FakeWorld extends World {
     public boolean isDirty = true;
+    public volatile boolean hasDeployed = false;
 
     private FakeWorld(EnumDecoratedType type) {
         super(new SaveHandlerMP(), new WorldInfo(new NBTTagCompound()), new FakeWorldProvider(), Minecraft.getMinecraft().mcProfiler, false);
@@ -29,12 +30,19 @@ public class FakeWorld extends World {
         provider.registerWorld(this);
     }
 
-    public FakeWorld(Blueprint blueprint) {
+    public FakeWorld(final Blueprint blueprint) {
         this(EnumDecoratedType.TEMPLATE);
         BlockPos start = new BlockPos(-blueprint.sizeX / 2, 1, -blueprint.sizeZ / 2);
 
-        BlockPos deployPos = start.add(blueprint.anchorX, blueprint.anchorY, blueprint.anchorZ);
-        BlueprintDeployer.INSTANCE.deployBlueprint(this, deployPos, EnumFacing.EAST, blueprint);
+        final BlockPos deployPos = start.add(blueprint.anchorX, blueprint.anchorY, blueprint.anchorZ);
+        final FakeWorld thisWorld = this;
+        new Thread("blueprint-deployer") {
+            @Override
+            public void run() {
+                BlueprintDeployer.INSTANCE.deployBlueprint(thisWorld, deployPos, EnumFacing.EAST, blueprint);
+                hasDeployed = true;
+            }
+        }.start();
 
         start = start.down();
         BlockPos end = start.add(blueprint.sizeX - 1, 0, blueprint.sizeZ - 1);

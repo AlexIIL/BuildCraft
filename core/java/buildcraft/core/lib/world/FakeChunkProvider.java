@@ -16,6 +16,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkProvider;
 
+import buildcraft.api.core.BCLog;
 import buildcraft.api.enums.EnumDecoratedType;
 import buildcraft.api.properties.BuildCraftProperties;
 import buildcraft.core.BuildCraftCore;
@@ -53,6 +54,7 @@ public class FakeChunkProvider implements IChunkProvider {
             }
             chunk.generateSkylightMap();
             chunks.put(ccip, chunk);
+            BCLog.logger.info("Created a new chunk @ " + ccip);
         }
         return chunks.get(ccip);
     }
