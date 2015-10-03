@@ -148,23 +148,6 @@ public class FakeWorldManager {
             GL11.glEndList();
             displayListMap.put(layer, list);
         }
-        // RenderList render = new RenderList();
-        // render.initialize(0, 0, 0);
-        // for (int x = min.getX(); x < max.getX(); x += 16) {
-        // for (int y = min.getY(); y < max.getY(); y += 16) {
-        // for (int z = min.getZ(); z < max.getZ(); z += 16) {
-        // BlockPos pos = new BlockPos(x, y, z);
-        // RenderChunk chunk = chunks.get(pos);
-        // if (!chunk.getCompiledChunk().isLayerEmpty(layer)) {
-        // render.addRenderChunk(chunk, layer);
-        // }
-        // }
-        // }
-        // }
-        //
-        // mc.entityRenderer.enableLightmap();
-        // render.renderChunkLayer(layer);
-        // mc.entityRenderer.disableLightmap();
     }
 
     private void renderAllBlocks(EnumWorldBlockLayer layer, WorldRenderer renderer) {
