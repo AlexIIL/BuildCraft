@@ -121,7 +121,11 @@ public class NodePageLine {
                 this.childrenDone = childrenDone;
             }
             return current;
+        }
 
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException("remove");
         }
     }
 
@@ -140,6 +144,11 @@ public class NodePageLine {
         @Override
         public PageLine next() {
             return iterator.next().pageLine;
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException("remove");
         }
     }
 }
