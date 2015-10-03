@@ -30,7 +30,6 @@ Bugs:
         - All filters
         - All facades
         - All robots
-        - Redstone crystal
         - Guide Book
         - Robot Goggles
     Missing Player Model:

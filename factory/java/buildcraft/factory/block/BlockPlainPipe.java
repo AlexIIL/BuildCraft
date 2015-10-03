@@ -8,12 +8,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import buildcraft.api.properties.BuildCraftProperty;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
@@ -23,14 +25,14 @@ import buildcraft.core.lib.block.BlockBuildCraftBase;
 public class BlockPlainPipe extends BlockBuildCraftBase {
 
     public BlockPlainPipe() {
-        super(Material.glass);
+        super(Material.glass, null, false, new BuildCraftProperty<?>[0]);
 
         minX = CoreConstants.PIPE_MIN_POS;
-        minY = 0.0;
+        minY = 0.0D;
         minZ = CoreConstants.PIPE_MIN_POS;
 
         maxX = CoreConstants.PIPE_MAX_POS;
-        maxY = 1.0;
+        maxY = 1.0D;
         maxZ = CoreConstants.PIPE_MAX_POS;
     }
 
@@ -63,5 +65,11 @@ public class BlockPlainPipe extends BlockBuildCraftBase {
     @Override
     public boolean isLadder(IBlockAccess world, BlockPos pos, EntityLivingBase entity) {
         return true;
+    }
+
+    @Override
+    public AxisAlignedBB getBox(IBlockAccess world, BlockPos pos, IBlockState state)
+    {
+        return new AxisAlignedBB(minX, minY, minZ, maxX, maxY, maxZ);
     }
 }

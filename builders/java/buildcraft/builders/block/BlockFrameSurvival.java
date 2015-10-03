@@ -29,7 +29,7 @@ public class BlockFrameSurvival extends BlockBuildCraftBase implements ICustomHi
     private final Map<IBlockState, AxisAlignedBB[]> boundingMap = Maps.newHashMap();
 
     public BlockFrameSurvival() {
-        super(Material.glass, CONNECTED_ARRAY);
+        super(Material.glass, null, CONNECTED_ARRAY);
         setHardness(0.5F);
         setLightOpacity(0);
 

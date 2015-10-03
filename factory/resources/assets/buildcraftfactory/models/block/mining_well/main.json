@@ -1,12 +1,12 @@
 {
 	"parent":"buildcraftcore:block/default_cube",
 	"textures":{
-		"particle":"buildcraftfactory:blocks/mining_well/side",
-		"down":"buildcraftfactory:blocks/mining_well/bottom",
-		"up":"buildcraftfactory:blocks/mining_well/top",
-		"north":"buildcraftfactory:blocks/mining_well/side",
-		"east":"buildcraftfactory:blocks/mining_well/side",
-		"south":"buildcraftfactory:blocks/mining_well/side",
-		"west":"buildcraftfactory:blocks/mining_well/side"
+		"particle":"buildcraftfactory:blocks/miningWell/side",
+		"down":"buildcraftfactory:blocks/miningWell/bottom",
+		"up":"buildcraftfactory:blocks/miningWell/top",
+		"north":"buildcraftfactory:blocks/miningWell/side",
+		"east":"buildcraftfactory:blocks/miningWell/side",
+		"south":"buildcraftfactory:blocks/miningWell/side",
+		"west":"buildcraftfactory:blocks/miningWell/side"
 	}
 }
