@@ -17,7 +17,6 @@ import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-
 import net.minecraftforge.fluids.FluidStack;
 
 import buildcraft.core.lib.fluids.Tank;

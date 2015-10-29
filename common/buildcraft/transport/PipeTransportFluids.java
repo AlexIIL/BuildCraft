@@ -13,7 +13,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidEvent;
@@ -29,17 +28,7 @@ import buildcraft.api.transport.IPipeTile;
 import buildcraft.core.DefaultProps;
 import buildcraft.core.lib.utils.MathUtils;
 import buildcraft.transport.network.PacketFluidUpdate;
-import buildcraft.transport.pipes.PipeFluidsClay;
-import buildcraft.transport.pipes.PipeFluidsCobblestone;
-import buildcraft.transport.pipes.PipeFluidsDiamond;
-import buildcraft.transport.pipes.PipeFluidsEmerald;
-import buildcraft.transport.pipes.PipeFluidsGold;
-import buildcraft.transport.pipes.PipeFluidsIron;
-import buildcraft.transport.pipes.PipeFluidsQuartz;
-import buildcraft.transport.pipes.PipeFluidsSandstone;
-import buildcraft.transport.pipes.PipeFluidsStone;
-import buildcraft.transport.pipes.PipeFluidsVoid;
-import buildcraft.transport.pipes.PipeFluidsWood;
+import buildcraft.transport.pipes.*;
 import buildcraft.transport.pipes.events.PipeEventFluid;
 import buildcraft.transport.utils.FluidRenderData;
 

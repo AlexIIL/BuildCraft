@@ -18,15 +18,15 @@ import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.SidedProxy;
 import net.minecraftforge.common.util.FakePlayerFactory;
 
 import buildcraft.BuildCraftCore;
 import buildcraft.api.core.ICoreProxy;
 import buildcraft.core.LaserKind;
 import buildcraft.core.lib.EntityBlock;
+
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.SidedProxy;
 
 public class CoreProxy implements ICoreProxy {
 

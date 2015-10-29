@@ -2,8 +2,6 @@ package buildcraft.core.tablet;
 
 import java.io.IOException;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTSizeTracker;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,6 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import buildcraft.api.core.BCLog;
 import buildcraft.core.lib.network.Packet;
 import buildcraft.core.network.PacketIds;
+
+import io.netty.buffer.ByteBuf;
 
 public class PacketTabletMessage extends Packet {
 	private NBTTagCompound tag;

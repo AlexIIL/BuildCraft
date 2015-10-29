@@ -3,9 +3,6 @@ package buildcraft.silicon;
 import java.util.EnumMap;
 import java.util.Map;
 
-import io.netty.buffer.ByteBuf;
-import gnu.trove.map.hash.TObjectIntHashMap;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
@@ -13,7 +10,6 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.BuildCraftCore;
@@ -25,6 +21,9 @@ import buildcraft.core.lib.inventory.InventoryIterator;
 import buildcraft.core.lib.inventory.SimpleInventory;
 import buildcraft.core.lib.inventory.StackHelper;
 import buildcraft.core.lib.utils.NBTUtils;
+
+import gnu.trove.map.hash.TObjectIntHashMap;
+import io.netty.buffer.ByteBuf;
 
 public class TilePackager extends TileBuildCraft implements ISidedInventory {
 	private class Requirement {

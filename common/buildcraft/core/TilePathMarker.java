@@ -13,8 +13,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -23,6 +21,8 @@ import buildcraft.BuildCraftCore;
 import buildcraft.api.core.BlockIndex;
 import buildcraft.api.core.IPathProvider;
 import buildcraft.api.core.Position;
+
+import io.netty.buffer.ByteBuf;
 
 public class TilePathMarker extends TileMarker implements IPathProvider {
 	// A list with the pathMarkers that aren't fully connected

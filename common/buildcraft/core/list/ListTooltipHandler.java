@@ -2,12 +2,12 @@ package buildcraft.core.list;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 
 import buildcraft.api.items.IList;
 import buildcraft.core.lib.utils.StringUtils;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class ListTooltipHandler {
 	@SubscribeEvent

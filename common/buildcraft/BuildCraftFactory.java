@@ -15,20 +15,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
-
-import cpw.mods.fml.client.event.ConfigChangedEvent;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLInterModComms;
-import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -44,29 +30,25 @@ import buildcraft.core.builders.schematics.SchematicRotateMeta;
 import buildcraft.core.config.ConfigManager;
 import buildcraft.core.lib.network.ChannelHandler;
 import buildcraft.core.lib.network.PacketHandler;
-import buildcraft.factory.BlockAutoWorkbench;
-import buildcraft.factory.BlockFloodGate;
-import buildcraft.factory.BlockHopper;
-import buildcraft.factory.BlockMiningWell;
-import buildcraft.factory.BlockPlainPipe;
-import buildcraft.factory.BlockPump;
-import buildcraft.factory.BlockRefinery;
-import buildcraft.factory.BlockTank;
-import buildcraft.factory.FactoryGuiHandler;
-import buildcraft.factory.FactoryProxy;
-import buildcraft.factory.FactoryProxyClient;
-import buildcraft.factory.PumpDimensionList;
-import buildcraft.factory.TileAutoWorkbench;
-import buildcraft.factory.TileFloodGate;
-import buildcraft.factory.TileHopper;
-import buildcraft.factory.TileMiningWell;
-import buildcraft.factory.TilePump;
-import buildcraft.factory.TileRefinery;
-import buildcraft.factory.TileTank;
+import buildcraft.factory.*;
 import buildcraft.factory.schematics.SchematicAutoWorkbench;
 import buildcraft.factory.schematics.SchematicPump;
 import buildcraft.factory.schematics.SchematicRefinery;
 import buildcraft.factory.schematics.SchematicTileIgnoreState;
+
+import cpw.mods.fml.client.event.ConfigChangedEvent;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
+import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(name = "BuildCraft Factory", version = Version.VERSION, useMetadata = false, modid = "BuildCraft|Factory", dependencies = DefaultProps.DEPENDENCY_CORE)
 public class BuildCraftFactory extends BuildCraftMod {

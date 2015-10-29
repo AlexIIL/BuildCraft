@@ -19,10 +19,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
-
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.common.DimensionManager;
 
 import buildcraft.BuildCraftCore;
@@ -36,6 +32,10 @@ import buildcraft.core.lib.render.RenderBlockComplex;
 import buildcraft.core.lib.render.RenderEntityBlock;
 import buildcraft.core.render.RenderingEntityBlocks;
 import buildcraft.core.render.RenderingMarkers;
+
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class CoreProxyClient extends CoreProxy {
 

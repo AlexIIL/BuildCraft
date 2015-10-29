@@ -8,14 +8,10 @@
  */
 package buildcraft.robotics.gui;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-
-import cpw.mods.fml.relauncher.Side;
 
 import buildcraft.BuildCraftCore;
 import buildcraft.core.lib.gui.BuildCraftContainer;
@@ -24,6 +20,9 @@ import buildcraft.core.lib.network.command.ICommandReceiver;
 import buildcraft.core.lib.network.command.PacketCommand;
 import buildcraft.core.lib.utils.NetworkUtils;
 import buildcraft.robotics.TileRequester;
+
+import cpw.mods.fml.relauncher.Side;
+import io.netty.buffer.ByteBuf;
 
 public class ContainerRequester extends BuildCraftContainer implements ICommandReceiver {
 

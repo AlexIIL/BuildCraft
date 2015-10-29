@@ -8,12 +8,12 @@
  */
 package buildcraft.core;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.nbt.NBTTagCompound;
 
 import buildcraft.api.core.ISerializable;
 import buildcraft.api.core.Position;
+
+import io.netty.buffer.ByteBuf;
 
 public class LaserData implements ISerializable {
 	public Position head = new Position(0, 0, 0);

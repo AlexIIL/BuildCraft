@@ -11,10 +11,10 @@ package buildcraft.core;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 
+import buildcraft.api.core.IIconProvider;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
-import buildcraft.api.core.IIconProvider;
 
 public class CoreIconProvider implements IIconProvider {
 

@@ -20,10 +20,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import buildcraft.core.lib.utils.XorShift128Random;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
-import buildcraft.core.lib.utils.XorShift128Random;
 
 public class BlockSpring extends Block {
 

@@ -12,15 +12,12 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.MathHelper;
-
 import net.minecraftforge.common.util.Constants;
 
 import buildcraft.BuildCraftCore;
@@ -32,6 +29,8 @@ import buildcraft.api.core.Position;
 import buildcraft.core.BlockBuildTool;
 import buildcraft.core.StackAtPosition;
 import buildcraft.core.lib.inventory.InvUtils;
+
+import io.netty.buffer.ByteBuf;
 
 public class BuildingItem implements IBuildingItem, ISerializable {
 

@@ -3,9 +3,6 @@ package buildcraft.transport.statements;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import buildcraft.api.core.Position;
 import buildcraft.api.statements.IStatementContainer;
 import buildcraft.api.statements.IStatementParameter;
@@ -13,6 +10,9 @@ import buildcraft.api.statements.ITriggerInternal;
 import buildcraft.api.statements.containers.ISidedStatementContainer;
 import buildcraft.core.lib.utils.StringUtils;
 import buildcraft.core.statements.BCStatement;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TriggerLightSensor extends BCStatement implements ITriggerInternal {
 	private final boolean bright;

@@ -12,10 +12,10 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import buildcraft.core.CompatHooks;
+
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.registry.GameRegistry;
-
-import buildcraft.core.CompatHooks;
 
 public class TransportProxy {
 

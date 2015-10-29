@@ -6,9 +6,6 @@ import java.util.List;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.common.registry.GameRegistry;
-
 import buildcraft.BuildCraftCore;
 import buildcraft.BuildCraftTransport;
 import buildcraft.api.gates.GateExpansions;
@@ -24,6 +21,9 @@ import buildcraft.transport.gates.GateExpansionTimer;
 import buildcraft.transport.gates.ItemGate;
 import buildcraft.transport.recipes.AdvancedFacadeRecipe;
 import buildcraft.transport.recipes.GateExpansionRecipe;
+
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public final class TransportSiliconRecipes {
 	private TransportSiliconRecipes() {

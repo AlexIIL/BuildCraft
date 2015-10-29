@@ -12,7 +12,6 @@ import java.util.LinkedList;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.api.blueprints.IBuilderContext;

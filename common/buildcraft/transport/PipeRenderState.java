@@ -8,12 +8,12 @@
  */
 package buildcraft.transport;
 
-import io.netty.buffer.ByteBuf;
-
 import buildcraft.api.core.ISerializable;
 import buildcraft.transport.utils.ConnectionMatrix;
 import buildcraft.transport.utils.TextureMatrix;
 import buildcraft.transport.utils.WireMatrix;
+
+import io.netty.buffer.ByteBuf;
 
 public class PipeRenderState implements ISerializable {
 	public final ConnectionMatrix pipeConnectionMatrix = new ConnectionMatrix();

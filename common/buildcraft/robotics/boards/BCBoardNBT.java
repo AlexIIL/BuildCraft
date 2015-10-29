@@ -13,14 +13,14 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import buildcraft.api.boards.RedstoneBoardRobot;
 import buildcraft.api.boards.RedstoneBoardRobotNBT;
 import buildcraft.api.robots.EntityRobotBase;
 import buildcraft.core.DefaultProps;
 import buildcraft.core.lib.utils.StringUtils;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BCBoardNBT extends RedstoneBoardRobotNBT {
 	public static final Map<String, BCBoardNBT> REGISTRY = new HashMap<String, BCBoardNBT>();

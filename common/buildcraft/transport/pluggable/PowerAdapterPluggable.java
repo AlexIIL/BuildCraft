@@ -1,16 +1,14 @@
 package buildcraft.transport.pluggable;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
-
 import net.minecraftforge.common.util.ForgeDirection;
 
 import cofh.api.energy.IEnergyHandler;
+
 import buildcraft.BuildCraftTransport;
 import buildcraft.api.core.render.ITextureStates;
 import buildcraft.api.transport.IPipe;
@@ -20,6 +18,8 @@ import buildcraft.api.transport.pluggable.PipePluggable;
 import buildcraft.core.lib.render.FakeBlock;
 import buildcraft.core.lib.utils.MatrixTranformations;
 import buildcraft.transport.PipeIconProvider;
+
+import io.netty.buffer.ByteBuf;
 
 public class PowerAdapterPluggable extends PipePluggable implements IEnergyHandler {
 	private static final int MAX_POWER = 40;

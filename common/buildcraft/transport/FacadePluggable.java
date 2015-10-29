@@ -1,13 +1,10 @@
 package buildcraft.transport;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
-
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -19,6 +16,8 @@ import buildcraft.api.transport.pluggable.IPipePluggableRenderer;
 import buildcraft.api.transport.pluggable.PipePluggable;
 import buildcraft.core.lib.utils.MatrixTranformations;
 import buildcraft.transport.render.FacadeRenderHelper;
+
+import io.netty.buffer.ByteBuf;
 
 public class FacadePluggable extends PipePluggable implements IFacadePluggable {
 	public static final class FacadePluggableRenderer implements IPipePluggableRenderer {

@@ -14,9 +14,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufInputStream;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -30,6 +27,9 @@ import buildcraft.core.lib.gui.slots.SlotBase;
 import buildcraft.core.lib.gui.widgets.Widget;
 import buildcraft.core.lib.inventory.StackHelper;
 import buildcraft.core.lib.network.PacketGuiWidget;
+
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufInputStream;
 
 public abstract class BuildCraftContainer extends Container {
 

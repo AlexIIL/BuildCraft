@@ -8,13 +8,13 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-
 import buildcraft.core.lib.block.BlockBuildCraft;
 import buildcraft.core.lib.render.FakeBlock;
 import buildcraft.core.lib.render.RenderUtils;
 import buildcraft.core.lib.render.SubIcon;
 import buildcraft.silicon.SiliconProxy;
+
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderLaserTable implements ISimpleBlockRenderingHandler {
 	private void workaround17(int x, int y, int z) {

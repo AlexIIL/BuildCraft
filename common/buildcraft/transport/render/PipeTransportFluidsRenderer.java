@@ -1,8 +1,6 @@
 package buildcraft.transport.render;
 
 import org.lwjgl.opengl.GL11;
-import gnu.trove.iterator.TIntIterator;
-import gnu.trove.set.hash.TIntHashSet;
 
 import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -10,7 +8,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.IntHashMap;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -21,6 +18,9 @@ import buildcraft.core.lib.render.RenderUtils;
 import buildcraft.transport.Pipe;
 import buildcraft.transport.PipeTransportFluids;
 import buildcraft.transport.utils.FluidRenderData;
+
+import gnu.trove.iterator.TIntIterator;
+import gnu.trove.set.hash.TIntHashSet;
 
 public class PipeTransportFluidsRenderer extends PipeTransportRenderer<PipeTransportFluids> {
 	private static final IntHashMap displayFluidLists = new IntHashMap();

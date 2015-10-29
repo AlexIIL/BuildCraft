@@ -23,9 +23,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.BuildCraftTransport;
@@ -42,6 +39,9 @@ import buildcraft.core.lib.inventory.InvUtils;
 import buildcraft.core.lib.utils.Utils;
 import buildcraft.transport.gates.GateFactory;
 import buildcraft.transport.statements.ActionValve.ValveState;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class Pipe<T extends PipeTransport> implements IDropControlInventory, IPipe {
 	public int[] wireSignalStrength = new int[]{0, 0, 0, 0};

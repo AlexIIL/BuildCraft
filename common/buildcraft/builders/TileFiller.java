@@ -8,15 +8,11 @@
  */
 package buildcraft.builders;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-
-import cpw.mods.fml.relauncher.Side;
 
 import buildcraft.BuildCraftCore;
 import buildcraft.api.core.IAreaProvider;
@@ -39,6 +35,9 @@ import buildcraft.core.lib.network.command.ICommandReceiver;
 import buildcraft.core.lib.network.command.PacketCommand;
 import buildcraft.core.lib.utils.NetworkUtils;
 import buildcraft.core.lib.utils.Utils;
+
+import cpw.mods.fml.relauncher.Side;
+import io.netty.buffer.ByteBuf;
 
 public class TileFiller extends TileAbstractBuilder implements IHasWork, IControllable, ICommandReceiver, IStatementContainer, ILEDProvider {
 	private static int POWER_ACTIVATION = 500;

@@ -16,10 +16,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 
+import buildcraft.core.lib.items.ItemBlockBuildCraft;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
-import buildcraft.core.lib.items.ItemBlockBuildCraft;
 
 public class ItemLaserTable extends ItemBlockBuildCraft {
 

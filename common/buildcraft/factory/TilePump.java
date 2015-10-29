@@ -14,12 +14,9 @@ import java.util.LinkedList;
 import java.util.Set;
 import java.util.TreeMap;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.nbt.NBTTagCompound;
-
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
@@ -45,6 +42,8 @@ import buildcraft.core.lib.fluids.TankUtils;
 import buildcraft.core.lib.utils.BlockUtils;
 import buildcraft.core.lib.utils.Utils;
 import buildcraft.core.proxy.CoreProxy;
+
+import io.netty.buffer.ByteBuf;
 
 public class TilePump extends TileBuildCraft implements IHasWork, IFluidHandler, IRedstoneEngineReceiver, ILEDProvider {
 

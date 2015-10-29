@@ -11,7 +11,6 @@ package buildcraft.builders.blueprints;
 import java.io.File;
 
 import net.minecraft.world.World;
-
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.api.blueprints.BlueprintDeployer;

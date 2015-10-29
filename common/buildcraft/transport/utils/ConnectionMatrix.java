@@ -8,9 +8,9 @@
  */
 package buildcraft.transport.utils;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraftforge.common.util.ForgeDirection;
+
+import io.netty.buffer.ByteBuf;
 
 public class ConnectionMatrix {
 	private int mask = 0;

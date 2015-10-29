@@ -11,8 +11,6 @@ package buildcraft.silicon;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -24,6 +22,8 @@ import buildcraft.core.lib.inventory.StackHelper;
 import buildcraft.core.lib.utils.NetworkUtils;
 import buildcraft.core.lib.utils.StringUtils;
 import buildcraft.core.lib.utils.Utils;
+
+import io.netty.buffer.ByteBuf;
 
 public class TileIntegrationTable extends TileLaserTableBase implements ISidedInventory {
 	public static final int SLOT_OUTPUT = 9;

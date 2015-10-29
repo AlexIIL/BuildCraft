@@ -11,8 +11,6 @@ package buildcraft.robotics;
 import java.util.Arrays;
 import java.util.List;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -34,6 +32,8 @@ import buildcraft.core.lib.network.command.PacketCommand;
 import buildcraft.core.lib.utils.NetworkUtils;
 import buildcraft.robotics.gui.ContainerZonePlan;
 import buildcraft.robotics.map.MapWorld;
+
+import io.netty.buffer.ByteBuf;
 
 public class TileZonePlan extends TileBuildCraft implements IInventory {
 

@@ -10,7 +10,6 @@ package buildcraft.robotics.ai;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
-
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.api.core.BlockIndex;

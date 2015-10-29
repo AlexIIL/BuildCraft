@@ -10,18 +10,16 @@ package buildcraft.core.lib.block;
 
 import java.util.HashSet;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-
 import net.minecraftforge.common.util.ForgeDirection;
 
 import cofh.api.energy.IEnergyHandler;
+
 import buildcraft.BuildCraftCore;
 import buildcraft.api.core.ISerializable;
 import buildcraft.api.tiles.IControllable;
@@ -31,6 +29,8 @@ import buildcraft.core.lib.TileBuffer;
 import buildcraft.core.lib.network.Packet;
 import buildcraft.core.lib.network.PacketTileUpdate;
 import buildcraft.core.lib.utils.Utils;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * For future maintainers: This class intentionally does not implement

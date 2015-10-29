@@ -1,12 +1,9 @@
 package buildcraft.transport.pluggable;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
-
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.BuildCraftTransport;
@@ -17,6 +14,8 @@ import buildcraft.api.transport.pluggable.IPipePluggableRenderer;
 import buildcraft.api.transport.pluggable.PipePluggable;
 import buildcraft.core.lib.utils.MatrixTranformations;
 import buildcraft.transport.PipeIconProvider;
+
+import io.netty.buffer.ByteBuf;
 
 public class PlugPluggable extends PipePluggable {
 	protected static final class PlugPluggableRenderer implements IPipePluggableRenderer {

@@ -19,9 +19,6 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import buildcraft.BuildCraftTransport;
 import buildcraft.api.core.EnumColor;
 import buildcraft.core.lib.gui.BuildCraftContainer;
@@ -34,6 +31,9 @@ import buildcraft.core.lib.network.PacketGuiReturn;
 import buildcraft.core.lib.utils.RevolvingList;
 import buildcraft.core.lib.utils.StringUtils;
 import buildcraft.transport.pipes.PipeItemsEmzuli;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ContainerEmzuliPipe extends BuildCraftContainer {
 

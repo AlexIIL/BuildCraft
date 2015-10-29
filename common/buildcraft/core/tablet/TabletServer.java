@@ -3,10 +3,10 @@ package buildcraft.core.tablet;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
-import cpw.mods.fml.relauncher.Side;
-
 import buildcraft.BuildCraftCore;
 import buildcraft.api.tablet.TabletBitmap;
+
+import cpw.mods.fml.relauncher.Side;
 
 public class TabletServer extends TabletBase {
 	protected final EntityPlayer player;

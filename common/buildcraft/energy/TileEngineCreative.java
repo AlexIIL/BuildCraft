@@ -8,13 +8,10 @@
  */
 package buildcraft.energy;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentTranslation;
-
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -23,6 +20,8 @@ import buildcraft.api.tools.IToolWrench;
 import buildcraft.core.PowerMode;
 import buildcraft.core.lib.engines.TileEngineBase;
 import buildcraft.core.lib.utils.StringUtils;
+
+import io.netty.buffer.ByteBuf;
 
 public class TileEngineCreative extends TileEngineBase {
 	private PowerMode powerMode = PowerMode.M2;

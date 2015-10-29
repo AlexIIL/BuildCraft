@@ -8,10 +8,7 @@
  */
 package buildcraft.factory;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.world.World;
-
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.BuildCraftCore;
@@ -27,6 +24,8 @@ import buildcraft.core.lib.RFBattery;
 import buildcraft.core.lib.block.TileBuildCraft;
 import buildcraft.core.lib.utils.BlockMiner;
 import buildcraft.core.lib.utils.BlockUtils;
+
+import io.netty.buffer.ByteBuf;
 
 public class TileMiningWell extends TileBuildCraft implements IHasWork, IPipeConnection, IControllable, ILEDProvider {
 	private boolean isDigging = true;

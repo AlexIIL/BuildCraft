@@ -23,10 +23,6 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.BuildCraftCore;
@@ -34,6 +30,10 @@ import buildcraft.api.events.BlockInteractionEvent;
 import buildcraft.api.transport.IItemPipe;
 import buildcraft.core.lib.block.BlockBuildCraft;
 import buildcraft.core.lib.render.ICustomHighlight;
+
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class BlockEngineBase extends BlockBuildCraft implements ICustomHighlight {
 	private static final AxisAlignedBB[][] boxes = {

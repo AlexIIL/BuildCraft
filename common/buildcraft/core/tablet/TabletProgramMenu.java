@@ -1,7 +1,5 @@
 package buildcraft.core.tablet;
 
-import cpw.mods.fml.relauncher.Side;
-
 import buildcraft.api.tablet.ITablet;
 import buildcraft.api.tablet.TabletBitmap;
 import buildcraft.api.tablet.TabletProgram;
@@ -9,6 +7,8 @@ import buildcraft.core.tablet.utils.TabletDrawUtils;
 import buildcraft.core.tablet.utils.TabletFont;
 import buildcraft.core.tablet.utils.TabletFontManager;
 import buildcraft.core.tablet.utils.TabletTextUtils;
+
+import cpw.mods.fml.relauncher.Side;
 
 public class TabletProgramMenu extends TabletProgram {
 	private final ITablet tablet;

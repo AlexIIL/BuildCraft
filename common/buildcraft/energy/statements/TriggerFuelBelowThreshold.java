@@ -10,10 +10,6 @@ package buildcraft.energy.statements;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.api.statements.IStatementContainer;
@@ -22,6 +18,9 @@ import buildcraft.api.statements.ITriggerExternal;
 import buildcraft.core.lib.utils.StringUtils;
 import buildcraft.core.statements.BCStatement;
 import buildcraft.energy.TileEngineIron;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TriggerFuelBelowThreshold extends BCStatement implements ITriggerExternal {
 

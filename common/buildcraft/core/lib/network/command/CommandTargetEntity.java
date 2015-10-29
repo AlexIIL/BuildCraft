@@ -8,11 +8,11 @@
  */
 package buildcraft.core.lib.network.command;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+
+import io.netty.buffer.ByteBuf;
 
 public class CommandTargetEntity extends CommandTarget {
 	@Override

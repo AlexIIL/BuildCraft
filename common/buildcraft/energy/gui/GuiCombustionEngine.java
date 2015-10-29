@@ -13,7 +13,6 @@ import java.util.List;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
-
 import net.minecraftforge.fluids.FluidStack;
 
 import buildcraft.core.lib.utils.StringUtils;

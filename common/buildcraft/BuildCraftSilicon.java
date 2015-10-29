@@ -15,17 +15,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
-
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLInterModComms;
-import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
 import buildcraft.api.blueprints.BuilderAPI;
@@ -40,26 +29,21 @@ import buildcraft.core.config.ConfigManager;
 import buildcraft.core.lib.items.ItemBuildCraft;
 import buildcraft.core.lib.network.ChannelHandler;
 import buildcraft.core.network.EntityIds;
-import buildcraft.silicon.BlockLaser;
-import buildcraft.silicon.BlockLaserTable;
-import buildcraft.silicon.BlockPackager;
-import buildcraft.silicon.EntityPackage;
-import buildcraft.silicon.ItemLaserTable;
-import buildcraft.silicon.ItemPackage;
-import buildcraft.silicon.ItemRedstoneChipset;
+import buildcraft.silicon.*;
 import buildcraft.silicon.ItemRedstoneChipset.Chipset;
-import buildcraft.silicon.SiliconGuiHandler;
-import buildcraft.silicon.SiliconProxy;
-import buildcraft.silicon.TileAdvancedCraftingTable;
-import buildcraft.silicon.TileAssemblyTable;
-import buildcraft.silicon.TileChargingTable;
-import buildcraft.silicon.TileIntegrationTable;
-import buildcraft.silicon.TileLaser;
-import buildcraft.silicon.TilePackager;
-import buildcraft.silicon.TileProgrammingTable;
-import buildcraft.silicon.TileStampingTable;
 import buildcraft.silicon.network.PacketHandlerSilicon;
 import buildcraft.transport.stripes.StripesHandlerDispenser;
+
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
+import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(name = "BuildCraft Silicon", version = Version.VERSION, useMetadata = false, modid = "BuildCraft|Silicon", dependencies = DefaultProps.DEPENDENCY_CORE)
 public class BuildCraftSilicon extends BuildCraftMod {

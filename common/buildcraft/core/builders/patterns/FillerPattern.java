@@ -17,8 +17,6 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.common.Loader;
-
 import buildcraft.api.blueprints.SchematicMask;
 import buildcraft.api.filler.IFillerPattern;
 import buildcraft.api.statements.IStatement;
@@ -30,6 +28,8 @@ import buildcraft.core.blueprints.BptBuilderTemplate;
 import buildcraft.core.blueprints.SchematicRegistry;
 import buildcraft.core.blueprints.Template;
 import buildcraft.core.lib.utils.StringUtils;
+
+import cpw.mods.fml.common.Loader;
 
 public abstract class FillerPattern implements IFillerPattern {
 

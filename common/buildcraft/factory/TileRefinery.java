@@ -8,14 +8,10 @@
  */
 package buildcraft.factory;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-
-import cpw.mods.fml.relauncher.Side;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
@@ -37,6 +33,9 @@ import buildcraft.core.lib.fluids.TankManager;
 import buildcraft.core.lib.network.command.ICommandReceiver;
 import buildcraft.core.lib.utils.NetworkUtils;
 import buildcraft.core.recipes.RefineryRecipeManager;
+
+import cpw.mods.fml.relauncher.Side;
+import io.netty.buffer.ByteBuf;
 
 public class TileRefinery extends TileBuildCraft implements IFluidHandler, IHasWork, IFlexibleCrafter, ICommandReceiver {
 

@@ -23,15 +23,15 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
-import cpw.mods.fml.common.network.FMLEmbeddedChannel;
-import cpw.mods.fml.common.network.FMLOutboundHandler;
-import cpw.mods.fml.common.network.FMLOutboundHandler.OutboundTarget;
-import cpw.mods.fml.relauncher.Side;
-
 import buildcraft.api.core.BCLog;
 import buildcraft.core.DefaultProps;
 import buildcraft.core.lib.network.Packet;
 import buildcraft.core.lib.utils.ThreadSafeUtils;
+
+import cpw.mods.fml.common.network.FMLEmbeddedChannel;
+import cpw.mods.fml.common.network.FMLOutboundHandler;
+import cpw.mods.fml.common.network.FMLOutboundHandler.OutboundTarget;
+import cpw.mods.fml.relauncher.Side;
 
 public class BuildCraftMod {
 	private static PacketSender sender = new PacketSender();

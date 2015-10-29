@@ -2,9 +2,6 @@ package buildcraft.energy;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.biome.BiomeGenBase;
-
-import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
-import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
@@ -13,6 +10,9 @@ import buildcraft.api.fuels.ICoolant;
 import buildcraft.core.IMCHandler;
 import buildcraft.energy.fuels.CoolantManager;
 import buildcraft.energy.worldgen.OilPopulate;
+
+import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
+import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
 
 public class IMCHandlerEnergy extends IMCHandler {
 	@Override

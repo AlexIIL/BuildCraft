@@ -8,17 +8,16 @@
  */
 package buildcraft.core.lib.network;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-
 import net.minecraftforge.common.DimensionManager;
 
 import buildcraft.BuildCraftCore;
 import buildcraft.core.network.PacketIds;
+
+import io.netty.buffer.ByteBuf;
 
 // TODO: Rename to PacketGuiUpdate
 public class PacketGuiReturn extends Packet {

@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.mojang.authlib.GameProfile;
+
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.model.ModelBase;
@@ -33,7 +34,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.util.ResourceLocation;
-
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.common.util.Constants.NBT;

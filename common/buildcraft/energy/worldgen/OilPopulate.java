@@ -20,9 +20,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
-
-import cpw.mods.fml.common.eventhandler.Event.Result;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
@@ -33,6 +30,9 @@ import net.minecraftforge.fluids.IFluidBlock;
 
 import buildcraft.BuildCraftCore;
 import buildcraft.BuildCraftEnergy;
+
+import cpw.mods.fml.common.eventhandler.Event.Result;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public final class OilPopulate {
 

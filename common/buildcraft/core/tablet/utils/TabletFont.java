@@ -6,10 +6,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import buildcraft.api.tablet.TabletBitmap;
+
 import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
-
-import buildcraft.api.tablet.TabletBitmap;
 
 public final class TabletFont {
 	public final class Glyph {

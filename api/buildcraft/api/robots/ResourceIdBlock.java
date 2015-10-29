@@ -12,7 +12,6 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.api.core.BlockIndex;

@@ -11,16 +11,12 @@ package buildcraft.builders;
 import java.io.IOException;
 import java.util.List;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTSizeTracker;
 import net.minecraft.nbt.NBTTagCompound;
-
-import cpw.mods.fml.relauncher.Side;
 
 import buildcraft.BuildCraftBuilders;
 import buildcraft.BuildCraftCore;
@@ -36,6 +32,9 @@ import buildcraft.core.lib.network.command.ICommandReceiver;
 import buildcraft.core.lib.network.command.PacketCommand;
 import buildcraft.core.lib.utils.NBTUtils;
 import buildcraft.core.lib.utils.NetworkUtils;
+
+import cpw.mods.fml.relauncher.Side;
+import io.netty.buffer.ByteBuf;
 
 /**
  * In this implementation, the blueprint library is the interface to the

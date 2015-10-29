@@ -2,15 +2,12 @@ package buildcraft.transport.gates;
 
 import java.util.Set;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.AxisAlignedBB;
-
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -27,6 +24,8 @@ import buildcraft.core.lib.utils.MatrixTranformations;
 import buildcraft.transport.Gate;
 import buildcraft.transport.TileGenericPipe;
 import buildcraft.transport.render.PipeRendererTESR;
+
+import io.netty.buffer.ByteBuf;
 
 public class GatePluggable extends PipePluggable {
 	private static final class GatePluggableRenderer implements IPipePluggableRenderer, IPipePluggableDynamicRenderer {

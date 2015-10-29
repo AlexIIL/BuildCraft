@@ -11,7 +11,6 @@ import net.minecraft.block.BlockStairs;
 import net.minecraft.block.BlockTorch;
 import net.minecraft.block.IGrowable;
 import net.minecraft.init.Blocks;
-
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;

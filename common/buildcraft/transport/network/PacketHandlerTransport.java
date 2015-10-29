@@ -8,15 +8,10 @@
  */
 package buildcraft.transport.network;
 
-import io.netty.channel.ChannelHandler.Sharable;
-import io.netty.channel.ChannelHandlerContext;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetHandler;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-
-import cpw.mods.fml.common.network.NetworkRegistry;
 
 import buildcraft.api.transport.IPipeTile;
 import buildcraft.core.lib.network.Packet;
@@ -30,6 +25,10 @@ import buildcraft.transport.PipeTransportPower;
 import buildcraft.transport.TileGenericPipe;
 import buildcraft.transport.pipes.PipeItemsDiamond;
 import buildcraft.transport.pipes.PipeItemsEmerald;
+
+import cpw.mods.fml.common.network.NetworkRegistry;
+import io.netty.channel.ChannelHandler.Sharable;
+import io.netty.channel.ChannelHandlerContext;
 
 @Sharable
 public class PacketHandlerTransport extends PacketHandler {

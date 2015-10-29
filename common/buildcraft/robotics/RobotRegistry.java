@@ -20,8 +20,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.LongHashMap;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSavedData;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.world.ChunkEvent;
@@ -32,6 +30,8 @@ import buildcraft.api.robots.EntityRobotBase;
 import buildcraft.api.robots.IRobotRegistry;
 import buildcraft.api.robots.ResourceId;
 import buildcraft.api.robots.RobotManager;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class RobotRegistry extends WorldSavedData implements IRobotRegistry {
 

@@ -1,20 +1,19 @@
 package buildcraft.core.lib.utils;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
-
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.ChunkProviderServer;
 
+import buildcraft.core.lib.network.ChannelHandler;
+import buildcraft.core.lib.network.Packet;
+
 import cpw.mods.fml.common.network.FMLEmbeddedChannel;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
-
-import buildcraft.core.lib.network.ChannelHandler;
-import buildcraft.core.lib.network.Packet;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 
 public final class ThreadSafeUtils {
 	private static final ThreadLocal<Chunk> lastChunk = new ThreadLocal<Chunk>();

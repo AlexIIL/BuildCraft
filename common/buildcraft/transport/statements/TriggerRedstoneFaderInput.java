@@ -10,9 +10,6 @@ package buildcraft.transport.statements;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import buildcraft.api.gates.IGate;
 import buildcraft.api.statements.IStatementContainer;
 import buildcraft.api.statements.IStatementParameter;
@@ -21,6 +18,9 @@ import buildcraft.core.lib.utils.StringUtils;
 import buildcraft.core.statements.BCStatement;
 import buildcraft.core.statements.StatementParameterRedstoneGateSideOnly;
 import buildcraft.transport.TileGenericPipe;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TriggerRedstoneFaderInput extends BCStatement implements ITriggerInternal {
 

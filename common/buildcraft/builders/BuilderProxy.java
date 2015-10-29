@@ -10,9 +10,9 @@ package buildcraft.builders;
 
 import net.minecraft.world.World;
 
-import cpw.mods.fml.common.SidedProxy;
-
 import buildcraft.core.lib.EntityBlock;
+
+import cpw.mods.fml.common.SidedProxy;
 
 public class BuilderProxy {
 	@SidedProxy(clientSide = "buildcraft.builders.BuilderProxyClient", serverSide = "buildcraft.builders.BuilderProxy")

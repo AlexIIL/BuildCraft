@@ -12,8 +12,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.common.network.IGuiHandler;
-
 import buildcraft.core.GuiIds;
 import buildcraft.factory.gui.ContainerAutoWorkbench;
 import buildcraft.factory.gui.ContainerHopper;
@@ -21,6 +19,8 @@ import buildcraft.factory.gui.ContainerRefinery;
 import buildcraft.factory.gui.GuiAutoCrafting;
 import buildcraft.factory.gui.GuiHopper;
 import buildcraft.factory.gui.GuiRefinery;
+
+import cpw.mods.fml.common.network.IGuiHandler;
 
 public class FactoryGuiHandler implements IGuiHandler {
 

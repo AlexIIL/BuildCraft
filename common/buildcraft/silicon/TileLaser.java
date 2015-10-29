@@ -11,13 +11,10 @@ package buildcraft.silicon;
 import java.util.LinkedList;
 import java.util.List;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ResourceLocation;
-
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.api.core.Position;
@@ -32,6 +29,8 @@ import buildcraft.core.LaserData;
 import buildcraft.core.lib.RFBattery;
 import buildcraft.core.lib.block.TileBuildCraft;
 import buildcraft.core.lib.utils.BlockUtils;
+
+import io.netty.buffer.ByteBuf;
 
 public class TileLaser extends TileBuildCraft implements IHasWork, IControllable {
 

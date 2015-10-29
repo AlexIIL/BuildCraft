@@ -8,16 +8,15 @@
  */
 package buildcraft.transport.network;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.util.MathHelper;
-
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.api.core.EnumColor;
 import buildcraft.core.lib.network.Packet;
 import buildcraft.core.network.PacketIds;
 import buildcraft.transport.TravelingItem;
+
+import io.netty.buffer.ByteBuf;
 
 public class PacketPipeTransportTraveler extends Packet {
 

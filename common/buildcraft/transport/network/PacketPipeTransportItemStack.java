@@ -8,14 +8,14 @@
  */
 package buildcraft.transport.network;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.item.ItemStack;
 
 import buildcraft.core.lib.network.Packet;
 import buildcraft.core.lib.utils.NetworkUtils;
 import buildcraft.core.network.PacketIds;
 import buildcraft.transport.TravelingItem;
+
+import io.netty.buffer.ByteBuf;
 
 public class PacketPipeTransportItemStack extends Packet {
 

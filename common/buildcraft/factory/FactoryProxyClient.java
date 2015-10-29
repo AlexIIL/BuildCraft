@@ -11,8 +11,6 @@ package buildcraft.factory;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.client.registry.ClientRegistry;
-
 import buildcraft.BuildCraftFactory;
 import buildcraft.core.lib.EntityBlock;
 import buildcraft.core.render.RenderLEDTile;
@@ -21,6 +19,8 @@ import buildcraft.core.render.RenderingEntityBlocks.EntityRenderIndex;
 import buildcraft.factory.render.RenderHopper;
 import buildcraft.factory.render.RenderRefinery;
 import buildcraft.factory.render.RenderTank;
+
+import cpw.mods.fml.client.registry.ClientRegistry;
 
 public class FactoryProxyClient extends FactoryProxy {
 	public static IIcon pumpTexture;

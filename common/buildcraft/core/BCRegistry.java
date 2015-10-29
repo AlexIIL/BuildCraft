@@ -1,16 +1,19 @@
 package buildcraft.core;
 
 import java.io.File;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+
 import buildcraft.core.lib.items.ItemBlockBuildCraft;
 import buildcraft.core.lib.utils.Utils;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public final class BCRegistry {
 	public static final BCRegistry INSTANCE = new BCRegistry();

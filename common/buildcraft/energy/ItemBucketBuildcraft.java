@@ -15,10 +15,10 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBucket;
 
+import buildcraft.core.BCCreativeTab;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
-import buildcraft.core.BCCreativeTab;
 
 public class ItemBucketBuildcraft extends ItemBucket {
 

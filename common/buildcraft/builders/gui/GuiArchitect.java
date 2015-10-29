@@ -10,7 +10,6 @@ package buildcraft.builders.gui;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
-import io.netty.buffer.ByteBuf;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
@@ -29,6 +28,8 @@ import buildcraft.core.lib.network.command.CommandWriter;
 import buildcraft.core.lib.network.command.PacketCommand;
 import buildcraft.core.lib.utils.NetworkUtils;
 import buildcraft.core.lib.utils.StringUtils;
+
+import io.netty.buffer.ByteBuf;
 
 public class GuiArchitect extends GuiBuildCraft {
 

@@ -10,10 +10,10 @@ package buildcraft.core.lib.render;
 
 import net.minecraft.util.IIcon;
 
+import buildcraft.api.core.render.ITextureStateManager;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
-import buildcraft.api.core.render.ITextureStateManager;
 
 /*
  * This class moves texture management from PipeRenderState 

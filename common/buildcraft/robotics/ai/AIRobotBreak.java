@@ -13,7 +13,6 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.WorldServer;
-
 import net.minecraftforge.common.ForgeHooks;
 
 import buildcraft.api.blueprints.BuilderAPI;

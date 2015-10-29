@@ -8,7 +8,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import net.minecraft.item.ItemStack;
-
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.api.boards.RedstoneBoardNBT;

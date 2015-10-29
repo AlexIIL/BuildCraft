@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 import net.minecraft.util.IIcon;
 
+import buildcraft.api.statements.IStatement;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
-import buildcraft.api.statements.IStatement;
 
 /**
  * Created by asie on 1/24/15.

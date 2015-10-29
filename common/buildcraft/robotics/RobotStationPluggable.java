@@ -2,17 +2,15 @@ package buildcraft.robotics;
 
 import java.util.List;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
-
 import net.minecraftforge.common.util.ForgeDirection;
 
 import cofh.api.energy.IEnergyReceiver;
+
 import buildcraft.BuildCraftRobotics;
 import buildcraft.BuildCraftTransport;
 import buildcraft.api.core.render.ITextureStates;
@@ -27,6 +25,8 @@ import buildcraft.api.transport.pluggable.IPipePluggableRenderer;
 import buildcraft.api.transport.pluggable.PipePluggable;
 import buildcraft.core.lib.utils.MatrixTranformations;
 import buildcraft.transport.PipeIconProvider;
+
+import io.netty.buffer.ByteBuf;
 
 public class RobotStationPluggable extends PipePluggable implements IPipePluggableItem, IEnergyReceiver, IDebuggable,
 		IDockingStationProvider {

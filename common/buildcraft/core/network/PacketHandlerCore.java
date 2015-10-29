@@ -1,13 +1,7 @@
 package buildcraft.core.network;
 
-import io.netty.channel.ChannelHandlerContext;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetHandler;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.relauncher.Side;
 
 import buildcraft.core.lib.network.Packet;
 import buildcraft.core.lib.network.PacketHandler;
@@ -16,6 +10,11 @@ import buildcraft.core.tablet.PacketTabletMessage;
 import buildcraft.core.tablet.TabletBase;
 import buildcraft.core.tablet.manager.TabletManagerClient;
 import buildcraft.core.tablet.manager.TabletManagerServer;
+
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.relauncher.Side;
+import io.netty.channel.ChannelHandlerContext;
 
 public class PacketHandlerCore extends PacketHandler {
 	@Override

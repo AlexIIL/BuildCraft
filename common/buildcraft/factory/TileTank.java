@@ -8,12 +8,9 @@
  */
 package buildcraft.factory;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.EnumSkyBlock;
-
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
@@ -29,6 +26,8 @@ import buildcraft.core.lib.block.TileBuildCraft;
 import buildcraft.core.lib.fluids.Tank;
 import buildcraft.core.lib.fluids.TankManager;
 import buildcraft.core.lib.utils.BlockUtils;
+
+import io.netty.buffer.ByteBuf;
 
 public class TileTank extends TileBuildCraft implements IFluidHandler {
 	public final Tank tank = new Tank("tank", FluidContainerRegistry.BUCKET_VOLUME * 16, this);

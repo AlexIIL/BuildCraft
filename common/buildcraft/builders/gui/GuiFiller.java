@@ -8,8 +8,6 @@
  */
 package buildcraft.builders.gui;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
@@ -36,6 +34,8 @@ import buildcraft.core.lib.gui.tooltips.ToolTipLine;
 import buildcraft.core.lib.network.command.CommandWriter;
 import buildcraft.core.lib.network.command.PacketCommand;
 import buildcraft.core.lib.utils.StringUtils;
+
+import io.netty.buffer.ByteBuf;
 
 public class GuiFiller extends GuiAdvancedInterface {
 	class FillerParameterSlot extends StatementParameterSlot {

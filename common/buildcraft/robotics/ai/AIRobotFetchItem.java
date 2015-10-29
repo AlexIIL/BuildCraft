@@ -10,7 +10,6 @@ package buildcraft.robotics.ai;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
-
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.api.core.IZone;

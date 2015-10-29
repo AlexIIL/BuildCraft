@@ -15,8 +15,6 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.api.core.IIconProvider;
@@ -31,6 +29,8 @@ import buildcraft.transport.PipeRenderState;
 import buildcraft.transport.TileGenericPipe;
 import buildcraft.transport.TransportProxy;
 import buildcraft.transport.pipes.PipeStructureCobblestone;
+
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class PipeRendererWorld implements ISimpleBlockRenderingHandler {
 

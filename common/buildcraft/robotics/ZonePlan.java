@@ -12,17 +12,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-
 import net.minecraftforge.common.util.Constants;
 
 import buildcraft.api.core.BlockIndex;
 import buildcraft.api.core.ISerializable;
 import buildcraft.api.core.IZone;
 import buildcraft.core.ChunkIndex;
+
+import io.netty.buffer.ByteBuf;
 
 public class ZonePlan implements IZone, ISerializable {
 	private final HashMap<ChunkIndex, ZoneChunk> chunkMapping = new HashMap<ChunkIndex, ZoneChunk>();

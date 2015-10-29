@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -25,6 +23,8 @@ import buildcraft.api.core.IBox;
 import buildcraft.api.core.ISerializable;
 import buildcraft.api.core.Position;
 import buildcraft.core.lib.utils.LaserUtils;
+
+import io.netty.buffer.ByteBuf;
 
 public class Box implements IBox, ISerializable {
 	public enum Kind {

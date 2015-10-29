@@ -11,13 +11,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
 import net.minecraftforge.oredict.OreDictionary;
 
 import buildcraft.core.lib.inventory.StackHelper;
 import buildcraft.core.lib.utils.NBTUtils;
+
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
 
 public final class ListHandlerOld {
 	private static final WeakHashMap<ItemStack, StackLine[]> LINE_CACHE = new WeakHashMap<ItemStack, StackLine[]>();

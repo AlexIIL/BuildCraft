@@ -10,13 +10,13 @@ package buildcraft.silicon;
 
 import net.minecraft.client.renderer.entity.RenderSnowball;
 
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-
 import buildcraft.BuildCraftSilicon;
 import buildcraft.silicon.render.RenderLaserBlock;
 import buildcraft.silicon.render.RenderLaserTable;
 import buildcraft.silicon.render.RenderLaserTile;
+
+import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class SiliconProxyClient extends SiliconProxy {
 	@Override

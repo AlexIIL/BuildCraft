@@ -12,19 +12,19 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 
 import org.apache.logging.log4j.Level;
+
+import buildcraft.core.lib.network.command.PacketCommand;
+
+import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.internal.FMLProxyPacket;
+import gnu.trove.map.hash.TByteObjectHashMap;
+import gnu.trove.map.hash.TObjectByteHashMap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageCodec;
 import io.netty.util.AttributeKey;
-import gnu.trove.map.hash.TByteObjectHashMap;
-import gnu.trove.map.hash.TObjectByteHashMap;
-
-import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.internal.FMLProxyPacket;
-
-import buildcraft.core.lib.network.command.PacketCommand;
 
 /**
  * Code based on FMLIndexedMessageToMessageCodec, but since some of its fields

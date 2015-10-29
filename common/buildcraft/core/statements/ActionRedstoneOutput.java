@@ -9,9 +9,6 @@
 package buildcraft.core.statements;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.api.statements.IActionInternal;
@@ -20,6 +17,9 @@ import buildcraft.api.statements.IStatementParameter;
 import buildcraft.api.statements.containers.IRedstoneStatementContainer;
 import buildcraft.api.statements.containers.ISidedStatementContainer;
 import buildcraft.core.lib.utils.StringUtils;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ActionRedstoneOutput extends BCStatement implements IActionInternal {
 

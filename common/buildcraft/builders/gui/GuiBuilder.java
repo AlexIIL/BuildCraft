@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.opengl.GL11;
-import io.netty.buffer.ByteBuf;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -30,6 +29,8 @@ import buildcraft.core.lib.gui.GuiAdvancedInterface;
 import buildcraft.core.lib.network.command.CommandWriter;
 import buildcraft.core.lib.network.command.PacketCommand;
 import buildcraft.core.lib.utils.StringUtils;
+
+import io.netty.buffer.ByteBuf;
 
 public class GuiBuilder extends GuiAdvancedInterface {
 	private static final ResourceLocation REGULAR_TEXTURE = new ResourceLocation("buildcraftbuilders:textures/gui/builder.png");

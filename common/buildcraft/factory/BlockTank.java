@@ -18,9 +18,6 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -30,6 +27,9 @@ import buildcraft.BuildCraftCore;
 import buildcraft.core.BCCreativeTab;
 import buildcraft.core.lib.block.BlockBuildCraft;
 import buildcraft.core.lib.inventory.InvUtils;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockTank extends BlockBuildCraft {
 	private static final boolean DEBUG_MODE = false;

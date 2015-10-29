@@ -12,9 +12,6 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-
 import buildcraft.BuildCraftBuilders;
 import buildcraft.builders.render.RenderArchitect;
 import buildcraft.builders.render.RenderBuilderTile;
@@ -26,6 +23,9 @@ import buildcraft.core.lib.render.RenderMultiTESR;
 import buildcraft.core.lib.render.RenderVoid;
 import buildcraft.core.render.RenderBuilder;
 import buildcraft.core.render.RenderLEDTile;
+
+import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class BuilderProxyClient extends BuilderProxy {
 	public static IIcon drillTexture, drillSideTexture;

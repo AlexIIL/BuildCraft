@@ -13,24 +13,14 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.client.MinecraftForgeClient;
+
+import buildcraft.BuildCraftTransport;
+import buildcraft.transport.render.*;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.client.MinecraftForgeClient;
-
-import buildcraft.BuildCraftTransport;
-import buildcraft.transport.render.FacadeItemRenderer;
-import buildcraft.transport.render.GateItemRenderer;
-import buildcraft.transport.render.PipeItemRenderer;
-import buildcraft.transport.render.PipeRendererTESR;
-import buildcraft.transport.render.PipeRendererWorld;
-import buildcraft.transport.render.PipeTransportFluidsRenderer;
-import buildcraft.transport.render.PipeTransportItemsRenderer;
-import buildcraft.transport.render.PipeTransportPowerRenderer;
-import buildcraft.transport.render.PipeTransportRenderer;
-import buildcraft.transport.render.PlugItemRenderer;
-import buildcraft.transport.render.TileEntityPickupFX;
 
 public class TransportProxyClient extends TransportProxy {
 	public static final PipeItemRenderer pipeItemRenderer = new PipeItemRenderer();

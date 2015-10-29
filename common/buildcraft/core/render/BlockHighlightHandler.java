@@ -16,13 +16,13 @@ import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
+import net.minecraftforge.client.event.DrawBlockHighlightEvent;
+
+import buildcraft.core.lib.render.ICustomHighlight;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraftforge.client.event.DrawBlockHighlightEvent;
-
-import buildcraft.core.lib.render.ICustomHighlight;
 
 public class BlockHighlightHandler {
 	@SideOnly(Side.CLIENT)

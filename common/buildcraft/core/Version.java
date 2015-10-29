@@ -20,14 +20,14 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
-
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.event.FMLInterModComms;
 import net.minecraftforge.common.config.Property;
 
 import buildcraft.BuildCraftCore;
 import buildcraft.api.core.BCLog;
 import buildcraft.core.proxy.CoreProxy;
+
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.event.FMLInterModComms;
 
 public class Version implements Runnable {
 	public enum EnumUpdateState {

@@ -14,7 +14,6 @@ import java.util.List;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
-import io.netty.buffer.ByteBuf;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
@@ -38,6 +37,8 @@ import buildcraft.core.lib.utils.NetworkUtils;
 import buildcraft.core.lib.utils.StringUtils;
 import buildcraft.robotics.TileZonePlan;
 import buildcraft.robotics.ZonePlan;
+
+import io.netty.buffer.ByteBuf;
 
 public class GuiZonePlan extends GuiAdvancedInterface {
 

@@ -8,8 +8,6 @@
  */
 package buildcraft.core;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -23,6 +21,8 @@ import buildcraft.core.lib.EntityBlock;
 import buildcraft.core.lib.block.TileBuildCraft;
 import buildcraft.core.lib.utils.LaserUtils;
 import buildcraft.core.proxy.CoreProxy;
+
+import io.netty.buffer.ByteBuf;
 
 public class TileMarker extends TileBuildCraft implements ITileAreaProvider {
 	public static class TileWrapper implements ISerializable {

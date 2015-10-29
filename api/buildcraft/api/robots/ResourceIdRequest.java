@@ -11,7 +11,6 @@ package buildcraft.api.robots;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import net.minecraft.nbt.NBTTagCompound;
-
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.api.core.BlockIndex;

@@ -3,12 +3,12 @@ package buildcraft.builders;
 import java.util.List;
 
 import net.minecraft.util.EnumChatFormatting;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 
 import buildcraft.builders.gui.ContainerBuilder;
 import buildcraft.core.blueprints.RequirementItemStack;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 /**
  * Created by asie on 10/6/15.

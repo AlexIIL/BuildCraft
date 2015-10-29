@@ -10,7 +10,6 @@ package buildcraft.core.statements;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
-
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.api.statements.IStatementContainer;

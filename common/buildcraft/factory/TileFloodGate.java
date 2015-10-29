@@ -14,11 +14,8 @@ import java.util.LinkedList;
 import java.util.Set;
 import java.util.TreeMap;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
-
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
@@ -35,6 +32,8 @@ import buildcraft.core.lib.fluids.Tank;
 import buildcraft.core.lib.fluids.TankUtils;
 import buildcraft.core.lib.utils.BlockUtils;
 import buildcraft.core.lib.utils.Utils;
+
+import io.netty.buffer.ByteBuf;
 
 public class TileFloodGate extends TileBuildCraft implements IFluidHandler {
 	public static final int[] REBUILD_DELAY = new int[8];

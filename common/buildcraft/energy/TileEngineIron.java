@@ -17,7 +17,6 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.biome.BiomeGenBase;
-
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
@@ -28,7 +27,6 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 import buildcraft.BuildCraftCore;
 import buildcraft.BuildCraftEnergy;
-
 import buildcraft.api.core.StackKey;
 import buildcraft.api.fuels.BuildcraftFuelRegistry;
 import buildcraft.api.fuels.ICoolant;
@@ -38,7 +36,6 @@ import buildcraft.api.statements.IActionExternal;
 import buildcraft.api.statements.IOverrideDefaultStatements;
 import buildcraft.api.statements.ITriggerExternal;
 import buildcraft.api.transport.IItemPipe;
-
 import buildcraft.core.GuiIds;
 import buildcraft.core.lib.engines.TileEngineWithInventory;
 import buildcraft.core.lib.fluids.Tank;

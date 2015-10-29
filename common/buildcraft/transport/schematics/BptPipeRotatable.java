@@ -9,7 +9,6 @@
 package buildcraft.transport.schematics;
 
 import net.minecraft.item.Item;
-
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.api.blueprints.IBuilderContext;

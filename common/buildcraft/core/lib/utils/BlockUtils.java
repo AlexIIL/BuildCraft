@@ -26,8 +26,6 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
-
-import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.ForgeEventFactory;
@@ -41,6 +39,8 @@ import net.minecraftforge.fluids.IFluidBlock;
 import buildcraft.BuildCraftCore;
 import buildcraft.api.blueprints.BuilderAPI;
 import buildcraft.core.proxy.CoreProxy;
+
+import cpw.mods.fml.common.FMLCommonHandler;
 
 public final class BlockUtils {
 	/**

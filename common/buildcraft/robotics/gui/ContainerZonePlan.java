@@ -8,14 +8,10 @@
  */
 package buildcraft.robotics.gui;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.block.material.MapColor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
-
-import cpw.mods.fml.relauncher.Side;
 
 import buildcraft.BuildCraftCore;
 import buildcraft.BuildCraftRobotics;
@@ -29,6 +25,9 @@ import buildcraft.core.lib.utils.NetworkUtils;
 import buildcraft.robotics.TileZonePlan;
 import buildcraft.robotics.ZonePlan;
 import buildcraft.robotics.map.MapWorld;
+
+import cpw.mods.fml.relauncher.Side;
+import io.netty.buffer.ByteBuf;
 
 public class ContainerZonePlan extends BuildCraftContainer implements ICommandReceiver {
 	private static final int MAX_PACKET_LENGTH = 30000;

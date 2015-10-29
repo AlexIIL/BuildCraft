@@ -11,11 +11,11 @@ package buildcraft.core;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
-
-import cpw.mods.fml.common.Loader;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.api.transport.IInjectable;
+
+import cpw.mods.fml.common.Loader;
 
 public class CompatHooks {
 	public static final CompatHooks INSTANCE;

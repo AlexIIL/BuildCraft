@@ -8,13 +8,13 @@
  */
 package buildcraft.core.lib.network;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import buildcraft.api.core.ISerializable;
 import buildcraft.core.network.PacketIds;
+
+import io.netty.buffer.ByteBuf;
 
 public class PacketTileUpdate extends PacketUpdate {
 	public int posX;

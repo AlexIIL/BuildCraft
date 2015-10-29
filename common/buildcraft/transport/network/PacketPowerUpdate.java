@@ -8,10 +8,10 @@
  */
 package buildcraft.transport.network;
 
-import io.netty.buffer.ByteBuf;
-
 import buildcraft.core.lib.network.PacketCoordinates;
 import buildcraft.core.network.PacketIds;
+
+import io.netty.buffer.ByteBuf;
 
 public class PacketPowerUpdate extends PacketCoordinates {
 

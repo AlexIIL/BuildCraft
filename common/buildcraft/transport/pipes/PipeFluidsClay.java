@@ -13,9 +13,6 @@ import java.util.Set;
 
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.IFluidHandler;
 
@@ -26,6 +23,9 @@ import buildcraft.transport.Pipe;
 import buildcraft.transport.PipeIconProvider;
 import buildcraft.transport.PipeTransportFluids;
 import buildcraft.transport.pipes.events.PipeEventFluid;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class PipeFluidsClay extends Pipe<PipeTransportFluids> {
 

@@ -4,10 +4,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-
 import buildcraft.core.lib.items.ItemBuildCraft;
 import buildcraft.core.tablet.manager.TabletManagerServer;
+
+import cpw.mods.fml.common.FMLCommonHandler;
 
 public class ItemTablet extends ItemBuildCraft {
 	@Override

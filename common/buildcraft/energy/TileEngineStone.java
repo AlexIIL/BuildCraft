@@ -15,7 +15,6 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
-
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.BuildCraftEnergy;

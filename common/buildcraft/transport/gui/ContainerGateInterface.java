@@ -14,16 +14,12 @@ import java.util.Iterator;
 import java.util.NavigableSet;
 import java.util.TreeSet;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-
-import cpw.mods.fml.relauncher.Side;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.BuildCraftCore;
@@ -40,6 +36,9 @@ import buildcraft.core.lib.utils.NetworkUtils;
 import buildcraft.transport.ActionActiveState;
 import buildcraft.transport.Gate;
 import buildcraft.transport.gates.GateDefinition;
+
+import cpw.mods.fml.relauncher.Side;
+import io.netty.buffer.ByteBuf;
 
 public class ContainerGateInterface extends BuildCraftContainer implements ICommandReceiver {
 

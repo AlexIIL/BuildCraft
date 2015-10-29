@@ -13,10 +13,10 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-
 import net.minecraftforge.common.util.ForgeDirection;
 
 import cofh.api.energy.IEnergyHandler;
+
 import buildcraft.api.power.IRedstoneEngineReceiver;
 import buildcraft.api.transport.IInjectable;
 import buildcraft.api.transport.IPipeTile;

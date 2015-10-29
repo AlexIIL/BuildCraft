@@ -13,13 +13,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import io.netty.buffer.ByteBuf;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.nbt.NBTTagCompound;
-
-import cpw.mods.fml.relauncher.Side;
 import net.minecraftforge.fluids.FluidStack;
 
 import buildcraft.BuildCraftCore;
@@ -34,6 +30,9 @@ import buildcraft.core.lib.network.Packet;
 import buildcraft.core.lib.network.command.CommandWriter;
 import buildcraft.core.lib.network.command.ICommandReceiver;
 import buildcraft.core.lib.network.command.PacketCommand;
+
+import cpw.mods.fml.relauncher.Side;
+import io.netty.buffer.ByteBuf;
 
 public abstract class TileAbstractBuilder extends TileBuildCraft implements ITileBuilder, IInventory, IBoxProvider,
 		IBuildingItemsProvider, ICommandReceiver {

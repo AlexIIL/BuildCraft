@@ -13,8 +13,6 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.WorldServer;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-
 import buildcraft.api.tiles.IHasWork;
 import buildcraft.core.lib.gui.ContainerDummy;
 import buildcraft.core.lib.inventory.InvUtils;
@@ -24,6 +22,8 @@ import buildcraft.core.lib.utils.NBTUtils;
 import buildcraft.core.lib.utils.StringUtils;
 import buildcraft.core.lib.utils.Utils;
 import buildcraft.core.proxy.CoreProxy;
+
+import cpw.mods.fml.common.FMLCommonHandler;
 
 public class TileStampingTable extends TileLaserTableBase implements IHasWork, ISidedInventory {
 	private class LocalInventoryCrafting extends InventoryCrafting {

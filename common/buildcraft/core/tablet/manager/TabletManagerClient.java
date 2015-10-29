@@ -1,9 +1,9 @@
 package buildcraft.core.tablet.manager;
 
+import buildcraft.core.tablet.TabletClient;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
-
-import buildcraft.core.tablet.TabletClient;
 
 public class TabletManagerClient {
 	public static final TabletManagerClient INSTANCE = new TabletManagerClient();
