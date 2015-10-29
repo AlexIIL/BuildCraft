@@ -12,7 +12,7 @@ import net.minecraft.world.IBlockAccess;
 
 import buildcraft.BuildCraftCore;
 
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import net.minecraftforge.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderingMarkers implements ISimpleBlockRenderingHandler {
 

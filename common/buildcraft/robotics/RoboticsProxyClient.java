@@ -11,9 +11,9 @@ import buildcraft.robotics.render.RenderRobot;
 import buildcraft.robotics.render.RenderZonePlan;
 import buildcraft.robotics.render.RobotStationItemRenderer;
 
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.Loader;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.Loader;
 
 public class RoboticsProxyClient extends RoboticsProxy {
     public void registerRenderers() {

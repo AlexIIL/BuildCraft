@@ -14,7 +14,7 @@ import buildcraft.energy.gui.ContainerEngine;
 import buildcraft.energy.gui.GuiCombustionEngine;
 import buildcraft.energy.gui.GuiStoneEngine;
 
-import cpw.mods.fml.common.network.IGuiHandler;
+import net.minecraftforge.fml.common.network.IGuiHandler;
 
 public class EnergyGuiHandler implements IGuiHandler {
 

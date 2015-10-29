@@ -17,7 +17,7 @@ import buildcraft.core.lib.network.command.PacketCommand;
 import buildcraft.core.network.PacketIds;
 import buildcraft.core.proxy.CoreProxy;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;

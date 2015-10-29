@@ -20,8 +20,8 @@ import buildcraft.core.lib.render.RenderVoid;
 import buildcraft.core.render.RenderBuilder;
 import buildcraft.core.render.RenderLEDTile;
 
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 public class BuilderProxyClient extends BuilderProxy {
     public static IIcon drillTexture, drillSideTexture;

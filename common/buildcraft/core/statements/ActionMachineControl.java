@@ -17,8 +17,8 @@ import buildcraft.api.tiles.IControllable;
 import buildcraft.api.tiles.IControllable.Mode;
 import buildcraft.core.lib.utils.StringUtils;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ActionMachineControl extends BCStatement implements IActionExternal {
     public final Mode mode;

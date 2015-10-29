@@ -22,8 +22,8 @@ import buildcraft.BuildCraftCore;
 import buildcraft.api.core.BCLog;
 import buildcraft.core.proxy.CoreProxy;
 
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.event.FMLInterModComms;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
 
 public class Version implements Runnable {
     public enum EnumUpdateState {

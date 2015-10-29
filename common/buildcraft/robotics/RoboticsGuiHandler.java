@@ -14,7 +14,7 @@ import buildcraft.robotics.gui.ContainerZonePlan;
 import buildcraft.robotics.gui.GuiRequester;
 import buildcraft.robotics.gui.GuiZonePlan;
 
-import cpw.mods.fml.common.network.IGuiHandler;
+import net.minecraftforge.fml.common.network.IGuiHandler;
 
 public class RoboticsGuiHandler implements IGuiHandler {
     @Override

@@ -18,8 +18,8 @@ import buildcraft.core.lib.engines.TileEngineBase.EnergyStage;
 import buildcraft.core.lib.utils.StringUtils;
 import buildcraft.core.statements.BCStatement;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TriggerEngineHeat extends BCStatement implements ITriggerExternal {
 

@@ -8,7 +8,7 @@ import buildcraft.core.tablet.utils.TabletFont;
 import buildcraft.core.tablet.utils.TabletFontManager;
 import buildcraft.core.tablet.utils.TabletTextUtils;
 
-import cpw.mods.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class TabletProgramMenu extends TabletProgram {
     private final ITablet tablet;

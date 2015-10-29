@@ -8,7 +8,7 @@ import net.minecraftforge.event.terraingen.WorldTypeEvent;
 
 import buildcraft.BuildCraftEnergy;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class BiomeInitializer {
 

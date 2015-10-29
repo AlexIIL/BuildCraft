@@ -22,8 +22,8 @@ import buildcraft.api.core.EnumColor;
 import buildcraft.api.core.Position;
 import buildcraft.core.lib.inventory.StackHelper;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class TravelingItem {
 

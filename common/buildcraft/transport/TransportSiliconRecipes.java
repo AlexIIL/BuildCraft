@@ -22,8 +22,8 @@ import buildcraft.transport.gates.ItemGate;
 import buildcraft.transport.recipes.AdvancedFacadeRecipe;
 import buildcraft.transport.recipes.GateExpansionRecipe;
 
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.Optional;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public final class TransportSiliconRecipes {
     private TransportSiliconRecipes() {

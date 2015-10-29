@@ -7,7 +7,7 @@ import buildcraft.BuildCraftCore;
 import buildcraft.api.recipes.BuildcraftRecipeRegistry;
 import buildcraft.core.lib.utils.Utils;
 
-import cpw.mods.fml.common.Optional;
+import net.minecraftforge.fml.common.Optional;
 
 public final class CoreSiliconRecipes {
     private CoreSiliconRecipes() {

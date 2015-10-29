@@ -21,8 +21,8 @@ import buildcraft.api.core.ICoreProxy;
 import buildcraft.core.LaserKind;
 import buildcraft.core.lib.EntityBlock;
 
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.SidedProxy;
 
 public class CoreProxy implements ICoreProxy {
 

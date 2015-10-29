@@ -13,7 +13,7 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 import buildcraft.core.lib.items.ItemBlockBuildCraft;
 import buildcraft.core.lib.utils.Utils;
 
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public final class BCRegistry {
     public static final BCRegistry INSTANCE = new BCRegistry();

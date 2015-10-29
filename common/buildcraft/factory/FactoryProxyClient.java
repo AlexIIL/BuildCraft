@@ -16,7 +16,7 @@ import buildcraft.factory.render.RenderHopper;
 import buildcraft.factory.render.RenderRefinery;
 import buildcraft.factory.render.RenderTank;
 
-import cpw.mods.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 public class FactoryProxyClient extends FactoryProxy {
     public static IIcon pumpTexture;

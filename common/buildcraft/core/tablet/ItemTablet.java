@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 import buildcraft.core.lib.items.ItemBuildCraft;
 import buildcraft.core.tablet.manager.TabletManagerServer;
 
-import cpw.mods.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class ItemTablet extends ItemBuildCraft {
     @Override

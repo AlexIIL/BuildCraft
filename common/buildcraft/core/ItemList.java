@@ -23,8 +23,8 @@ import buildcraft.core.lib.utils.NBTUtils;
 import buildcraft.core.list.ListHandlerNew;
 import buildcraft.core.list.ListHandlerOld;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemList extends ItemBuildCraft implements IList {
     public ItemList() {

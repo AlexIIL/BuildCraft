@@ -12,7 +12,7 @@ import buildcraft.core.list.ContainerListOld;
 import buildcraft.core.list.GuiListNew;
 import buildcraft.core.list.GuiListOld;
 
-import cpw.mods.fml.common.network.IGuiHandler;
+import net.minecraftforge.fml.common.network.IGuiHandler;
 
 public class CoreGuiHandler implements IGuiHandler {
 

@@ -27,7 +27,7 @@ import buildcraft.api.robots.IRobotRegistry;
 import buildcraft.api.robots.ResourceId;
 import buildcraft.api.robots.RobotManager;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class RobotRegistry extends WorldSavedData implements IRobotRegistry {
 

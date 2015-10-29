@@ -26,7 +26,7 @@ import buildcraft.transport.TileGenericPipe;
 import buildcraft.transport.TransportProxy;
 import buildcraft.transport.pipes.PipeStructureCobblestone;
 
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import net.minecraftforge.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class PipeRendererWorld implements ISimpleBlockRenderingHandler {
 

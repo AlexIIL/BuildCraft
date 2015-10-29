@@ -6,8 +6,8 @@ import net.minecraft.util.IIcon;
 
 import buildcraft.api.statements.IStatement;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /** Created by asie on 1/24/15. */
 public abstract class StatementSlot extends AdvancedSlot {

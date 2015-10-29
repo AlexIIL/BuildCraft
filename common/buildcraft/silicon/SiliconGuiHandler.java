@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 
 import buildcraft.silicon.gui.*;
 
-import cpw.mods.fml.common.network.IGuiHandler;
+import net.minecraftforge.fml.common.network.IGuiHandler;
 
 public class SiliconGuiHandler implements IGuiHandler {
 

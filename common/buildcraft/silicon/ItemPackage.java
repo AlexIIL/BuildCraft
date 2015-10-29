@@ -18,8 +18,8 @@ import buildcraft.core.lib.items.ItemBuildCraft;
 import buildcraft.core.lib.utils.NBTUtils;
 import buildcraft.silicon.render.PackageFontRenderer;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemPackage extends ItemBuildCraft {
     public static final class DispenseBehaviour extends BehaviorDefaultDispenseItem {

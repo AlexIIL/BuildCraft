@@ -12,8 +12,8 @@ import buildcraft.api.core.INBTStoreable;
 import buildcraft.api.core.ISerializable;
 import buildcraft.api.transport.IPipeTile;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /** An IPipePluggable MUST have an empty constructor for client-side rendering! */
 public abstract class PipePluggable implements INBTStoreable, ISerializable {

@@ -24,8 +24,8 @@ import buildcraft.core.BCCreativeTab;
 import buildcraft.core.lib.block.BlockBuildCraft;
 import buildcraft.core.lib.inventory.InvUtils;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockTank extends BlockBuildCraft {
     private static final boolean DEBUG_MODE = false;

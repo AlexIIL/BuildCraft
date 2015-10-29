@@ -36,8 +36,8 @@ import buildcraft.core.lib.utils.Utils;
 import buildcraft.transport.gates.GateFactory;
 import buildcraft.transport.statements.ActionValve.ValveState;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class Pipe<T extends PipeTransport> implements IDropControlInventory, IPipe {
     public int[] wireSignalStrength = new int[] { 0, 0, 0, 0 };

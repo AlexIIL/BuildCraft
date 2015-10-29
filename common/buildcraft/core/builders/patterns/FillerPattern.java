@@ -25,7 +25,7 @@ import buildcraft.core.blueprints.SchematicRegistry;
 import buildcraft.core.blueprints.Template;
 import buildcraft.core.lib.utils.StringUtils;
 
-import cpw.mods.fml.common.Loader;
+import net.minecraftforge.fml.common.Loader;
 
 public abstract class FillerPattern implements IFillerPattern {
 

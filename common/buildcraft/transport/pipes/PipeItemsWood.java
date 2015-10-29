@@ -27,8 +27,8 @@ import buildcraft.transport.PipeTransportItems;
 import buildcraft.transport.TransportConstants;
 import buildcraft.transport.TravelingItem;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PipeItemsWood extends Pipe<PipeTransportItems> implements IEnergyHandler {
     protected RFBattery battery = new RFBattery(2560, 80, 0);

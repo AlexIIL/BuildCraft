@@ -15,7 +15,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraft.core.lib.render.RenderUtils;
 import buildcraft.silicon.SiliconProxy;
 
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import net.minecraftforge.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderLaserBlock implements ISimpleBlockRenderingHandler {
     @Override

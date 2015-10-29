@@ -16,7 +16,7 @@ import buildcraft.factory.gui.GuiAutoCrafting;
 import buildcraft.factory.gui.GuiHopper;
 import buildcraft.factory.gui.GuiRefinery;
 
-import cpw.mods.fml.common.network.IGuiHandler;
+import net.minecraftforge.fml.common.network.IGuiHandler;
 
 public class FactoryGuiHandler implements IGuiHandler {
 

@@ -10,8 +10,8 @@ import net.minecraft.util.IIcon;
 import buildcraft.BuildCraftCore;
 import buildcraft.api.core.IIconProvider;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PipeIconProvider implements IIconProvider {
 

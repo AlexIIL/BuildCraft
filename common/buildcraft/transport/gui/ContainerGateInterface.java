@@ -33,7 +33,7 @@ import buildcraft.transport.ActionActiveState;
 import buildcraft.transport.Gate;
 import buildcraft.transport.gates.GateDefinition;
 
-import cpw.mods.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 
 public class ContainerGateInterface extends BuildCraftContainer implements ICommandReceiver {

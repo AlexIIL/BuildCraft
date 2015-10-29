@@ -16,8 +16,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.api.core.BCLog;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public final class StatementManager {
 

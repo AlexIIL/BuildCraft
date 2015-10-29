@@ -19,8 +19,8 @@ import buildcraft.api.statements.ITriggerInternal;
 import buildcraft.api.transport.IPipeTile;
 import buildcraft.core.lib.utils.StringUtils;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TriggerEnergy extends BCStatement implements ITriggerInternal {
     public static class Neighbor {

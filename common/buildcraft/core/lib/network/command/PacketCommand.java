@@ -12,7 +12,7 @@ import buildcraft.core.lib.network.Packet;
 import buildcraft.core.lib.utils.NetworkUtils;
 import buildcraft.core.network.PacketIds;
 
-import cpw.mods.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import io.netty.buffer.ByteBuf;
 
 public class PacketCommand extends Packet {

@@ -24,10 +24,10 @@ import net.minecraftforge.common.util.Constants;
 
 import buildcraft.api.core.BCLog;
 
-import cpw.mods.fml.common.FMLModContainer;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.ModContainer;
-import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
+import net.minecraftforge.fml.common.FMLModContainer;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.ModContainer;
+import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent;
 
 public class MappingRegistry {
 

@@ -5,7 +5,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import buildcraft.BuildCraftCore;
 import buildcraft.api.tablet.TabletBitmap;
 
-import cpw.mods.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class TabletClient extends TabletBase {
     protected final TabletRenderer renderer;

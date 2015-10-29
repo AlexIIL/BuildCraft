@@ -5,4 +5,4 @@
 @API(apiVersion = "1.0", owner = "BuildCraftAPI|core", provides = "BuildCraftAPI|lists")
 package buildcraft.api.lists;
 
-import cpw.mods.fml.common.API;
+import net.minecraftforge.fml.common.API;

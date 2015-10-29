@@ -16,8 +16,8 @@ import net.minecraftforge.oredict.OreDictionary;
 import buildcraft.core.lib.inventory.StackHelper;
 import buildcraft.core.lib.utils.NBTUtils;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
 
 public final class ListHandlerOld {
     private static final WeakHashMap<ItemStack, StackLine[]> LINE_CACHE = new WeakHashMap<ItemStack, StackLine[]>();

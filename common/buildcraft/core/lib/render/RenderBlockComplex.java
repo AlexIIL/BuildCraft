@@ -10,7 +10,7 @@ import net.minecraft.world.IBlockAccess;
 import buildcraft.BuildCraftCore;
 import buildcraft.core.lib.block.BlockBuildCraft;
 
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import net.minecraftforge.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderBlockComplex implements ISimpleBlockRenderingHandler {
     private static final int[] Y_ROTATE = { 3, 0, 1, 2 };

@@ -3,8 +3,8 @@ package buildcraft.core.lib.gui.widgets;
 import buildcraft.core.lib.gui.GuiBuildCraft;
 import buildcraft.core.lib.utils.MathUtils;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ScrollbarWidget extends Widget {
     private static final int HEIGHT = 14;

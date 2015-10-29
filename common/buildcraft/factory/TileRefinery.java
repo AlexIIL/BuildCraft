@@ -30,7 +30,7 @@ import buildcraft.core.lib.network.command.ICommandReceiver;
 import buildcraft.core.lib.utils.NetworkUtils;
 import buildcraft.core.recipes.RefineryRecipeManager;
 
-import cpw.mods.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 
 public class TileRefinery extends TileBuildCraft implements IFluidHandler, IHasWork, IFlexibleCrafter, ICommandReceiver {

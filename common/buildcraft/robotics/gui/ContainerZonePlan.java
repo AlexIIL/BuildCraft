@@ -22,7 +22,7 @@ import buildcraft.robotics.TileZonePlan;
 import buildcraft.robotics.ZonePlan;
 import buildcraft.robotics.map.MapWorld;
 
-import cpw.mods.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 
 public class ContainerZonePlan extends BuildCraftContainer implements ICommandReceiver {

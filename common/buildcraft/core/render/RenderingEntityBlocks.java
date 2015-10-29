@@ -13,7 +13,7 @@ import net.minecraft.world.IBlockAccess;
 import buildcraft.BuildCraftCore;
 import buildcraft.core.lib.render.IInventoryRenderer;
 
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import net.minecraftforge.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderingEntityBlocks implements ISimpleBlockRenderingHandler {
 

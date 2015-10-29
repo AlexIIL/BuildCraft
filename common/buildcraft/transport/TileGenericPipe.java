@@ -57,8 +57,8 @@ import buildcraft.transport.gates.GateFactory;
 import buildcraft.transport.gates.GatePluggable;
 import buildcraft.transport.pluggable.PlugPluggable;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
 
 public class TileGenericPipe extends TileEntity implements IFluidHandler, IPipeTile, ITileBufferHolder, IEnergyHandler, IDropControlInventory,

@@ -7,7 +7,7 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import buildcraft.api.items.IList;
 import buildcraft.core.lib.utils.StringUtils;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class ListTooltipHandler {
     @SubscribeEvent

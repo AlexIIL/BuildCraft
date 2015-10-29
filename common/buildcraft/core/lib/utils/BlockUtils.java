@@ -36,7 +36,7 @@ import buildcraft.BuildCraftCore;
 import buildcraft.api.blueprints.BuilderAPI;
 import buildcraft.core.proxy.CoreProxy;
 
-import cpw.mods.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public final class BlockUtils {
     /** Deactivate constructor */

@@ -8,7 +8,7 @@ import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.ConfigElement;
 import net.minecraftforge.common.config.Property;
 
-import cpw.mods.fml.client.config.IConfigElement;
+import net.minecraftforge.fml.client.config.IConfigElement;
 
 public class BCConfigElement<T> extends ConfigElement<T> {
     private ConfigCategory cat;

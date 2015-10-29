@@ -11,7 +11,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.api.transport.IInjectable;
 
-import cpw.mods.fml.common.Loader;
+import net.minecraftforge.fml.common.Loader;
 
 public class CompatHooks {
     public static final CompatHooks INSTANCE;

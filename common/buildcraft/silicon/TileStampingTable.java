@@ -23,7 +23,7 @@ import buildcraft.core.lib.utils.StringUtils;
 import buildcraft.core.lib.utils.Utils;
 import buildcraft.core.proxy.CoreProxy;
 
-import cpw.mods.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class TileStampingTable extends TileLaserTableBase implements IHasWork, ISidedInventory {
     private class LocalInventoryCrafting extends InventoryCrafting {

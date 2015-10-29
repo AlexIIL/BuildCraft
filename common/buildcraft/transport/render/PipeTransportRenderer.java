@@ -9,8 +9,8 @@ import net.minecraft.util.ResourceLocation;
 import buildcraft.transport.Pipe;
 import buildcraft.transport.PipeTransport;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class PipeTransportRenderer<T extends PipeTransport> {
     public static final Map<Class<? extends PipeTransport>, PipeTransportRenderer> RENDERER_MAP =

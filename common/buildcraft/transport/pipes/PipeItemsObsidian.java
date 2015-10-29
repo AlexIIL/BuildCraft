@@ -36,8 +36,8 @@ import buildcraft.transport.TravelingItem;
 import buildcraft.transport.pipes.events.PipeEventItem;
 import buildcraft.transport.utils.TransportUtils;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PipeItemsObsidian extends Pipe<PipeTransportItems> implements IEnergyHandler {
     private final RFBattery battery = new RFBattery(2560, 640, 0);

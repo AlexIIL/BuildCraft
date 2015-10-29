@@ -27,8 +27,8 @@ import net.minecraftforge.fluids.IFluidBlock;
 import buildcraft.BuildCraftCore;
 import buildcraft.BuildCraftEnergy;
 
-import cpw.mods.fml.common.eventhandler.Event.Result;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.Event.Result;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public final class OilPopulate {
 
