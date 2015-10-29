@@ -11,8 +11,8 @@ import buildcraft.api.blueprints.SchematicBlock;
 import buildcraft.api.core.BlockIndex;
 
 public class SchematicBlockFloored extends SchematicBlock {
-	@Override
-	public Set<BlockIndex> getPrerequisiteBlocks(IBuilderContext context) {
-		return Sets.newHashSet(RELATIVE_INDEXES[ForgeDirection.DOWN.ordinal()]);
-	}
+    @Override
+    public Set<BlockIndex> getPrerequisiteBlocks(IBuilderContext context) {
+        return Sets.newHashSet(RELATIVE_INDEXES[ForgeDirection.DOWN.ordinal()]);
+    }
 }

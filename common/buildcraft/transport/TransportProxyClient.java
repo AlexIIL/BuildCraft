@@ -1,11 +1,7 @@
-/**
- * Copyright (c) 2011-2015, SpaceToad and the BuildCraft Team
- * http://www.mod-buildcraft.com
+/** Copyright (c) 2011-2015, SpaceToad and the BuildCraft Team http://www.mod-buildcraft.com
  * <p/>
- * BuildCraft is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
- * http://www.mod-buildcraft.com/MMPL-1.0.txt
- */
+ * BuildCraft is distributed under the terms of the Minecraft Mod Public License 1.0, or MMPL. Please check the contents
+ * of the license located in http://www.mod-buildcraft.com/MMPL-1.0.txt */
 package buildcraft.transport;
 
 import net.minecraft.client.renderer.GLAllocation;
@@ -23,49 +19,49 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class TransportProxyClient extends TransportProxy {
-	public static final PipeItemRenderer pipeItemRenderer = new PipeItemRenderer();
-	public static final PipeRendererWorld pipeWorldRenderer = new PipeRendererWorld();
-	public static final FacadeItemRenderer facadeItemRenderer = new FacadeItemRenderer();
-	public static final PlugItemRenderer plugItemRenderer = new PlugItemRenderer();
-	public static final GateItemRenderer gateItemRenderer = new GateItemRenderer();
+    public static final PipeItemRenderer pipeItemRenderer = new PipeItemRenderer();
+    public static final PipeRendererWorld pipeWorldRenderer = new PipeRendererWorld();
+    public static final FacadeItemRenderer facadeItemRenderer = new FacadeItemRenderer();
+    public static final PlugItemRenderer plugItemRenderer = new PlugItemRenderer();
+    public static final GateItemRenderer gateItemRenderer = new GateItemRenderer();
 
-	@Override
-	public void registerTileEntities() {
-		super.registerTileEntities();
-		ClientRegistry.bindTileEntitySpecialRenderer(TileGenericPipe.class, PipeRendererTESR.INSTANCE);
-	}
+    @Override
+    public void registerTileEntities() {
+        super.registerTileEntities();
+        ClientRegistry.bindTileEntitySpecialRenderer(TileGenericPipe.class, PipeRendererTESR.INSTANCE);
+    }
 
-	@Override
-	public void obsidianPipePickup(World world, EntityItem item, TileEntity tile) {
-		FMLClientHandler.instance().getClient().effectRenderer.addEffect(new TileEntityPickupFX(world, item, tile));
-	}
+    @Override
+    public void obsidianPipePickup(World world, EntityItem item, TileEntity tile) {
+        FMLClientHandler.instance().getClient().effectRenderer.addEffect(new TileEntityPickupFX(world, item, tile));
+    }
 
-	@Override
-	public void clearDisplayList(int displayList) {
-		GLAllocation.deleteDisplayLists(displayList);
-	}
+    @Override
+    public void clearDisplayList(int displayList) {
+        GLAllocation.deleteDisplayLists(displayList);
+    }
 
-	@Override
-	public void registerRenderers() {
-		for (Item itemPipe : BlockGenericPipe.pipes.keySet()) {
-			MinecraftForgeClient.registerItemRenderer(itemPipe, pipeItemRenderer);
-		}
+    @Override
+    public void registerRenderers() {
+        for (Item itemPipe : BlockGenericPipe.pipes.keySet()) {
+            MinecraftForgeClient.registerItemRenderer(itemPipe, pipeItemRenderer);
+        }
 
-		MinecraftForgeClient.registerItemRenderer(BuildCraftTransport.facadeItem, facadeItemRenderer);
-		MinecraftForgeClient.registerItemRenderer(BuildCraftTransport.plugItem, plugItemRenderer);
-		MinecraftForgeClient.registerItemRenderer(BuildCraftTransport.pipeGate, gateItemRenderer);
+        MinecraftForgeClient.registerItemRenderer(BuildCraftTransport.facadeItem, facadeItemRenderer);
+        MinecraftForgeClient.registerItemRenderer(BuildCraftTransport.plugItem, plugItemRenderer);
+        MinecraftForgeClient.registerItemRenderer(BuildCraftTransport.pipeGate, gateItemRenderer);
 
-		PipeTransportRenderer.RENDERER_MAP.put(PipeTransportItems.class, new PipeTransportItemsRenderer());
-		PipeTransportRenderer.RENDERER_MAP.put(PipeTransportFluids.class, new PipeTransportFluidsRenderer());
-		PipeTransportRenderer.RENDERER_MAP.put(PipeTransportPower.class, new PipeTransportPowerRenderer());
+        PipeTransportRenderer.RENDERER_MAP.put(PipeTransportItems.class, new PipeTransportItemsRenderer());
+        PipeTransportRenderer.RENDERER_MAP.put(PipeTransportFluids.class, new PipeTransportFluidsRenderer());
+        PipeTransportRenderer.RENDERER_MAP.put(PipeTransportPower.class, new PipeTransportPowerRenderer());
 
-		TransportProxy.pipeModel = RenderingRegistry.getNextAvailableRenderId();
+        TransportProxy.pipeModel = RenderingRegistry.getNextAvailableRenderId();
 
-		RenderingRegistry.registerBlockHandler(pipeWorldRenderer);
-	}
+        RenderingRegistry.registerBlockHandler(pipeWorldRenderer);
+    }
 
-	@Override
-	public void setIconProviderFromPipe(ItemPipe item, Pipe<?> dummyPipe) {
-		item.setPipesIcons(dummyPipe.getIconProvider());
-	}
+    @Override
+    public void setIconProviderFromPipe(ItemPipe item, Pipe<?> dummyPipe) {
+        item.setPipesIcons(dummyPipe.getIconProvider());
+    }
 }

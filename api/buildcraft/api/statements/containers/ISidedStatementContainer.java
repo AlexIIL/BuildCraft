@@ -4,9 +4,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import buildcraft.api.statements.IStatementContainer;
 
-/**
- * Created by asie on 3/14/15.
- */
+/** Created by asie on 3/14/15. */
 public interface ISidedStatementContainer extends IStatementContainer {
-	ForgeDirection getSide();
+    ForgeDirection getSide();
 }

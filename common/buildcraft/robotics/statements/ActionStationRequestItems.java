@@ -1,11 +1,7 @@
-/**
- * Copyright (c) 2011-2015, SpaceToad and the BuildCraft Team
- * http://www.mod-buildcraft.com
+/** Copyright (c) 2011-2015, SpaceToad and the BuildCraft Team http://www.mod-buildcraft.com
  * <p/>
- * BuildCraft is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
- * http://www.mod-buildcraft.com/MMPL-1.0.txt
- */
+ * BuildCraft is distributed under the terms of the Minecraft Mod Public License 1.0, or MMPL. Please check the contents
+ * of the license located in http://www.mod-buildcraft.com/MMPL-1.0.txt */
 package buildcraft.robotics.statements;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -16,32 +12,32 @@ import buildcraft.core.statements.StatementParameterItemStackExact;
 
 public class ActionStationRequestItems extends ActionStationInputItems {
 
-	public ActionStationRequestItems() {
-		super("buildcraft:station.request_items");
-	}
+    public ActionStationRequestItems() {
+        super("buildcraft:station.request_items");
+    }
 
-	@Override
-	public String getDescription() {
-		return StringUtils.localize("gate.action.station.request_items");
-	}
+    @Override
+    public String getDescription() {
+        return StringUtils.localize("gate.action.station.request_items");
+    }
 
-	@Override
-	public void registerIcons(IIconRegister iconRegister) {
-		icon = iconRegister.registerIcon("buildcraftrobotics:triggers/action_station_request_items");
-	}
+    @Override
+    public void registerIcons(IIconRegister iconRegister) {
+        icon = iconRegister.registerIcon("buildcraftrobotics:triggers/action_station_request_items");
+    }
 
-	@Override
-	public int maxParameters() {
-		return 3;
-	}
+    @Override
+    public int maxParameters() {
+        return 3;
+    }
 
-	@Override
-	public int minParameters() {
-		return 1;
-	}
+    @Override
+    public int minParameters() {
+        return 1;
+    }
 
-	@Override
-	public IStatementParameter createParameter(int index) {
-		return new StatementParameterItemStackExact();
-	}
+    @Override
+    public IStatementParameter createParameter(int index) {
+        return new StatementParameterItemStackExact();
+    }
 }

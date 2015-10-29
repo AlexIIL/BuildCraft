@@ -16,82 +16,82 @@ import buildcraft.core.lib.utils.Utils;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public final class BCRegistry {
-	public static final BCRegistry INSTANCE = new BCRegistry();
-	private Configuration regCfg;
+    public static final BCRegistry INSTANCE = new BCRegistry();
+    private Configuration regCfg;
 
-	private BCRegistry() {
+    private BCRegistry() {
 
-	}
+    }
 
-	public boolean isEnabled(String category, String name) {
-		return regCfg.get(category, name, true).getBoolean();
-	}
+    public boolean isEnabled(String category, String name) {
+        return regCfg.get(category, name, true).getBoolean();
+    }
 
-	public void setRegistryConfig(File f) {
-		regCfg = new Configuration(f);
-	}
+    public void setRegistryConfig(File f) {
+        regCfg = new Configuration(f);
+    }
 
-	public boolean registerBlock(Block block, boolean forced) {
-		return registerBlock(block, ItemBlockBuildCraft.class, forced);
-	}
+    public boolean registerBlock(Block block, boolean forced) {
+        return registerBlock(block, ItemBlockBuildCraft.class, forced);
+    }
 
-	public boolean registerBlock(Block block, Class<? extends ItemBlock> item, boolean forced) {
-		String name = block.getUnlocalizedName().replace("tile.", "");
-		if (forced || regCfg.get("blocks", name, true).getBoolean()) {
-			GameRegistry.registerBlock(block, item, name);
-			return true;
-		}
-		return false;
-	}
+    public boolean registerBlock(Block block, Class<? extends ItemBlock> item, boolean forced) {
+        String name = block.getUnlocalizedName().replace("tile.", "");
+        if (forced || regCfg.get("blocks", name, true).getBoolean()) {
+            GameRegistry.registerBlock(block, item, name);
+            return true;
+        }
+        return false;
+    }
 
-	public boolean registerItem(Item item, boolean forced) {
-		String name = item.getUnlocalizedName().replace("item.", "");
-		if (forced || regCfg.get("items", name, true).getBoolean()) {
-			GameRegistry.registerItem(item, name);
-			return true;
-		}
-		return false;
-	}
+    public boolean registerItem(Item item, boolean forced) {
+        String name = item.getUnlocalizedName().replace("item.", "");
+        if (forced || regCfg.get("items", name, true).getBoolean()) {
+            GameRegistry.registerItem(item, name);
+            return true;
+        }
+        return false;
+    }
 
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	public void registerTileEntity(Class clas, String ident) {
-		GameRegistry.registerTileEntity(CompatHooks.INSTANCE.getTile(clas), ident);
-	}
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    public void registerTileEntity(Class clas, String ident) {
+        GameRegistry.registerTileEntity(CompatHooks.INSTANCE.getTile(clas), ident);
+    }
 
-	public void addCraftingRecipe(ItemStack result, Object... recipe) {
-		for (Object o : recipe) {
-			if (o == null) {
-				return;
-			}
-			if (o instanceof Block && !Utils.isRegistered((Block) o)) {
-				return;
-			}
-			if (o instanceof Item && !Utils.isRegistered((Item) o)) {
-				return;
-			}
-			if (o instanceof ItemStack && !Utils.isRegistered((ItemStack) o)) {
-				return;
-			}
-		}
-		GameRegistry.addRecipe(new ShapedOreRecipe(result, recipe));
-	}
+    public void addCraftingRecipe(ItemStack result, Object... recipe) {
+        for (Object o : recipe) {
+            if (o == null) {
+                return;
+            }
+            if (o instanceof Block && !Utils.isRegistered((Block) o)) {
+                return;
+            }
+            if (o instanceof Item && !Utils.isRegistered((Item) o)) {
+                return;
+            }
+            if (o instanceof ItemStack && !Utils.isRegistered((ItemStack) o)) {
+                return;
+            }
+        }
+        GameRegistry.addRecipe(new ShapedOreRecipe(result, recipe));
+    }
 
-	public void addShapelessRecipe(ItemStack result, Object... recipe) {
-		for (Object o : recipe) {
-			if (o instanceof Block && Block.getIdFromBlock((Block) o) < 0) {
-				return;
-			}
-			if (o instanceof Item && Item.getIdFromItem((Item) o) < 0) {
-				return;
-			}
-			if (o instanceof ItemStack && ((ItemStack) o).getItem() == null) {
-				return;
-			}
-		}
-		GameRegistry.addRecipe(new ShapelessOreRecipe(result, recipe));
-	}
+    public void addShapelessRecipe(ItemStack result, Object... recipe) {
+        for (Object o : recipe) {
+            if (o instanceof Block && Block.getIdFromBlock((Block) o) < 0) {
+                return;
+            }
+            if (o instanceof Item && Item.getIdFromItem((Item) o) < 0) {
+                return;
+            }
+            if (o instanceof ItemStack && ((ItemStack) o).getItem() == null) {
+                return;
+            }
+        }
+        GameRegistry.addRecipe(new ShapelessOreRecipe(result, recipe));
+    }
 
-	public void save() {
-		regCfg.save();
-	}
+    public void save() {
+        regCfg.save();
+    }
 }

@@ -14,30 +14,30 @@ import buildcraft.api.statements.IStatementContainer;
 
 public class PipeActionProvider implements IActionProvider {
 
-	@Override
-	public Collection<IActionInternal> getInternalActions(IStatementContainer container) {
-		LinkedList<IActionInternal> result = new LinkedList<IActionInternal>();
-		Pipe<?> pipe = null;
-		if (container instanceof IGate) {
-			pipe = (Pipe<?>) ((IGate) container).getPipe();
+    @Override
+    public Collection<IActionInternal> getInternalActions(IStatementContainer container) {
+        LinkedList<IActionInternal> result = new LinkedList<IActionInternal>();
+        Pipe<?> pipe = null;
+        if (container instanceof IGate) {
+            pipe = (Pipe<?>) ((IGate) container).getPipe();
 
-			if (container instanceof Gate) {
-				((Gate) container).addActions(result);
-			}
-		}
+            if (container instanceof Gate) {
+                ((Gate) container).addActions(result);
+            }
+        }
 
-		if (pipe == null) {
-			return result;
-		}
+        if (pipe == null) {
+            return result;
+        }
 
-		result.addAll(pipe.getActions());
+        result.addAll(pipe.getActions());
 
-		return result;
-	}
+        return result;
+    }
 
-	@Override
-	public Collection<IActionExternal> getExternalActions(ForgeDirection side, TileEntity tile) {
-		return null;
-	}
+    @Override
+    public Collection<IActionExternal> getExternalActions(ForgeDirection side, TileEntity tile) {
+        return null;
+    }
 
 }

@@ -24,53 +24,55 @@ import buildcraft.core.builders.schematics.SchematicTileCreative;
 import buildcraft.core.builders.schematics.SchematicWallSide;
 
 public final class HeuristicBlockDetection {
-	private HeuristicBlockDetection() {
+    private HeuristicBlockDetection() {
 
-	}
+    }
 
-	public static void start() {
-		Iterator i = Block.blockRegistry.iterator();
-		while (i.hasNext()) {
-			Block block = (Block) i.next();
-			if (block == null || block == Blocks.air) {
-				continue;
-			}
+    public static void start() {
+        Iterator i = Block.blockRegistry.iterator();
+        while (i.hasNext()) {
+            Block block = (Block) i.next();
+            if (block == null || block == Blocks.air) {
+                continue;
+            }
 
-			for (int meta = 0; meta < 16; meta++) {
-				if (!SchematicRegistry.INSTANCE.isSupported(block, meta)) {
-					try {
-						if (block.hasTileEntity(meta)) {
-							// All tiles are registered as creative only.
-							// This is helpful for example for server admins.
-							SchematicRegistry.INSTANCE.registerSchematicBlock(block, meta, SchematicTileCreative.class);
-							continue;
-						}
+            for (int meta = 0; meta < 16; meta++) {
+                if (!SchematicRegistry.INSTANCE.isSupported(block, meta)) {
+                    try {
+                        if (block.hasTileEntity(meta)) {
+                            // All tiles are registered as creative only.
+                            // This is helpful for example for server admins.
+                            SchematicRegistry.INSTANCE.registerSchematicBlock(block, meta, SchematicTileCreative.class);
+                            continue;
+                        }
 
-						try {
-							if (block instanceof IFluidBlock) {
-								IFluidBlock fblock = (IFluidBlock) block;
-								if (fblock.getFluid() != null) {
-									SchematicRegistry.INSTANCE.registerSchematicBlock(block, meta, SchematicFluid.class, new FluidStack(fblock.getFluid(), 1000));
-								}
-							} else {
-								if (block instanceof BlockBush || block instanceof IPlantable || block instanceof IGrowable || block instanceof BlockBasePressurePlate) {
-									SchematicRegistry.INSTANCE.registerSchematicBlock(block, meta, SchematicBlockFloored.class);
-								} else if (block instanceof BlockLever || block instanceof BlockTorch || block instanceof BlockButton) {
-									SchematicRegistry.INSTANCE.registerSchematicBlock(block, meta, SchematicWallSide.class);
-								} else if (block instanceof BlockStairs) {
-									SchematicRegistry.INSTANCE.registerSchematicBlock(block, meta, SchematicStairs.class);
-								} else {
-									SchematicRegistry.INSTANCE.registerSchematicBlock(block, meta, SchematicBlock.class);
-								}
-							}
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					} catch (Exception e) {
+                        try {
+                            if (block instanceof IFluidBlock) {
+                                IFluidBlock fblock = (IFluidBlock) block;
+                                if (fblock.getFluid() != null) {
+                                    SchematicRegistry.INSTANCE.registerSchematicBlock(block, meta, SchematicFluid.class, new FluidStack(fblock
+                                            .getFluid(), 1000));
+                                }
+                            } else {
+                                if (block instanceof BlockBush || block instanceof IPlantable || block instanceof IGrowable
+                                    || block instanceof BlockBasePressurePlate) {
+                                    SchematicRegistry.INSTANCE.registerSchematicBlock(block, meta, SchematicBlockFloored.class);
+                                } else if (block instanceof BlockLever || block instanceof BlockTorch || block instanceof BlockButton) {
+                                    SchematicRegistry.INSTANCE.registerSchematicBlock(block, meta, SchematicWallSide.class);
+                                } else if (block instanceof BlockStairs) {
+                                    SchematicRegistry.INSTANCE.registerSchematicBlock(block, meta, SchematicStairs.class);
+                                } else {
+                                    SchematicRegistry.INSTANCE.registerSchematicBlock(block, meta, SchematicBlock.class);
+                                }
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } catch (Exception e) {
 
-					}
-				}
-			}
-		}
-	}
+                    }
+                }
+            }
+        }
+    }
 }

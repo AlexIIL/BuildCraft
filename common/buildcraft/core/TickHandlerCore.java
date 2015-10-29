@@ -1,11 +1,7 @@
-/**
- * Copyright (c) 2011-2015, SpaceToad and the BuildCraft Team
- * http://www.mod-buildcraft.com
+/** Copyright (c) 2011-2015, SpaceToad and the BuildCraft Team http://www.mod-buildcraft.com
  * <p/>
- * BuildCraft is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
- * http://www.mod-buildcraft.com/MMPL-1.0.txt
- */
+ * BuildCraft is distributed under the terms of the Minecraft Mod Public License 1.0, or MMPL. Please check the contents
+ * of the license located in http://www.mod-buildcraft.com/MMPL-1.0.txt */
 package buildcraft.core;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,27 +15,26 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class TickHandlerCore {
-	private boolean nagged;
+    private boolean nagged;
 
-	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
-	public void checkUpToDate(PlayerTickEvent evt) {
-		if (nagged) {
-			return;
-		}
+    @SideOnly(Side.CLIENT)
+    @SubscribeEvent
+    public void checkUpToDate(PlayerTickEvent evt) {
+        if (nagged) {
+            return;
+        }
 
-		EntityPlayer player = evt.player;
+        EntityPlayer player = evt.player;
 
-		if (Version.needsUpdateNoticeAndMarkAsSeen()) {
-			player.addChatMessage(new ChatComponentTranslation("bc_update.new_version",
-					Version.getRecommendedVersion(),
-					CoreProxy.proxy.getMinecraftVersion()));
-			player.addChatMessage(new ChatComponentTranslation("bc_update.download"));
-			player.addChatMessage(new ChatComponentTranslation("bc_update.once"));
-			player.addChatMessage(new ChatComponentTranslation("bc_update.again"));
-			player.addChatMessage(new ChatComponentTranslation("bc_update.changelog"));
-		}
+        if (Version.needsUpdateNoticeAndMarkAsSeen()) {
+            player.addChatMessage(new ChatComponentTranslation("bc_update.new_version", Version.getRecommendedVersion(), CoreProxy.proxy
+                    .getMinecraftVersion()));
+            player.addChatMessage(new ChatComponentTranslation("bc_update.download"));
+            player.addChatMessage(new ChatComponentTranslation("bc_update.once"));
+            player.addChatMessage(new ChatComponentTranslation("bc_update.again"));
+            player.addChatMessage(new ChatComponentTranslation("bc_update.changelog"));
+        }
 
-		nagged = true;
-	}
+        nagged = true;
+    }
 }

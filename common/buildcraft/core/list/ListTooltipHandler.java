@@ -10,16 +10,16 @@ import buildcraft.core.lib.utils.StringUtils;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class ListTooltipHandler {
-	@SubscribeEvent
-	public void itemTooltipEvent(ItemTooltipEvent event) {
-		if (event.itemStack != null && event.entityPlayer != null && event.entityPlayer.openContainer != null
-				&& event.entityPlayer.openContainer instanceof ContainerListNew) {
-			ItemStack list = event.entityPlayer.getCurrentEquippedItem();
-			if (list != null && list.getItem() instanceof IList) {
-				if (((IList) list.getItem()).matches(list, event.itemStack)) {
-					event.toolTip.add(EnumChatFormatting.GREEN + StringUtils.localize("tip.list.matches"));
-				}
-			}
-		}
-	}
+    @SubscribeEvent
+    public void itemTooltipEvent(ItemTooltipEvent event) {
+        if (event.itemStack != null && event.entityPlayer != null && event.entityPlayer.openContainer != null
+            && event.entityPlayer.openContainer instanceof ContainerListNew) {
+            ItemStack list = event.entityPlayer.getCurrentEquippedItem();
+            if (list != null && list.getItem() instanceof IList) {
+                if (((IList) list.getItem()).matches(list, event.itemStack)) {
+                    event.toolTip.add(EnumChatFormatting.GREEN + StringUtils.localize("tip.list.matches"));
+                }
+            }
+        }
+    }
 }

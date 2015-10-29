@@ -1,11 +1,7 @@
-/**
- * Copyright (c) 2011-2015, SpaceToad and the BuildCraft Team
- * http://www.mod-buildcraft.com
+/** Copyright (c) 2011-2015, SpaceToad and the BuildCraft Team http://www.mod-buildcraft.com
  * <p/>
- * BuildCraft is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
- * http://www.mod-buildcraft.com/MMPL-1.0.txt
- */
+ * BuildCraft is distributed under the terms of the Minecraft Mod Public License 1.0, or MMPL. Please check the contents
+ * of the license located in http://www.mod-buildcraft.com/MMPL-1.0.txt */
 package buildcraft.core.statements;
 
 import java.util.Collection;
@@ -25,34 +21,33 @@ import buildcraft.api.tiles.IControllable;
 
 public class DefaultActionProvider implements IActionProvider {
 
-	@Override
-	public Collection<IActionInternal> getInternalActions(IStatementContainer container) {
-		LinkedList<IActionInternal> res = new LinkedList<IActionInternal>();
+    @Override
+    public Collection<IActionInternal> getInternalActions(IStatementContainer container) {
+        LinkedList<IActionInternal> res = new LinkedList<IActionInternal>();
 
-		if (container instanceof IRedstoneStatementContainer) {
-			res.add(BuildCraftCore.actionRedstone);
-		}
+        if (container instanceof IRedstoneStatementContainer) {
+            res.add(BuildCraftCore.actionRedstone);
+        }
 
-		return res;
-	}
+        return res;
+    }
 
-	@Override
-	public Collection<IActionExternal> getExternalActions(ForgeDirection side, TileEntity tile) {
-		LinkedList<IActionExternal> res = new LinkedList<IActionExternal>();
+    @Override
+    public Collection<IActionExternal> getExternalActions(ForgeDirection side, TileEntity tile) {
+        LinkedList<IActionExternal> res = new LinkedList<IActionExternal>();
 
-		try {
-			if (tile instanceof IControllable) {
-				for (IControllable.Mode mode : IControllable.Mode.values()) {
-					if (mode != IControllable.Mode.Unknown &&
-							((IControllable) tile).acceptsControlMode(mode)) {
-						res.add(BuildCraftCore.actionControl[mode.ordinal()]);
-					}
-				}
-			}
-		} catch (Throwable error) {
-			BCLog.logger.error("Outdated API detected, please update your mods!");
-		}
+        try {
+            if (tile instanceof IControllable) {
+                for (IControllable.Mode mode : IControllable.Mode.values()) {
+                    if (mode != IControllable.Mode.Unknown && ((IControllable) tile).acceptsControlMode(mode)) {
+                        res.add(BuildCraftCore.actionControl[mode.ordinal()]);
+                    }
+                }
+            }
+        } catch (Throwable error) {
+            BCLog.logger.error("Outdated API detected, please update your mods!");
+        }
 
-		return res;
-	}
+        return res;
+    }
 }

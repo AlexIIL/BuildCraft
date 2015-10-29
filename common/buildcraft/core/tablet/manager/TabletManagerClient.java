@@ -6,34 +6,34 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 
 public class TabletManagerClient {
-	public static final TabletManagerClient INSTANCE = new TabletManagerClient();
+    public static final TabletManagerClient INSTANCE = new TabletManagerClient();
 
-	private static TabletClient currentTablet;
-	private static TabletThread currentTabletThread;
+    private static TabletClient currentTablet;
+    private static TabletThread currentTabletThread;
 
-	public TabletThread get() {
-		if (currentTablet == null) {
-			currentTablet = new TabletClient();
-			currentTabletThread = new TabletThread(currentTablet);
-			new Thread(currentTabletThread).start();
-		}
-		return currentTabletThread;
-	}
+    public TabletThread get() {
+        if (currentTablet == null) {
+            currentTablet = new TabletClient();
+            currentTabletThread = new TabletThread(currentTablet);
+            new Thread(currentTabletThread).start();
+        }
+        return currentTabletThread;
+    }
 
-	public void onServerStopping() {
-		if (currentTablet != null) {
-			currentTablet = null;
-			currentTabletThread.stop();
-			currentTabletThread = null;
-		}
-	}
+    public void onServerStopping() {
+        if (currentTablet != null) {
+            currentTablet = null;
+            currentTabletThread.stop();
+            currentTabletThread = null;
+        }
+    }
 
-	@SubscribeEvent
-	public void playerLogout(PlayerEvent.PlayerLoggedOutEvent event) {
-		if (currentTablet != null) {
-			currentTablet = null;
-			currentTabletThread.stop();
-			currentTabletThread = null;
-		}
-	}
+    @SubscribeEvent
+    public void playerLogout(PlayerEvent.PlayerLoggedOutEvent event) {
+        if (currentTablet != null) {
+            currentTablet = null;
+            currentTabletThread.stop();
+            currentTabletThread = null;
+        }
+    }
 }

@@ -1,11 +1,7 @@
-/**
- * Copyright (c) 2011-2015, SpaceToad and the BuildCraft Team
- * http://www.mod-buildcraft.com
+/** Copyright (c) 2011-2015, SpaceToad and the BuildCraft Team http://www.mod-buildcraft.com
  * <p/>
- * BuildCraft is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
- * http://www.mod-buildcraft.com/MMPL-1.0.txt
- */
+ * BuildCraft is distributed under the terms of the Minecraft Mod Public License 1.0, or MMPL. Please check the contents
+ * of the license located in http://www.mod-buildcraft.com/MMPL-1.0.txt */
 package buildcraft.robotics.boards;
 
 import net.minecraft.block.Block;
@@ -35,112 +31,111 @@ import buildcraft.robotics.statements.ActionRobotFilter;
 
 public class BoardRobotPump extends RedstoneBoardRobot {
 
-	private BlockIndex blockFound;
-	private IFluidFilter fluidFilter = null;
+    private BlockIndex blockFound;
+    private IFluidFilter fluidFilter = null;
 
-	public BoardRobotPump(EntityRobotBase iRobot) {
-		super(iRobot);
-	}
+    public BoardRobotPump(EntityRobotBase iRobot) {
+        super(iRobot);
+    }
 
-	@Override
-	public RedstoneBoardRobotNBT getNBTHandler() {
-		return BCBoardNBT.REGISTRY.get("pump");
-	}
+    @Override
+    public RedstoneBoardRobotNBT getNBTHandler() {
+        return BCBoardNBT.REGISTRY.get("pump");
+    }
 
-	@Override
-	public void update() {
-		final IWorldProperty isFluidSource = BuildCraftAPI.getWorldProperty("fluidSource");
-		FluidStack tank = robot.getTankInfo(ForgeDirection.UNKNOWN)[0].fluid;
+    @Override
+    public void update() {
+        final IWorldProperty isFluidSource = BuildCraftAPI.getWorldProperty("fluidSource");
+        FluidStack tank = robot.getTankInfo(ForgeDirection.UNKNOWN)[0].fluid;
 
-		if (tank != null && tank.amount > 0) {
-			startDelegateAI(new AIRobotGotoStationAndUnloadFluids(robot));
-		} else {
-			updateFilter();
+        if (tank != null && tank.amount > 0) {
+            startDelegateAI(new AIRobotGotoStationAndUnloadFluids(robot));
+        } else {
+            updateFilter();
 
-			startDelegateAI(new AIRobotSearchAndGotoBlock(robot, false, new IBlockFilter() {
+            startDelegateAI(new AIRobotSearchAndGotoBlock(robot, false, new IBlockFilter() {
 
-				@Override
-				public boolean matches(World world, int x, int y, int z) {
-					if (isFluidSource.get(world, x, y, z)
-							&& !robot.getRegistry().isTaken(new ResourceIdBlock(x, y, z))) {
-						return matchesGateFilter(world, x, y, z);
-					} else {
-						return false;
-					}
-				}
-			}));
-		}
-	}
+                @Override
+                public boolean matches(World world, int x, int y, int z) {
+                    if (isFluidSource.get(world, x, y, z) && !robot.getRegistry().isTaken(new ResourceIdBlock(x, y, z))) {
+                        return matchesGateFilter(world, x, y, z);
+                    } else {
+                        return false;
+                    }
+                }
+            }));
+        }
+    }
 
-	@Override
-	public void delegateAIEnded(AIRobot ai) {
-		if (ai instanceof AIRobotSearchAndGotoBlock) {
-			if (ai.success()) {
-				blockFound = ((AIRobotSearchAndGotoBlock) ai).getBlockFound();
-				startDelegateAI(new AIRobotPumpBlock(robot, blockFound));
-			} else {
-				startDelegateAI(new AIRobotGotoSleep(robot));
-			}
-		} else if (ai instanceof AIRobotPumpBlock) {
-			releaseBlockFound();
-		} else if (ai instanceof AIRobotGotoStationAndUnloadFluids) {
+    @Override
+    public void delegateAIEnded(AIRobot ai) {
+        if (ai instanceof AIRobotSearchAndGotoBlock) {
+            if (ai.success()) {
+                blockFound = ((AIRobotSearchAndGotoBlock) ai).getBlockFound();
+                startDelegateAI(new AIRobotPumpBlock(robot, blockFound));
+            } else {
+                startDelegateAI(new AIRobotGotoSleep(robot));
+            }
+        } else if (ai instanceof AIRobotPumpBlock) {
+            releaseBlockFound();
+        } else if (ai instanceof AIRobotGotoStationAndUnloadFluids) {
 
-			if (!ai.success()) {
-				startDelegateAI(new AIRobotGotoSleep(robot));
-			}
-		}
-	}
+            if (!ai.success()) {
+                startDelegateAI(new AIRobotGotoSleep(robot));
+            }
+        }
+    }
 
-	private void releaseBlockFound() {
-		if (blockFound != null) {
-			robot.getRegistry().release(new ResourceIdBlock(blockFound));
-			blockFound = null;
-		}
-	}
+    private void releaseBlockFound() {
+        if (blockFound != null) {
+            robot.getRegistry().release(new ResourceIdBlock(blockFound));
+            blockFound = null;
+        }
+    }
 
-	public void updateFilter() {
-		fluidFilter = ActionRobotFilter.getGateFluidFilter(robot.getLinkedStation());
-		if (fluidFilter instanceof PassThroughFluidFilter) {
-			fluidFilter = null;
-		}
-	}
+    public void updateFilter() {
+        fluidFilter = ActionRobotFilter.getGateFluidFilter(robot.getLinkedStation());
+        if (fluidFilter instanceof PassThroughFluidFilter) {
+            fluidFilter = null;
+        }
+    }
 
-	private boolean matchesGateFilter(World world, int x, int y, int z) {
-		if (fluidFilter == null) {
-			return true;
-		}
+    private boolean matchesGateFilter(World world, int x, int y, int z) {
+        if (fluidFilter == null) {
+            return true;
+        }
 
-		Block block;
-		synchronized (world) {
-			block = world.getBlock(x, y, z);
-		}
+        Block block;
+        synchronized (world) {
+            block = world.getBlock(x, y, z);
+        }
 
-		Fluid fluid = FluidRegistry.lookupFluidForBlock(block);
+        Fluid fluid = FluidRegistry.lookupFluidForBlock(block);
 
-		return fluidFilter.matches(fluid);
-	}
+        return fluidFilter.matches(fluid);
+    }
 
-	@Override
-	public boolean canLoadFromNBT() {
-		return true;
-	}
+    @Override
+    public boolean canLoadFromNBT() {
+        return true;
+    }
 
-	@Override
-	public void writeSelfToNBT(NBTTagCompound nbt) {
-		super.writeSelfToNBT(nbt);
-		if (blockFound != null) {
-			NBTTagCompound sub = new NBTTagCompound();
-			blockFound.writeTo(sub);
-			nbt.setTag("blockFound", sub);
-		}
-	}
+    @Override
+    public void writeSelfToNBT(NBTTagCompound nbt) {
+        super.writeSelfToNBT(nbt);
+        if (blockFound != null) {
+            NBTTagCompound sub = new NBTTagCompound();
+            blockFound.writeTo(sub);
+            nbt.setTag("blockFound", sub);
+        }
+    }
 
-	@Override
-	public void loadSelfFromNBT(NBTTagCompound nbt) {
-		super.loadSelfFromNBT(nbt);
+    @Override
+    public void loadSelfFromNBT(NBTTagCompound nbt) {
+        super.loadSelfFromNBT(nbt);
 
-		if (nbt.hasKey("blockFound")) {
-			blockFound = new BlockIndex(nbt.getCompoundTag("blockFound"));
-		}
-	}
+        if (nbt.hasKey("blockFound")) {
+            blockFound = new BlockIndex(nbt.getCompoundTag("blockFound"));
+        }
+    }
 }

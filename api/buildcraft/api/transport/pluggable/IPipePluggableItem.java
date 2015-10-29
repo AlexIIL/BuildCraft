@@ -6,5 +6,5 @@ import net.minecraftforge.common.util.ForgeDirection;
 import buildcraft.api.transport.IPipe;
 
 public interface IPipePluggableItem {
-	PipePluggable createPipePluggable(IPipe pipe, ForgeDirection side, ItemStack stack);
+    PipePluggable createPipePluggable(IPipe pipe, ForgeDirection side, ItemStack stack);
 }

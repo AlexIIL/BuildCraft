@@ -11,49 +11,49 @@ import net.minecraftforge.common.config.Property;
 import cpw.mods.fml.client.config.IConfigElement;
 
 public class BCConfigElement<T> extends ConfigElement<T> {
-	private ConfigCategory cat;
-	private boolean isProp;
+    private ConfigCategory cat;
+    private boolean isProp;
 
-	public BCConfigElement(ConfigCategory ctgy) {
-		super(ctgy);
-		cat = ctgy;
-		isProp = false;
-	}
+    public BCConfigElement(ConfigCategory ctgy) {
+        super(ctgy);
+        cat = ctgy;
+        isProp = false;
+    }
 
-	public BCConfigElement(Property prop) {
-		super(prop);
-		isProp = true;
-	}
+    public BCConfigElement(Property prop) {
+        super(prop);
+        isProp = true;
+    }
 
-	@Override
-	public List<IConfigElement> getChildElements() {
-		if (!isProp) {
-			List<IConfigElement> elements = new ArrayList<IConfigElement>();
-			Iterator<ConfigCategory> ccI = cat.getChildren().iterator();
-			Iterator<Property> pI = cat.getOrderedValues().iterator();
+    @Override
+    public List<IConfigElement> getChildElements() {
+        if (!isProp) {
+            List<IConfigElement> elements = new ArrayList<IConfigElement>();
+            Iterator<ConfigCategory> ccI = cat.getChildren().iterator();
+            Iterator<Property> pI = cat.getOrderedValues().iterator();
 
-			while (ccI.hasNext()) {
-				ConfigCategory child = ccI.next();
-				if (!child.parent.getQualifiedName().equals(cat.getQualifiedName())) {
-					continue;
-				}
+            while (ccI.hasNext()) {
+                ConfigCategory child = ccI.next();
+                if (!child.parent.getQualifiedName().equals(cat.getQualifiedName())) {
+                    continue;
+                }
 
-				ConfigElement<?> temp = new BCConfigElement<Object>(child);
-				if (temp.showInGui()) {
-					elements.add(temp);
-				}
-			}
+                ConfigElement<?> temp = new BCConfigElement<Object>(child);
+                if (temp.showInGui()) {
+                    elements.add(temp);
+                }
+            }
 
-			while (pI.hasNext()) {
-				ConfigElement<?> temp = getTypedElement(pI.next());
-				if (temp.showInGui()) {
-					elements.add(temp);
-				}
-			}
+            while (pI.hasNext()) {
+                ConfigElement<?> temp = getTypedElement(pI.next());
+                if (temp.showInGui()) {
+                    elements.add(temp);
+                }
+            }
 
-			return elements;
-		} else {
-			return null;
-		}
-	}
+            return elements;
+        } else {
+            return null;
+        }
+    }
 }
