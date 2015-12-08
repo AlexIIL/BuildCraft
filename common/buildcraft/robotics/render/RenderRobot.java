@@ -361,7 +361,7 @@ public class RenderRobot extends Render<EntityRobot> {
         if (wearable.hasTagCompound()) {
             NBTTagCompound nbt = wearable.getTagCompound();
             if (nbt.hasKey("Name")) {// FIXME: Come back to this!
-                gameProfile = gameProfileCache.get(nbt.getString("Name"));
+                gameProfile = NBTUtil.readGameProfileFromNBT(nbt);
             } else if (nbt.hasKey("SkullOwner", NBT.TAG_COMPOUND)) {
                 gameProfile = NBTUtil.readGameProfileFromNBT(nbt.getCompoundTag("SkullOwner"));
                 nbt.setString("Name", gameProfile.getName());
