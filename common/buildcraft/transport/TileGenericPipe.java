@@ -24,6 +24,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -43,13 +44,7 @@ import buildcraft.api.core.ISerializable;
 import buildcraft.api.gates.IGateExpansion;
 import buildcraft.api.power.IRedstoneEngineReceiver;
 import buildcraft.api.tiles.IDebuggable;
-import buildcraft.api.transport.ICustomPipeConnection;
-import buildcraft.api.transport.IPipe;
-import buildcraft.api.transport.IPipeConnection;
-import buildcraft.api.transport.IPipeTile;
-import buildcraft.api.transport.PipeConnectionAPI;
-import buildcraft.api.transport.PipeManager;
-import buildcraft.api.transport.PipeWire;
+import buildcraft.api.transport.*;
 import buildcraft.api.transport.pluggable.IFacadePluggable;
 import buildcraft.api.transport.pluggable.PipePluggable;
 import buildcraft.core.DefaultProps;
@@ -270,10 +265,10 @@ public class TileGenericPipe extends TileEntity implements IUpdatePlayerListBox,
         }
 
         if (pipe != null) {
-            nbt.setInteger("pipeId", Item.getIdFromItem(pipe.item));
+            nbt.setString("pipeId", Item.itemRegistry.getNameForObject(pipe.item).toString());
             pipe.writeToNBT(nbt);
         } else {
-            nbt.setInteger("pipeId", coreState.pipeId);
+            nbt.setString("pipeId", Item.itemRegistry.getNameForObject(Item.getItemById(coreState.pipeId)).toString());
         }
 
         sideProperties.writeToNBT(nbt);
@@ -300,8 +295,15 @@ public class TileGenericPipe extends TileEntity implements IUpdatePlayerListBox,
             }
         }
 
-        coreState.pipeId = nbt.getInteger("pipeId");
-        pipe = BlockGenericPipe.createPipe((ItemPipe) Item.getItemById(coreState.pipeId));
+        if (nbt.hasKey("pipeId", Constants.NBT.TAG_STRING)) {
+            String pipeId = nbt.getString("pipeId");
+            Item item = Item.getByNameOrId(pipeId);
+            coreState.pipeId = Item.getIdFromItem(item);
+            pipe = BlockGenericPipe.createPipe((ItemPipe) item);
+        } else {
+            coreState.pipeId = nbt.getInteger("pipeId");
+            pipe = BlockGenericPipe.createPipe((ItemPipe) Item.getItemById(coreState.pipeId));
+        }
         bindPipe();
 
         if (pipe != null) {
@@ -447,6 +449,7 @@ public class TileGenericPipe extends TileEntity implements IUpdatePlayerListBox,
         return getPipeColor() >= 0 ? (1 + getPipeColor()) : 0;
     }
 
+    @Override
     public int getPipeColor() {
         return worldObj.isRemote ? renderState.getGlassColor() : this.glassColor;
     }
@@ -590,6 +593,7 @@ public class TileGenericPipe extends TileEntity implements IUpdatePlayerListBox,
         return initialized;
     }
 
+    @Override
     public void scheduleNeighborChange() {
         blockNeighborChange = true;
     }
@@ -790,6 +794,7 @@ public class TileGenericPipe extends TileEntity implements IUpdatePlayerListBox,
         return canPipeConnect_internal(with, side);
     }
 
+    @Override
     public boolean hasBlockingPluggable(EnumFacing side) {
         PipePluggable pluggable = getPipePluggable(side);
         if (pluggable == null) {
@@ -904,6 +909,7 @@ public class TileGenericPipe extends TileEntity implements IUpdatePlayerListBox,
         return null;
     }
 
+    @Override
     public void scheduleRenderUpdate() {
         refreshRenderState = true;
     }

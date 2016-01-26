@@ -1,5 +1,6 @@
 package buildcraft.transport.gates;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -196,6 +197,11 @@ public class GatePluggable extends PipePluggable {
             }
         }
         return true;
+    }
+    
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(new Object[]{material,logic,expansions});
     }
 
     @Override

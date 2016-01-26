@@ -205,6 +205,7 @@ public class GuiBuilder extends GuiAdvancedInterface {
                 selectedButton = this;
                 clicked = true;
                 BuildCraftCore.instance.sendToServer(new PacketCommand(builder, "eraseFluidTank", new CommandWriter() {
+                    @Override
                     public void write(ByteBuf data) {
                         data.writeInt(id);
                     }

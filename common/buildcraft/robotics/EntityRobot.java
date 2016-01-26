@@ -682,6 +682,7 @@ public class EntityRobot extends EntityRobotBase implements IEntityAdditionalSpa
 
     public void updateClientSlot(final int slot) {
         BuildCraftCore.instance.sendToEntity(new PacketCommand(this, "clientSetInventory", new CommandWriter() {
+            @Override
             public void write(ByteBuf data) {
                 data.writeShort(slot);
                 NetworkUtils.writeStack(data, inv[slot]);
@@ -715,6 +716,7 @@ public class EntityRobot extends EntityRobotBase implements IEntityAdditionalSpa
     public void setItemInUse(ItemStack stack) {
         itemInUse = stack;
         BuildCraftCore.instance.sendToEntity(new PacketCommand(this, "clientSetItemInUse", new CommandWriter() {
+            @Override
             public void write(ByteBuf data) {
                 NetworkUtils.writeStack(data, itemInUse);
             }
@@ -724,6 +726,7 @@ public class EntityRobot extends EntityRobotBase implements IEntityAdditionalSpa
     private void setSteamDirection(final Vec3 direction) {
         if (!worldObj.isRemote) {
             BuildCraftCore.instance.sendToEntity(new PacketCommand(this, "setSteamDirection", new CommandWriter() {
+                @Override
                 public void write(ByteBuf data) {
                     data.writeDouble(direction.xCoord);
                     data.writeDouble(direction.yCoord);
@@ -769,6 +772,7 @@ public class EntityRobot extends EntityRobotBase implements IEntityAdditionalSpa
             EntityPlayer p = (EntityPlayer) sender;
             if ("requestInitialization".equals(command)) {
                 BuildCraftCore.instance.sendToPlayer(p, new PacketCommand(this, "initialize", new CommandWriter() {
+                    @Override
                     public void write(ByteBuf data) {
                         NetworkUtils.writeStack(data, itemInUse);
                         data.writeBoolean(itemActive);
@@ -778,6 +782,7 @@ public class EntityRobot extends EntityRobotBase implements IEntityAdditionalSpa
                 for (int i = 0; i < inv.length; ++i) {
                     final int j = i;
                     BuildCraftCore.instance.sendToPlayer(p, new PacketCommand(this, "clientSetInventory", new CommandWriter() {
+                        @Override
                         public void write(ByteBuf data) {
                             data.writeShort(j);
                             NetworkUtils.writeStack(data, inv[j]);
@@ -881,6 +886,7 @@ public class EntityRobot extends EntityRobotBase implements IEntityAdditionalSpa
         if (isActive != itemActive) {
             itemActive = isActive;
             BuildCraftCore.instance.sendToEntity(new PacketCommand(this, "setItemActive", new CommandWriter() {
+                @Override
                 public void write(ByteBuf data) {
                     data.writeBoolean(isActive);
                 }
@@ -1042,6 +1048,7 @@ public class EntityRobot extends EntityRobotBase implements IEntityAdditionalSpa
 
     private void syncWearablesToClient() {
         BuildCraftCore.instance.sendToEntity(new PacketCommand(this, "syncWearables", new CommandWriter() {
+            @Override
             public void write(ByteBuf data) {
                 data.writeByte(wearables.size());
                 for (ItemStack s : wearables) {

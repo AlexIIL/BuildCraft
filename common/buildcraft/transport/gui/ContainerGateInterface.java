@@ -292,6 +292,7 @@ public class ContainerGateInterface extends BuildCraftContainer implements IComm
     public Packet getStatementPacket(final String name, final int slot, final IStatement statement) {
         final String statementKind = statement != null ? statement.getUniqueTag() : null;
         return new PacketCommand(this, name, new CommandWriter() {
+            @Override
             public void write(ByteBuf data) {
                 data.writeByte(slot);
                 NetworkUtils.writeUTF(data, statementKind);
@@ -306,6 +307,7 @@ public class ContainerGateInterface extends BuildCraftContainer implements IComm
             parameter.writeToNBT(parameterNBT);
         }
         return new PacketCommand(this, name, new CommandWriter() {
+            @Override
             public void write(ByteBuf data) {
                 data.writeByte(slot);
                 data.writeByte(paramSlot);
@@ -329,6 +331,7 @@ public class ContainerGateInterface extends BuildCraftContainer implements IComm
                 final String[] actionStrings = statementsToStrings(potentialActions);
 
                 BuildCraftCore.instance.sendToPlayer(player, new PacketCommand(this, "init", new CommandWriter() {
+                    @Override
                     public void write(ByteBuf data) {
                         data.writeByte(gate.getDirection().ordinal());
                         data.writeShort(triggerStrings.length);

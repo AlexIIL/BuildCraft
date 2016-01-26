@@ -164,6 +164,7 @@ public class BlockFrame extends BlockBuildCraftBase {
         list.add(new ItemStack(this));
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public EnumWorldBlockLayer getBlockLayer() {
         return EnumWorldBlockLayer.CUTOUT;

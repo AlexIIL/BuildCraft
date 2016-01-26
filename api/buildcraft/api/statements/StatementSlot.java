@@ -4,28 +4,42 @@
  * of the license located in http://www.mod-buildcraft.com/MMPL-1.0.txt */
 package buildcraft.api.statements;
 
+import java.util.Arrays;
+
 public class StatementSlot {
     public IStatement statement;
     public IStatementParameter[] parameters;
 
     @Override
-    public boolean equals(Object o) {
-        if (o == null || !(o instanceof StatementSlot)) {
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + Arrays.hashCode(parameters);
+        result = prime * result + ((statement == null) ? 0 : statement.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        StatementSlot s = (StatementSlot) o;
-        if (s.statement != statement || parameters.length != s.parameters.length) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        for (int i = 0; i < parameters.length; i++) {
-            IStatementParameter p1 = parameters[i];
-            IStatementParameter p2 = s.parameters[i];
-            if (p1 == null && p2 != null) {
+        StatementSlot other = (StatementSlot) obj;
+        if (!Arrays.equals(parameters, other.parameters)) {
+            return false;
+        }
+        if (statement == null) {
+            if (other.statement != null) {
                 return false;
             }
-            if (!(p1.equals(p2))) {
-                return false;
-            }
+        } else if (!statement.equals(other.statement)) {
+            return false;
         }
         return true;
     }

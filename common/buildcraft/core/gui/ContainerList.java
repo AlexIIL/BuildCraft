@@ -53,6 +53,7 @@ public class ContainerList extends BuildCraftContainer implements ICommandReceiv
 
         if (player.worldObj.isRemote) {
             BuildCraftCore.instance.sendToServer(new PacketCommand(this, "setStack", new CommandWriter() {
+                @Override
                 public void write(ByteBuf data) {
                     data.writeByte(lineIndex);
                     data.writeByte(slotIndex);
@@ -75,6 +76,7 @@ public class ContainerList extends BuildCraftContainer implements ICommandReceiv
 
         if (player.worldObj.isRemote) {
             BuildCraftCore.instance.sendToServer(new PacketCommand(this, "switchButton", new CommandWriter() {
+                @Override
                 public void write(ByteBuf data) {
                     data.writeByte(lineIndex);
                     data.writeByte(button);
@@ -88,6 +90,7 @@ public class ContainerList extends BuildCraftContainer implements ICommandReceiv
 
         if (player.worldObj.isRemote) {
             BuildCraftCore.instance.sendToServer(new PacketCommand(this, "setLabel", new CommandWriter() {
+                @Override
                 public void write(ByteBuf data) {
                     NetworkUtils.writeUTF(data, text);
                 }

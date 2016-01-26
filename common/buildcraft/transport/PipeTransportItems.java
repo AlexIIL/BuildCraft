@@ -523,6 +523,7 @@ public class PipeTransportItems extends PipeTransport implements IDebuggable {
         items.clear();
     }
 
+    @Override
     public List<ItemStack> getDroppedItems() {
         groupEntities();
 

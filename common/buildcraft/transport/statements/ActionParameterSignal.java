@@ -4,6 +4,7 @@
  * of the license located in http://www.mod-buildcraft.com/MMPL-1.0.txt */
 package buildcraft.transport.statements;
 
+import java.util.Arrays;
 import java.util.Locale;
 
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -85,6 +86,11 @@ public class ActionParameterSignal implements IStatementParameter {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(new Object[] { color });
     }
 
     @Override

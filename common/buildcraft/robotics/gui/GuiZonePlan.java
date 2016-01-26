@@ -154,6 +154,7 @@ public class GuiZonePlan extends GuiAdvancedInterface {
 
     private void uploadMap() {
         BuildCraftCore.instance.sendToServer(new PacketCommand(getContainer(), "computeMap", new CommandWriter() {
+            @Override
             public void write(ByteBuf data) {
                 data.writeInt(cx);
                 data.writeInt(cz);
@@ -352,6 +353,7 @@ public class GuiZonePlan extends GuiAdvancedInterface {
                 textField.textboxKeyTyped(carac, val);
                 final String text = textField.getText();
                 BuildCraftCore.instance.sendToServer(new PacketCommand(getContainer(), "setName", new CommandWriter() {
+                    @Override
                     public void write(ByteBuf data) {
                         NetworkUtils.writeUTF(data, text);
                     }

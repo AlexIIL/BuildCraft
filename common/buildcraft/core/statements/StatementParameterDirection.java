@@ -4,6 +4,8 @@
  * of the license located in http://www.mod-buildcraft.com/MMPL-1.0.txt */
 package buildcraft.core.statements;
 
+import java.util.Arrays;
+
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -75,6 +77,11 @@ public class StatementParameterDirection implements IStatementParameter {
             return param.direction == this.direction;
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(new Object[] { direction });
     }
 
     @Override

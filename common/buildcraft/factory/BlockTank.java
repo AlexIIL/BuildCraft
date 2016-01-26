@@ -233,6 +233,7 @@ public class BlockTank extends BlockBuildCraft {
         return 0;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public EnumWorldBlockLayer getBlockLayer() {
         return EnumWorldBlockLayer.CUTOUT;

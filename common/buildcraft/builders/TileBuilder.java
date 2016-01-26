@@ -643,6 +643,7 @@ public class TileBuilder extends TileAbstractBuilder implements IHasWork, IFluid
     private Packet getItemRequirementsPacket(final ArrayList<ItemStack> items) {
         if (items != null) {
             return new PacketCommand(this, "setItemRequirements", new CommandWriter() {
+                @Override
                 public void write(ByteBuf data) {
                     data.writeShort(items.size());
                     if (items != null) {

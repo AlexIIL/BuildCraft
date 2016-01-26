@@ -61,6 +61,7 @@ public interface IPipeTile extends IInjectable {
     void scheduleRenderUpdate();
 
     // For compatibility with BC 6.2.x and below
+    @Override
     int injectItem(ItemStack stack, boolean doAdd, EnumFacing from, EnumColor color);
 
     @Deprecated

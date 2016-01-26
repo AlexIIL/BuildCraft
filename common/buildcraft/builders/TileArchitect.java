@@ -283,6 +283,7 @@ public class TileArchitect extends TileBuildCraft implements IInventory, IBoxPro
 
     public Packet getPacketSetName() {
         return new PacketCommand(this, "setName", new CommandWriter() {
+            @Override
             public void write(ByteBuf data) {
                 NetworkUtils.writeUTF(data, name);
             }
@@ -308,6 +309,7 @@ public class TileArchitect extends TileBuildCraft implements IInventory, IBoxPro
         readConfiguration = conf;
 
         BuildCraftCore.instance.sendToServer(new PacketCommand(this, "setReadConfiguration", new CommandWriter() {
+            @Override
             public void write(ByteBuf data) {
                 readConfiguration.writeData(data);
             }

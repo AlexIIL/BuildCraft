@@ -315,6 +315,7 @@ public abstract class BlockBuildCraftBase extends Block {
         }
     }
 
+    @Override
     public boolean canCollideCheck(IBlockState state, boolean hitIfLiquid) {
         return true;
     }
