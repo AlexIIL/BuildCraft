@@ -195,6 +195,8 @@ public abstract class TileBuildCraft extends TileEntity implements IEnergyHandle
         if (mode != null) {
             nbt.setByte("lastMode", (byte) mode.ordinal());
         }
+        IBlockState state = worldObj.getBlockState(getPos());
+        nbt.setInteger("MIGRATION_META", state.getBlock().getMetaFromState(state));
     }
 
     @Override
