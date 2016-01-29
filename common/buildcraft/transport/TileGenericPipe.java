@@ -271,6 +271,8 @@ public class TileGenericPipe extends TileEntity implements IUpdatePlayerListBox,
             nbt.setString("pipeId", Item.itemRegistry.getNameForObject(Item.getItemById(coreState.pipeId)).toString());
         }
 
+        BCLog.logger.info("Writing pipe " + pipe + " @" + getPos() + " as " + nbt.getString("pipeId"));
+
         sideProperties.writeToNBT(nbt);
     }
 
@@ -361,6 +363,7 @@ public class TileGenericPipe extends TileEntity implements IUpdatePlayerListBox,
                 if (deletePipe) {
                     worldObj.setBlockToAir(getPos());
                 }
+                worldObj.markChunkDirty(getPos(), null);
 
                 if (pipe == null) {
                     return;
