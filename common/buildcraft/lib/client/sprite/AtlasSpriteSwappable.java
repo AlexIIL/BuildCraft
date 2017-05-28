@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.resources.IResource;
 import net.minecraft.client.resources.IResourceManager;
+import net.minecraft.profiler.Profiler;
 import net.minecraft.util.ResourceLocation;
 
 import net.minecraftforge.fml.client.FMLClientHandler;
@@ -38,15 +39,26 @@ public abstract class AtlasSpriteSwappable extends TextureAtlasSprite {
         if (current == null) {
             return;
         }
+        Profiler prof = Minecraft.getMinecraft().mcProfiler;
+        prof.startSection("bc");
+        prof.startSection(getClass());
         if (needsSwapping) {
+            prof.startSection("copy");
             current.copyFrom(this);
+            prof.endSection();
         }
         if (current.hasAnimationMetadata()) {
+            prof.startSection("animate");
             current.updateAnimation();
+            prof.endSection();
         } else if (needsSwapping) {
+            prof.startSection("swap");
             TextureUtil.uploadTextureMipmap(current.getFrameTextureData(0), current.getIconWidth(), current.getIconHeight(), current.getOriginX(), current.getOriginY(), false, false);
+            prof.endSection();
         }
         needsSwapping = false;
+        prof.endSection();
+        prof.endSection();
     }
 
     public boolean swapWith(TextureAtlasSprite other) {

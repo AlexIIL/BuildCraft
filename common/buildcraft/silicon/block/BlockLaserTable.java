@@ -1,9 +1,10 @@
-/*
- * Copyright (c) 2017 SpaceToad and the BuildCraft team
+/* Copyright (c) 2017 SpaceToad and the BuildCraft team
  * This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. If a copy of the MPL was not
- * distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/
- */
+ * distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/ */
 package buildcraft.silicon.block;
+
+import java.util.EnumMap;
+import java.util.Map;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -21,11 +22,26 @@ import buildcraft.api.enums.EnumLaserTableType;
 import buildcraft.api.mj.ILaserTargetBlock;
 
 import buildcraft.lib.block.BlockBCTile_Neptune;
+
 import buildcraft.silicon.BCSiliconGuis;
-import buildcraft.silicon.tile.*;
+import buildcraft.silicon.tile.TileAdvancedCraftingTable;
+import buildcraft.silicon.tile.TileAssemblyTable;
+import buildcraft.silicon.tile.TileChargingTable;
+import buildcraft.silicon.tile.TileIntegrationTable;
+import buildcraft.silicon.tile.TileProgrammingTable_Neptune;
 
 public class BlockLaserTable extends BlockBCTile_Neptune implements ILaserTargetBlock {
+    private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0, 0, 0, 1, 9 / 16D, 1);
+    private static final Map<EnumLaserTableType, BCSiliconGuis> GUIS;
+
     private final EnumLaserTableType type;
+
+    static {
+        GUIS = new EnumMap<>(EnumLaserTableType.class);
+        GUIS.put(EnumLaserTableType.ADVANCED_CRAFTING_TABLE, BCSiliconGuis.ADVANCED_CRAFTING_TABLE);
+        GUIS.put(EnumLaserTableType.ASSEMBLY_TABLE, BCSiliconGuis.ASSEMBLY_TABLE);
+        GUIS.put(EnumLaserTableType.INTEGRATION_TABLE, BCSiliconGuis.INTEGRATION_TABLE);
+    }
 
     public BlockLaserTable(EnumLaserTableType type, Material material, String id) {
         super(material, id);
@@ -49,7 +65,7 @@ public class BlockLaserTable extends BlockBCTile_Neptune implements ILaserTarget
 
     @Override
     public TileEntity createNewTileEntity(World world, int meta) {
-        switch(type) {
+        switch (type) {
             case ASSEMBLY_TABLE:
                 return new TileAssemblyTable();
             case ADVANCED_CRAFTING_TABLE:
@@ -60,35 +76,23 @@ public class BlockLaserTable extends BlockBCTile_Neptune implements ILaserTarget
                 return new TileChargingTable();
             case PROGRAMMING_TABLE:
                 return new TileProgrammingTable_Neptune();
+            default:
+                return null;
         }
-        return null;
     }
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return new AxisAlignedBB(0 / 16D, 0 / 16D, 0 / 16D, 16 / 16D, 9 / 16D, 16 / 16D);
+        return BOUNDING_BOX;
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-        switch(type) {
-            case ASSEMBLY_TABLE:
-                if (!world.isRemote) {
-                    BCSiliconGuis.ASSEMBLY_TABLE.openGUI(player, pos);
-                }
-                return true;
-            case ADVANCED_CRAFTING_TABLE:
-                if (!world.isRemote) {
-                    BCSiliconGuis.ADVANCED_CRAFTING_TABLE.openGUI(player, pos);
-                }
-                return true;
-            case INTEGRATION_TABLE:
-                if (!world.isRemote) {
-                    BCSiliconGuis.INTEGRATION_TABLE.openGUI(player, pos);
-                }
-                return true;
-            case CHARGING_TABLE:
-            case PROGRAMMING_TABLE:
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
+        EnumFacing side, float hitX, float hitY, float hitZ) {
+        BCSiliconGuis gui = GUIS.get(type);
+        if (gui != null) {
+            gui.openGUI(player, pos);
+            return true;
         }
         return false;
     }

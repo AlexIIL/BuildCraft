@@ -41,6 +41,24 @@ public abstract class TileMiner extends TileBC_Neptune implements ITickable, IDe
     public static final int NET_LED_STATUS = IDS.allocId("LED_STATUS");
     public static final int NET_WANTED_Y = IDS.allocId("WANTED_Y");
 
+    // TODO: Implement the following states.
+    // We already have running, but ATM building_tube doesn't take time or power
+    // interrupted only makes sense now that tubes can be broken - this is simple though
+    public enum MinerState {
+        /**
+         * Breaking the block below or pumping fluid via the block below.
+         */
+        RUNNING,
+        /**
+         * We can't mine just yet - extend the tube downwards.
+         */
+        BUILDING_TUBE,
+        /**
+         * A tube has just been broken - pause for a few seconds.
+         */
+        INTERUPTED;
+    }
+
     protected int progress = 0;
     protected BlockPos currentPos = null;
 
@@ -79,7 +97,6 @@ public abstract class TileMiner extends TileBC_Neptune implements ITickable, IDe
             return;
         }
 
-        world.profiler.startSection(TileMiner.class);
         battery.tick(getWorld(), getPos());
 
         // if (worldObj.rand.nextDouble() > 0.9) { // is this correct?
@@ -91,7 +108,6 @@ public abstract class TileMiner extends TileBC_Neptune implements ITickable, IDe
         initCurrentPos();
         world.profiler.endStartSection("mine");
         mine();
-        world.profiler.endSection();
         world.profiler.endSection();
     }
 
