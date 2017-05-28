@@ -5,6 +5,8 @@
 package buildcraft.core;
 
 import java.io.File;
+import java.util.ArrayDeque;
+import java.util.Queue;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -23,6 +25,8 @@ import buildcraft.lib.misc.ConfigUtil;
 import buildcraft.lib.registry.RegistryHelper;
 
 public class BCCoreConfig {
+    public static final Queue<IConfigReloader> listeners = new ArrayDeque<>();
+
     public static Configuration config;
     public static Configuration objConfig;
     public static FileConfigManager detailedConfigManager;
@@ -63,9 +67,10 @@ public class BCCoreConfig {
         config = new Configuration(new File(cfgFolder, "main.cfg"));
         objConfig = RegistryHelper.setRegistryConfig(BCCore.MODID, new File(cfgFolder, "objects.cfg"));
 
-        detailedConfigManager = new FileConfigManager(" The buildcraft detailed configuration file. This contains a lot of miscelaneous options that have no "
-            + "affect on gameplay.\n You should refer to the BC source code for a detailed description of what these do. (https://github.com/BuildCraft/BuildCraft)\n"
-            + " This file will be overwritten every time that buildcraft starts, so don't change anything other than the values.");
+        detailedConfigManager = new FileConfigManager(
+            " The buildcraft detailed configuration file. This contains a lot of miscelaneous options that have no "
+                + "affect on gameplay.\n You should refer to the BC source code for a detailed description of what these do. (https://github.com/BuildCraft/BuildCraft)\n"
+                + " This file will be overwritten every time that buildcraft starts, so don't change anything other than the values.");
         detailedConfigManager.setConfigFile(new File(cfgFolder, "detailed.properties"));
 
         // Variables to make
@@ -89,11 +94,13 @@ public class BCCoreConfig {
         game.setTo(propWorldGenWaterSpring);
 
         propUseLocalServerOnClient = config.get(general, "useServerDataOnClient", true);
-        propUseLocalServerOnClient.setComment("Allows BuildCraft to use the integrated server's data on the client on singleplayer worlds. Disable if you're getting the odd crash caused by it.");
+        propUseLocalServerOnClient.setComment(
+            "Allows BuildCraft to use the integrated server's data on the client on singleplayer worlds. Disable if you're getting the odd crash caused by it.");
         none.setTo(propUseLocalServerOnClient);
 
         propMinePlayerProtected = config.get(general, "miningBreaksPlayerProtectedBlocks", false);
-        propMinePlayerProtected.setComment("Should BuildCraft miners be allowed to break blocks using player-specific protection?");
+        propMinePlayerProtected.setComment(
+            "Should BuildCraft miners be allowed to break blocks using player-specific protection?");
         none.setTo(propMinePlayerProtected);
 
         propUseColouredLabels = config.get(display, "useColouredLabels", true);
@@ -101,7 +108,8 @@ public class BCCoreConfig {
         none.setTo(propUseColouredLabels);
 
         propUseHighContrastColouredLabels = config.get(display, "useHighContrastColouredLabels", false);
-        propUseHighContrastColouredLabels.setComment("Should colours displayed in tooltips use higher-contrast colours?");
+        propUseHighContrastColouredLabels.setComment(
+            "Should colours displayed in tooltips use higher-contrast colours?");
         none.setTo(propUseHighContrastColouredLabels);
 
         propHidePower = config.get(display, "hidePowerValues", false);
@@ -113,20 +121,24 @@ public class BCCoreConfig {
         none.setTo(propHideFluid);
 
         propUseBucketsStatic = config.get(display, "useBucketsStatic", false);
-        propUseBucketsStatic.setComment("Should static fluid values be displayed in terms of buckets rather than thousandths of a bucket? (B vs mB)");
+        propUseBucketsStatic.setComment(
+            "Should static fluid values be displayed in terms of buckets rather than thousandths of a bucket? (B vs mB)");
         none.setTo(propUseBucketsStatic);
 
         propUseBucketsFlow = config.get(display, "useBucketsFlow", false);
-        propUseBucketsFlow.setComment("Should flowing fluid values be displayed in terms of buckets per second rather than thousandths of a bucket per tick? (B/s vs mB/t)");
+        propUseBucketsFlow.setComment(
+            "Should flowing fluid values be displayed in terms of buckets per second rather than thousandths of a bucket per tick? (B/s vs mB/t)");
         none.setTo(propUseBucketsFlow);
 
         propUseLongLocalizedName = config.get(display, "useLongLocalizedName", false);
-        propUseLongLocalizedName.setComment("Should localised strings be displayed in long or short form (10 mB / t vs 10 milli buckets per tick");
+        propUseLongLocalizedName.setComment(
+            "Should localised strings be displayed in long or short form (10 mB / t vs 10 milli buckets per tick");
         none.setTo(propUseLongLocalizedName);
 
         propItemLifespan = config.get(general, "itemLifespan", 60);
         propItemLifespan.setMinValue(5).setMaxValue(600);
-        propItemLifespan.setComment("How long, in seconds, should items stay on the ground? (Vanilla = 300, default = 60)");
+        propItemLifespan.setComment(
+            "How long, in seconds, should items stay on the ground? (Vanilla = 300, default = 60)");
         none.setTo(propItemLifespan);
 
         propMarkerMaxDistance = config.get(general, "markerMaxDistance", 64);
@@ -136,7 +148,8 @@ public class BCCoreConfig {
 
         propNetworkUpdateRate = config.get(general, "updateFactor", networkUpdateRate);
         propNetworkUpdateRate.setMinValue(1).setMaxValue(100);
-        propNetworkUpdateRate.setComment("How often, in ticks, should network update packets be sent? Increasing this might help network performance.");
+        propNetworkUpdateRate.setComment(
+            "How often, in ticks, should network update packets be sent? Increasing this might help network performance.");
         none.setTo(propNetworkUpdateRate);
 
         reloadConfig(game);
@@ -146,13 +159,16 @@ public class BCCoreConfig {
 
     @SubscribeEvent
     public static void onConfigChange(OnConfigChangedEvent cce) {
-        if (BCModules.isBcMod(cce.getModID())) {
+        if (BCModules.CORE.getModId().equals(cce.getModID())) {
             EnumRestartRequirement req = EnumRestartRequirement.NONE;
             if (Loader.instance().isInState(LoaderState.AVAILABLE)) {
                 // The loaders state will be LoaderState.SERVER_STARTED when we are in a world
                 req = EnumRestartRequirement.WORLD;
             }
             reloadConfig(req);
+            for (IConfigReloader listener : listeners) {
+                listener.reload(req);
+            }
         }
     }
 
@@ -170,7 +186,8 @@ public class BCCoreConfig {
         useLocalServerOnClient = propUseLocalServerOnClient.getBoolean();
         minePlayerProteted = propMinePlayerProtected.getBoolean();
         BCLibConfig.useColouredLabels = useColouredLabels = propUseColouredLabels.getBoolean();
-        BCLibConfig.useHighContrastLabelColours = useHighContrastLabelColours = propUseHighContrastColouredLabels.getBoolean();
+        BCLibConfig.useHighContrastLabelColours = useHighContrastLabelColours = propUseHighContrastColouredLabels
+            .getBoolean();
         hidePower = propHidePower.getBoolean();
         hideFluid = propHideFluid.getBoolean();
         BCLibConfig.useBucketsStatic = useBucketsStatic = propUseBucketsStatic.getBoolean();
@@ -192,5 +209,10 @@ public class BCCoreConfig {
         if (objConfig.hasChanged()) {
             objConfig.save();
         }
+    }
+
+    @FunctionalInterface
+    public interface IConfigReloader {
+        void reload(EnumRestartRequirement requirement);
     }
 }

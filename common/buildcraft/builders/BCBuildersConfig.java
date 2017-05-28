@@ -8,8 +8,9 @@ package buildcraft.builders;
 
 import net.minecraftforge.common.config.Property;
 
-import buildcraft.core.BCCoreConfig;
 import buildcraft.lib.config.EnumRestartRequirement;
+
+import buildcraft.core.BCCoreConfig;
 
 public class BCBuildersConfig {
     /** Blueprints that save larger than this are stored externally, smaller ones are stored directly in the item. */
@@ -28,21 +29,23 @@ public class BCBuildersConfig {
 
     public static void preInit() {
         EnumRestartRequirement none = EnumRestartRequirement.NONE;
-        EnumRestartRequirement game = EnumRestartRequirement.GAME;
 
         propBptStoreExternalThreshold = BCCoreConfig.config.get("general", "bptStoreExternalThreshold", 20_000);
         none.setTo(propBptStoreExternalThreshold);
 
         propQuarryFrameMinHeight = BCCoreConfig.config.get("general", "quarryFrameMinHeight", 4);
-        propQuarryFrameMinHeight.setComment("The minimum height that all quarry frames must be. A value of 1 will look strange when it drills the toppermost layer.");
+        propQuarryFrameMinHeight.setComment(
+            "The minimum height that all quarry frames must be. A value of 1 will look strange when it drills the toppermost layer.");
         propQuarryFrameMinHeight.setMinValue(1);
         none.setTo(propQuarryFrameMinHeight);
 
         propQuarryFrameMoveBoth = BCCoreConfig.config.get("display", "quarryFrameMoveBoth", false);
-        propQuarryFrameMoveBoth.setComment("If true then the quarry frame will move with both of its axis rather than just one.");
+        propQuarryFrameMoveBoth.setComment(
+            "If true then the quarry frame will move with both of its axis rather than just one.");
         none.setTo(propQuarryFrameMoveBoth);
 
         reloadConfig(EnumRestartRequirement.GAME);
+        BCCoreConfig.listeners.add(BCBuildersConfig::reloadConfig);
     }
 
     public static void reloadConfig(EnumRestartRequirement restarted) {

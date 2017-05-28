@@ -29,6 +29,7 @@ import buildcraft.api.tiles.IDebuggable;
 import buildcraft.api.tiles.TilesAPI;
 
 import buildcraft.lib.migrate.BCVersion;
+import buildcraft.lib.misc.LocaleUtil;
 import buildcraft.lib.misc.data.IdAllocator;
 import buildcraft.lib.net.PacketBufferBC;
 import buildcraft.lib.tile.TileBC_Neptune;
@@ -78,6 +79,7 @@ public abstract class TileMiner extends TileBC_Neptune implements ITickable, IDe
             return;
         }
 
+        world.profiler.startSection(TileMiner.class);
         battery.tick(getWorld(), getPos());
 
         // if (worldObj.rand.nextDouble() > 0.9) { // is this correct?
@@ -85,9 +87,12 @@ public abstract class TileMiner extends TileBC_Neptune implements ITickable, IDe
             sendNetworkUpdate(NET_LED_STATUS);
         }
 
+        world.profiler.startSection("initCurrentPos");
         initCurrentPos();
-
+        world.profiler.endStartSection("mine");
         mine();
+        world.profiler.endSection();
+        world.profiler.endSection();
     }
 
     @Override
@@ -217,7 +222,7 @@ public abstract class TileMiner extends TileBC_Neptune implements ITickable, IDe
         left.add("currentLength = " + currentLength);
         left.add("lastLength = " + lastLength);
         left.add("isComplete = " + isComplete());
-        left.add("progress = " + progress);
+        left.add("progress = " + LocaleUtil.localizeMj(progress));
     }
 
     @Override

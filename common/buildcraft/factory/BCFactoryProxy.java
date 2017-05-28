@@ -4,24 +4,33 @@
  * distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 package buildcraft.factory;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.network.IGuiHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
 import buildcraft.factory.client.render.RenderDistiller;
 import buildcraft.factory.client.render.RenderMiningWell;
 import buildcraft.factory.client.render.RenderPump;
 import buildcraft.factory.client.render.RenderTank;
 import buildcraft.factory.container.ContainerAutoCraftItems;
 import buildcraft.factory.container.ContainerChute;
+import buildcraft.factory.container.ContainerPump;
 import buildcraft.factory.gui.GuiAutoCraftItems;
 import buildcraft.factory.gui.GuiChute;
-import buildcraft.factory.tile.*;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.network.IGuiHandler;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import buildcraft.factory.gui.GuiPump;
+import buildcraft.factory.tile.TileAutoWorkbenchItems;
+import buildcraft.factory.tile.TileChute;
+import buildcraft.factory.tile.TileDistiller_BC8;
+import buildcraft.factory.tile.TileMiningWell;
+import buildcraft.factory.tile.TilePump;
+import buildcraft.factory.tile.TileTank;
 
 public abstract class BCFactoryProxy implements IGuiHandler {
     @SidedProxy
@@ -32,18 +41,24 @@ public abstract class BCFactoryProxy implements IGuiHandler {
     }
 
     @Override
-    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+    public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
         TileEntity tile = world.getTileEntity(new BlockPos(x, y, z));
-        if (ID == BCFactoryGuis.AUTO_WORKBENCH_ITEMS.ordinal()) {
+        if (id == BCFactoryGuis.AUTO_WORKBENCH_ITEMS.ordinal()) {
             if (tile instanceof TileAutoWorkbenchItems) {
                 TileAutoWorkbenchItems workbench = (TileAutoWorkbenchItems) tile;
                 return new ContainerAutoCraftItems(player, workbench);
             }
         }
-        if (ID == BCFactoryGuis.CHUTE.ordinal()) {
+        if (id == BCFactoryGuis.CHUTE.ordinal()) {
             if (tile instanceof TileChute) {
                 TileChute chute = (TileChute) tile;
                 return new ContainerChute(player, chute);
+            }
+        }
+        if (id == BCFactoryGuis.PUMP.ordinal()) {
+            if (tile instanceof TilePump) {
+                TilePump pump = (TilePump) tile;
+                return new ContainerPump(player, pump);
             }
         }
         return null;
@@ -64,18 +79,24 @@ public abstract class BCFactoryProxy implements IGuiHandler {
     @SideOnly(Side.CLIENT)
     public static class ClientProxy extends BCFactoryProxy {
         @Override
-        public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+        public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
             TileEntity tile = world.getTileEntity(new BlockPos(x, y, z));
-            if (ID == BCFactoryGuis.AUTO_WORKBENCH_ITEMS.ordinal()) {
+            if (id == BCFactoryGuis.AUTO_WORKBENCH_ITEMS.ordinal()) {
                 if (tile instanceof TileAutoWorkbenchItems) {
                     TileAutoWorkbenchItems workbench = (TileAutoWorkbenchItems) tile;
                     return new GuiAutoCraftItems(new ContainerAutoCraftItems(player, workbench));
                 }
             }
-            if (ID == BCFactoryGuis.CHUTE.ordinal()) {
+            if (id == BCFactoryGuis.CHUTE.ordinal()) {
                 if (tile instanceof TileChute) {
                     TileChute chute = (TileChute) tile;
                     return new GuiChute(new ContainerChute(player, chute));
+                }
+            }
+            if (id == BCFactoryGuis.PUMP.ordinal()) {
+                if (tile instanceof TilePump) {
+                    TilePump pump = (TilePump) tile;
+                    return new GuiPump(new ContainerPump(player, pump));
                 }
             }
             return null;

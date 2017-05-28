@@ -261,16 +261,18 @@ public final class BlockUtil {
         return FluidRegistry.lookupFluidForBlock(block);
     }
 
+    /** Retrieves the fluid that the given block contains, or originated from (Unlike {@link #getFluid(Block)} this
+     * returns {@link FluidRegistry#WATER} for both {@link Blocks#WATER} as well as {@link Blocks#FLOWING_WATER}.) */
     public static Fluid getFluidWithFlowing(Block block) {
-        Fluid fluid = null;
         if (block == Blocks.LAVA || block == Blocks.FLOWING_LAVA) {
-            fluid = FluidRegistry.LAVA;
+            return FluidRegistry.LAVA;
         } else if (block == Blocks.WATER || block == Blocks.FLOWING_WATER) {
-            fluid = FluidRegistry.WATER;
+            return FluidRegistry.WATER;
         } else if (block instanceof BlockFluidBase) {
-            fluid = ((BlockFluidBase) block).getFluid();
+            return ((BlockFluidBase) block).getFluid();
+        } else {
+            return getFluid(block);
         }
-        return fluid;
     }
 
     public static ItemStack getBucketFromFluid(Fluid fluid) {

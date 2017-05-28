@@ -36,6 +36,7 @@ public class BlockFrame extends BlockBCBase_Neptune {
 
     public BlockFrame(Material material, String id) {
         super(material, id);
+        setLightOpacity(0);
     }
 
     @Override

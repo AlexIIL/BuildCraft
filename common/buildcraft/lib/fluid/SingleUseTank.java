@@ -9,58 +9,53 @@ import javax.annotation.Nonnull;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
+import buildcraft.api.core.IFluidFilter;
+
 public class SingleUseTank extends Tank {
 
-    private Fluid acceptedFluid;
+    public final SlotFluidFilter filterSlot;
 
     public SingleUseTank(@Nonnull String name, int capacity, TileEntity tile) {
         super(name, capacity, tile);
+        filterSlot = new SlotFluidFilter(null);
+    }
+
+    public SingleUseTank(@Nonnull String name, int capacity, TileEntity tile, IFluidFilter filter) {
+        super(name, capacity, tile);
+        filterSlot = new SlotFluidFilter(filter);
     }
 
     @Override
-    public int fill(FluidStack resource, boolean doFill) {
+    public int fillInternal(FluidStack resource, boolean doFill) {
         if (resource == null) {
             return 0;
         }
-
-        if (doFill && acceptedFluid == null) {
-            acceptedFluid = resource.getFluid();
+        if (filterSlot.getFluid() != null && filterSlot.getFluid() != resource.getFluid()) {
+            return 0;
         }
-
-        if (acceptedFluid == null || acceptedFluid == resource.getFluid()) {
-            return super.fill(resource, doFill);
-        }
-
-        return 0;
+        int filled = super.fillInternal(resource, doFill);
+        filterSlot.setFluid(resource.getFluid());
+        return filled;
     }
 
     public void reset() {
-        acceptedFluid = null;
-    }
-
-    public void setAcceptedFluid(Fluid fluid) {
-        this.acceptedFluid = fluid;
-    }
-
-    public Fluid getAcceptedFluid() {
-        return acceptedFluid;
+        filterSlot.setFluid(null);
     }
 
     @Override
     public void writeTankToNBT(NBTTagCompound nbt) {
         super.writeTankToNBT(nbt);
-        if (acceptedFluid != null) {
-            nbt.setString("acceptedFluid", acceptedFluid.getName());
+        if (filterSlot.getFluid() != null) {
+            nbt.setString("acceptedFluid", filterSlot.getFluid().getName());
         }
     }
 
     @Override
     public void readTankFromNBT(NBTTagCompound nbt) {
         super.readTankFromNBT(nbt);
-        acceptedFluid = FluidRegistry.getFluid(nbt.getString("acceptedFluid"));
+        filterSlot.setFluid(FluidRegistry.getFluid(nbt.getString("acceptedFluid")));
     }
 }
