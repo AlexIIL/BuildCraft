@@ -36,6 +36,7 @@ public class BCFactory {
     public void preInit(FMLPreInitializationEvent evt) {
         RegistryHelper.useOtherModConfigFor(MODID, BCCore.MODID);
 
+        BCFactoryConfig.preInit();
         BCFactoryItems.preInit();
         BCFactoryBlocks.preInit();
 

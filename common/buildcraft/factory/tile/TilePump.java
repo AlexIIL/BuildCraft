@@ -6,13 +6,15 @@ package buildcraft.factory.tile;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Deque;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -42,7 +44,7 @@ import buildcraft.factory.BCFactoryConfig;
 public class TilePump extends TileMiner {
     private final SingleUseTank tank = new SingleUseTank("tank", 16 * Fluid.BUCKET_VOLUME, this);
     private boolean queueBuilt = false;
-    private final SortedMap<Integer, Deque<BlockPos>> layerQueues = new TreeMap<>();
+    private final SortedMap<Integer, Deque<BlockPos>> layerQueues = Collections.synchronizedSortedMap(new TreeMap<>());
 
     public TilePump() {
         tank.setCanFill(false);
@@ -147,7 +149,7 @@ public class TilePump extends TileMiner {
     }
 
     private Deque<BlockPos> getLayerQueue(int y) {
-        return layerQueues.computeIfAbsent(y, k -> new LinkedList<>());
+        return layerQueues.computeIfAbsent(y, k -> new ConcurrentLinkedDeque<>());
     }
 
     private void nextPos() {
@@ -286,7 +288,8 @@ public class TilePump extends TileMiner {
     public void getDebugInfo(List<String> left, List<String> right, EnumFacing side) {
         super.getDebugInfo(left, right, side);
         left.add("fluid = " + tank.getDebugString());
-        left.add("queue size = " + layerQueues.size());
+        left.add("queue size (Y) = " + layerQueues.size());
+        left.add("queue size (XZ) = " + layerQueues.values().stream().mapToInt(Collection::size).sum());
         Fluid filter = tank.filterSlot.getFluid();
         left.add("filter = " + (filter == null ? "null" : filter.getName()));
     }

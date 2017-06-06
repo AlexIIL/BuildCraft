@@ -33,6 +33,6 @@ public class BlockPump extends BlockBCTile_Neptune {
         if (!world.isRemote) {
             BCFactoryGuis.PUMP.openGUI(player, pos);
         }
-        return false;
+        return true;
     }
 }
