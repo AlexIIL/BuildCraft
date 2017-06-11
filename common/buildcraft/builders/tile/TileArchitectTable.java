@@ -225,9 +225,8 @@ public class TileArchitectTable extends TileBC_Neptune implements ITickable, IDe
     }
 
     private ISchematicBlock<?> readSchematicBlock(BlockPos worldScanPos) {
-        return SchematicBlockManager.getSchematicBlock(world, pos.offset(world.getBlockState(pos).getValue(
-            BlockBCBase_Neptune.PROP_FACING).getOpposite()), worldScanPos, world.getBlockState(worldScanPos), world
-                .getBlockState(worldScanPos).getBlock());
+        EnumFacing thisFacing = world.getBlockState(pos).getValue(BlockBCBase_Neptune.PROP_FACING).getOpposite();
+        return SchematicBlockManager.getSchematicBlock(world, pos.offset(thisFacing), worldScanPos);
     }
 
     private void scanEntities() {

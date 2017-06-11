@@ -67,22 +67,17 @@ public class SchematicEntityManager {
                 Collections.emptyList()
             )
         );
-        FakeWorld world = FakeWorld.INSTANCE;
-        world.uploadBlueprint(blueprint, true);
         int i = 0;
+        BptBlockAccess access = new BptBlockAccess(blueprint.size);
         for (ISchematicEntity<?> schematicEntity : blueprint.entities) {
-            Entity entity = schematicEntity.buildWithoutChecks(world, FakeWorld.BLUEPRINT_OFFSET);
+            Entity entity = schematicEntity.buildWithoutChecks(null, BlockPos.ORIGIN);
             if (entity != null) {
-                world.editable = false;
-                SchematicEntityContext schematicEntityContext = new SchematicEntityContext(world, FakeWorld.BLUEPRINT_OFFSET, entity);
+                SchematicEntityContext schematicEntityContext = new SchematicEntityContext(access, BlockPos.ORIGIN, entity);
                 requiredItems.set(i, schematicEntity.computeRequiredItems(schematicEntityContext));
                 requiredFluids.set(i, schematicEntity.computeRequiredFluids(schematicEntityContext));
-                world.editable = true;
-                world.removeEntity(entity);
             }
             i++;
         }
-        world.clear();
         return Pair.of(requiredItems, requiredFluids);
     }
 

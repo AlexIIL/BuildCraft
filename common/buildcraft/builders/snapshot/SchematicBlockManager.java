@@ -20,6 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import net.minecraftforge.fluids.FluidStack;
@@ -42,17 +43,13 @@ public class SchematicBlockManager {
         throw new UnsupportedOperationException();
     }
 
-    public static ISchematicBlock<?> getSchematicBlock(World world,
+    public static ISchematicBlock<?> getSchematicBlock(IBlockAccess world,
                                                        BlockPos basePos,
-                                                       BlockPos pos,
-                                                       IBlockState blockState,
-                                                       Block block) {
+                                                       BlockPos pos) {
         SchematicBlockContext context = new SchematicBlockContext(
             world,
             basePos,
-            pos,
-            blockState,
-            block
+            pos
         );
         return getSchematicBlock(context);
     }
@@ -66,27 +63,17 @@ public class SchematicBlockManager {
             [blueprint.size.getX()]
             [blueprint.size.getY()]
             [blueprint.size.getZ()];
-        FakeWorld world = FakeWorld.INSTANCE;
-        world.uploadBlueprint(blueprint, true);
-        world.editable = false;
+        BptBlockAccess access = new BptBlockAccess(blueprint);
         for (int z = 0; z < blueprint.size.getZ(); z++) {
             for (int y = 0; y < blueprint.size.getY(); y++) {
                 for (int x = 0; x < blueprint.size.getX(); x++) {
-                    BlockPos pos = new BlockPos(x, y, z).add(FakeWorld.BLUEPRINT_OFFSET);
-                    ISchematicBlock<?> schematicBlock = blueprint.palette.get(
-                        blueprint.data
-                            [pos.getX() - FakeWorld.BLUEPRINT_OFFSET.getX()]
-                            [pos.getY() - FakeWorld.BLUEPRINT_OFFSET.getY()]
-                            [pos.getZ() - FakeWorld.BLUEPRINT_OFFSET.getZ()]
-                    );
-                    IBlockState blockState = world.getBlockState(pos);
-                    Block block = blockState.getBlock();
+                    BlockPos pos = new BlockPos(x, y, z);
+                    int paletteIndex = blueprint.data[pos.getX()][pos.getY()][pos.getZ()];
+                    ISchematicBlock<?> schematicBlock = blueprint.palette.get(paletteIndex);
                     SchematicBlockContext schematicBlockContext = new SchematicBlockContext(
-                        world,
-                        FakeWorld.BLUEPRINT_OFFSET,
-                        pos,
-                        blockState,
-                        block
+                        access,
+                        BlockPos.ORIGIN,
+                        pos
                     );
                     requiredItems[x][y][z] =
                         schematicBlock.computeRequiredItems(schematicBlockContext);
@@ -95,8 +82,6 @@ public class SchematicBlockManager {
                 }
             }
         }
-        world.editable = true;
-        world.clear();
         return Pair.of(requiredItems, requiredFluids);
     }
 

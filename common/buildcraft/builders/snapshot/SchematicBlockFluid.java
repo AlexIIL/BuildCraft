@@ -28,6 +28,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 
 import buildcraft.api.core.InvalidInputDataException;
+import buildcraft.api.schematics.IBuildableRegion;
 import buildcraft.api.schematics.ISchematicBlock;
 import buildcraft.api.schematics.SchematicBlockContext;
 
@@ -45,7 +46,7 @@ public class SchematicBlockFluid implements ISchematicBlock<SchematicBlockFluid>
     @Override
     public void init(SchematicBlockContext context) {
         blockState = context.blockState;
-        isFlowing = BlockUtil.getFluid(context.world, context.pos) == null;
+        isFlowing = BlockUtil.getFluidContained(context.world, context.pos) == null;
     }
 
     @Override
@@ -72,8 +73,9 @@ public class SchematicBlockFluid implements ISchematicBlock<SchematicBlockFluid>
     @Override
     public List<FluidStack> computeRequiredFluids(SchematicBlockContext context) {
         List<FluidStack> requiredFluids = new ArrayList<>();
-        if (BlockUtil.drainBlock(context.world, context.pos, false) != null) {
-            requiredFluids.add(BlockUtil.drainBlock(context.world, context.pos, false));
+        FluidStack contained = BlockUtil.getFluidContained(context.world, context.pos);
+        if (contained != null) {
+            requiredFluids.add(contained);
         }
         return requiredFluids;
     }
@@ -113,8 +115,9 @@ public class SchematicBlockFluid implements ISchematicBlock<SchematicBlockFluid>
     }
 
     @Override
-    public boolean buildWithoutChecks(World world, BlockPos blockPos) {
-        return world.setBlockState(blockPos, blockState, 0);
+    public boolean buildWithoutChecks(IBuildableRegion world, BlockPos blockPos) {
+        world.setBlockState(blockPos, blockState, null);
+        return true;
     }
 
     @Override

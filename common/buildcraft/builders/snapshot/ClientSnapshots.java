@@ -11,8 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.base.Predicates;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
 
@@ -24,15 +22,10 @@ import net.minecraft.client.renderer.WorldVertexBufferUploader;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import buildcraft.api.schematics.ISchematicEntity;
 
 import buildcraft.lib.net.MessageManager;
 
@@ -41,7 +34,7 @@ public enum ClientSnapshots {
 
     private final List<Snapshot> snapshots = new ArrayList<>();
     private final List<Snapshot.Header> pending = new ArrayList<>();
-    private final Map<Snapshot.Header, FakeWorld> worlds = new HashMap<>();
+    private final Map<Snapshot.Header, BptBlockAccess> worlds = new HashMap<>();
     private final Map<Snapshot.Header, VertexBuffer> buffers = new HashMap<>();
 
     public Snapshot getSnapshot(Snapshot.Header header) {
@@ -72,53 +65,27 @@ public enum ClientSnapshots {
 
     @SideOnly(Side.CLIENT)
     public void renderSnapshot(Snapshot snapshot, int offsetX, int offsetY, int sizeX, int sizeY) {
-        FakeWorld world = worlds.computeIfAbsent(snapshot.header, localHeader -> {
-            FakeWorld localWorld = new FakeWorld();
+        BptBlockAccess world = worlds.computeIfAbsent(snapshot.header, h -> {
             if (snapshot instanceof Blueprint) {
-                localWorld.uploadBlueprint((Blueprint) snapshot, false);
-                for (ISchematicEntity<?> schematicEntity : ((Blueprint) snapshot).entities) {
-                    schematicEntity.build(localWorld, FakeWorld.BLUEPRINT_OFFSET);
-                }
+                return new BptBlockAccess((Blueprint) snapshot);
+            } else {
+                return new BptBlockAccess((Template) snapshot);
             }
-            if (snapshot instanceof Template) {
-                for (int z = 0; z < snapshot.size.getZ(); z++) {
-                    for (int y = 0; y < snapshot.size.getY(); y++) {
-                        for (int x = 0; x < snapshot.size.getX(); x++) {
-                            if (((Template) snapshot).data[x][y][z]) {
-                                localWorld.setBlockState(
-                                    new BlockPos(x, y, z).add(FakeWorld.BLUEPRINT_OFFSET),
-                                    Blocks.QUARTZ_BLOCK.getDefaultState()
-                                );
-                            }
-                        }
-                    }
-                }
-            }
-            return localWorld;
         });
         VertexBuffer vertexBuffer = buffers.computeIfAbsent(snapshot.header, localHeader -> {
             VertexBuffer localBuffer = new VertexBuffer(1024) {
                 @Override
                 public void reset() {
+                    // Remove this so that our temp drawing code works
                 }
             };
             localBuffer.begin(GL11.GL_QUADS, DefaultVertexFormats.BLOCK);
             for (int z = 0; z < snapshot.size.getZ(); z++) {
                 for (int y = 0; y < snapshot.size.getY(); y++) {
                     for (int x = 0; x < snapshot.size.getX(); x++) {
-                        BlockPos pos = new BlockPos(x, y, z).add(FakeWorld.BLUEPRINT_OFFSET);
-                        localBuffer.setTranslation(
-                            -FakeWorld.BLUEPRINT_OFFSET.getX(),
-                            -FakeWorld.BLUEPRINT_OFFSET.getY(),
-                            -FakeWorld.BLUEPRINT_OFFSET.getZ()
-                        );
-                        Minecraft.getMinecraft().getBlockRendererDispatcher().renderBlock(
-                            world.getBlockState(pos),
-                            pos,
-                            world,
-                            localBuffer
-                        );
-                        localBuffer.setTranslation(0, 0, 0);
+                        BlockPos pos = new BlockPos(x, y, z);
+                        Minecraft.getMinecraft().getBlockRendererDispatcher().renderBlock(world.getBlockState(pos), pos,
+                            world, localBuffer);
                     }
                 }
             }
@@ -128,18 +95,19 @@ public enum ClientSnapshots {
         GlStateManager.pushAttrib();
         GlStateManager.enableDepth();
         GlStateManager.enableBlend();
-        GlStateManager.clear(GL11.GL_DEPTH_BUFFER_BIT); // TODO: save depth buffer?
+        GlStateManager.clear(GL11.GL_DEPTH_BUFFER_BIT); // TODO:
+                                                        // save
+                                                        // depth
+                                                        // buffer?
         GlStateManager.pushMatrix();
         GlStateManager.matrixMode(GL11.GL_PROJECTION);
         GlStateManager.pushMatrix();
         GlStateManager.loadIdentity();
+
         ScaledResolution scaledResolution = new ScaledResolution(Minecraft.getMinecraft());
-        GlStateManager.viewport(
-            offsetX * scaledResolution.getScaleFactor(),
+        GlStateManager.viewport(offsetX * scaledResolution.getScaleFactor(),
             Minecraft.getMinecraft().displayHeight - (sizeY + offsetY) * scaledResolution.getScaleFactor(),
-            sizeX * scaledResolution.getScaleFactor(),
-            sizeY * scaledResolution.getScaleFactor()
-        );
+            sizeX * scaledResolution.getScaleFactor(), sizeY * scaledResolution.getScaleFactor());
         GlStateManager.scale(scaledResolution.getScaleFactor(), scaledResolution.getScaleFactor(), 1);
         GLU.gluPerspective(70.0F, (float) sizeX / sizeY, 0.1F, 1000.0F);
         GlStateManager.matrixMode(GL11.GL_MODELVIEW);
@@ -159,67 +127,43 @@ public enum ClientSnapshots {
             for (int z = 0; z < snapshot.size.getZ(); z++) {
                 for (int y = 0; y < snapshot.size.getY(); y++) {
                     for (int x = 0; x < snapshot.size.getX(); x++) {
-                        BlockPos pos = new BlockPos(x, y, z).add(FakeWorld.BLUEPRINT_OFFSET);
+                        BlockPos pos = new BlockPos(x, y, z);
                         GlStateManager.pushAttrib();
-                        // noinspection ConstantConditions
-                        TileEntityRendererDispatcher.instance.renderTileEntityAt(
-                            world.getTileEntity(pos),
-                            pos.getX() - FakeWorld.BLUEPRINT_OFFSET.getX(),
-                            pos.getY() - FakeWorld.BLUEPRINT_OFFSET.getY(),
-                            pos.getZ() - FakeWorld.BLUEPRINT_OFFSET.getZ(),
-                            0
-                        );
+                        TileEntityRendererDispatcher.instance.renderTileEntityAt(world.getTileEntity(pos),
+                            pos.getX(),
+                            pos.getY(),
+                            pos.getZ(), 0);
                         GlStateManager.popAttrib();
                     }
                 }
             }
             TileEntityRendererDispatcher.instance.drawBatch(1);
         }
-        // noinspection Guava
-        for (Entity entity : world.getEntities(Entity.class, Predicates.alwaysTrue())) {
-            Vec3d pos = entity.getPositionVector();
-            switch (snapshot.facing) {
-                case NORTH:
-                    pos = new Vec3d(
-                        pos.xCoord + snapshot.size.getX() - 1,
-                        pos.yCoord,
-                        pos.zCoord
-                    );
-                    break;
-                case SOUTH:
-                    pos = new Vec3d(
-                        pos.xCoord + snapshot.size.getX() - 1,
-                        pos.yCoord,
-                        pos.zCoord + snapshot.size.getZ() - 1
-                    );
-                    break;
-                case WEST:
-                    pos = new Vec3d(
-                        pos.xCoord,
-                        pos.yCoord,
-                        pos.zCoord + snapshot.size.getZ() - 1
-                    );
-                    break;
-                case EAST:
-                    pos = new Vec3d(
-                        pos.xCoord + snapshot.size.getX() - 1,
-                        pos.yCoord,
-                        pos.zCoord + snapshot.size.getZ() - 1
-                    );
-                    break;
-            }
-            GlStateManager.pushAttrib();
-            Minecraft.getMinecraft().getRenderManager().doRenderEntity(
-                entity,
-                pos.xCoord - FakeWorld.BLUEPRINT_OFFSET.getX(),
-                pos.yCoord - FakeWorld.BLUEPRINT_OFFSET.getY(),
-                pos.zCoord - FakeWorld.BLUEPRINT_OFFSET.getZ(),
-                0,
-                0,
-                true
-            );
-            GlStateManager.popAttrib();
-        }
+//        for (Entity entity : world.entities) {
+//            Vec3d pos = entity.getPositionVector();
+//            switch (snapshot.facing) {
+//                case NORTH:
+//                    pos = new Vec3d(pos.xCoord + snapshot.size.getX() - 1, pos.yCoord, pos.zCoord);
+//                    break;
+//                case SOUTH:
+//                    pos = new Vec3d(pos.xCoord + snapshot.size.getX() - 1, pos.yCoord,
+//                        pos.zCoord + snapshot.size.getZ() - 1);
+//                    break;
+//                case WEST:
+//                    pos = new Vec3d(pos.xCoord, pos.yCoord, pos.zCoord + snapshot.size.getZ() - 1);
+//                    break;
+//                case EAST:
+//                    pos = new Vec3d(pos.xCoord + snapshot.size.getX() - 1, pos.yCoord,
+//                        pos.zCoord + snapshot.size.getZ() - 1);
+//                    break;
+//            }
+//            GlStateManager.pushAttrib();
+//            Minecraft.getMinecraft().getRenderManager().doRenderEntity(entity,
+//                pos.xCoord,
+//                pos.yCoord,
+//                pos.zCoord, 0, 0, true);
+//            GlStateManager.popAttrib();
+//        }
         GlStateManager.popMatrix();
         GlStateManager.disableRescaleNormal();
         GlStateManager.matrixMode(GL11.GL_PROJECTION);

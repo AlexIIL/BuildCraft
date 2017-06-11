@@ -220,7 +220,7 @@ public abstract class TileEngineBase_BC8 extends TileBC_Neptune implements ITick
     }
 
     public final EnumPowerStage getPowerStage() {
-        if (!world.isRemote) {
+        if (isServerWorld()) {
             EnumPowerStage newStage = computePowerStage();
 
             if (powerStage != newStage) {

@@ -21,6 +21,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 
 import buildcraft.api.core.InvalidInputDataException;
+import buildcraft.api.schematics.IBuildableRegion;
 import buildcraft.api.schematics.ISchematicBlock;
 import buildcraft.api.schematics.SchematicBlockContext;
 
@@ -73,7 +74,7 @@ public final class SchematicBlockAir implements ISchematicBlock<SchematicBlockAi
     }
 
     @Override
-    public boolean buildWithoutChecks(World world, BlockPos blockPos) {
+    public boolean buildWithoutChecks(IBuildableRegion world, BlockPos blockPos) {
         return true;
     }
 

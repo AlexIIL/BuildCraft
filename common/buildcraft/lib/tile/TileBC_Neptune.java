@@ -137,6 +137,10 @@ public abstract class TileBC_Neptune extends TileEntity implements IPayloadRecei
         GameRegistry.registerTileEntityWithAlternatives(tileClass, regName, alternatives);
     }
 
+    public boolean isServerWorld() {
+        return world != null && !world.isRemote;
+    }
+
     // ##################################################
     //
     // Local blockstate + tile entity getters

@@ -93,8 +93,7 @@ public class ItemSchematicSingle extends ItemBC_Neptune {
         }
         int damage = stack.getItemDamage();
         if (damage != DAMAGE_USED) {
-            IBlockState state = world.getBlockState(pos);
-            ISchematicBlock<?> schematicBlock = SchematicBlockManager.getSchematicBlock(world, pos, pos, state, state.getBlock());
+            ISchematicBlock<?> schematicBlock = SchematicBlockManager.getSchematicBlock(world, pos, pos);
             if (schematicBlock.isAir()) {
                 return EnumActionResult.FAIL;
             }

@@ -42,6 +42,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 
 import buildcraft.api.core.InvalidInputDataException;
+import buildcraft.api.schematics.IBuildableRegion;
 import buildcraft.api.schematics.ISchematicBlock;
 import buildcraft.api.schematics.SchematicBlockContext;
 
@@ -65,39 +66,27 @@ public class SchematicBlockDefault implements ISchematicBlock<SchematicBlockDefa
             return false;
         }
         ResourceLocation registryName = context.block.getRegistryName();
-        return registryName != null &&
-            RulesLoader.READ_DOMAINS.contains(registryName.getResourceDomain()) &&
-            RulesLoader.getRules(context.blockState).stream().noneMatch(rule -> rule.ignore);
+        return registryName != null && RulesLoader.READ_DOMAINS.contains(registryName.getResourceDomain())
+            && RulesLoader.getRules(context.blockState).stream().noneMatch(rule -> rule.ignore);
     }
 
-    @SuppressWarnings({"unused", "WeakerAccess"})
+    @SuppressWarnings({ "unused", "WeakerAccess" })
     protected void setRequiredBlockOffsets(SchematicBlockContext context, Set<JsonRule> rules) {
         requiredBlockOffsets.clear();
-        rules.stream()
-            .map(rule -> rule.requiredBlockOffsets)
-            .filter(Objects::nonNull)
-            .flatMap(Collection::stream)
+        rules.stream().map(rule -> rule.requiredBlockOffsets).filter(Objects::nonNull).flatMap(Collection::stream)
             .forEach(requiredBlockOffsets::add);
         if (context.block instanceof BlockFalling) {
             requiredBlockOffsets.add(new BlockPos(0, -1, 0));
         }
-        rules.stream()
-            .map(rule -> rule.copyOppositeRequiredBlockOffsetFromProperty)
-            .forEach(propertyName ->
-                context.blockState.getProperties().keySet().stream()
-                    .filter(property -> property.getName().equals(propertyName))
-                    .map(PropertyDirection.class::cast)
-                    .map(context.blockState::getValue)
-                    .map(EnumFacing::getOpposite)
-                    .map(EnumFacing::getDirectionVec)
-                    .map(BlockPos::new)
-                    .forEach(requiredBlockOffsets::add)
-            );
+        rules.stream().map(rule -> rule.copyOppositeRequiredBlockOffsetFromProperty)
+            .forEach(propertyName -> context.blockState.getProperties().keySet().stream()
+                .filter(property -> property.getName().equals(propertyName)).map(PropertyDirection.class::cast)
+                .map(context.blockState::getValue).map(EnumFacing::getOpposite).map(EnumFacing::getDirectionVec)
+                .map(BlockPos::new).forEach(requiredBlockOffsets::add));
         if (rules.stream().anyMatch(rule -> rule.copyRequiredBlockOffsetsFromProperties)) {
             for (EnumFacing side : EnumFacing.VALUES) {
                 if (context.blockState.getProperties().keySet().stream()
-                    .filter(property -> property.getName().equals(side.getName()))
-                    .map(PropertyBool.class::cast)
+                    .filter(property -> property.getName().equals(side.getName())).map(PropertyBool.class::cast)
                     .anyMatch(context.blockState::getValue)) {
                     requiredBlockOffsets.add(new BlockPos(side.getDirectionVec()));
                 }
@@ -105,26 +94,21 @@ public class SchematicBlockDefault implements ISchematicBlock<SchematicBlockDefa
         }
     }
 
-    @SuppressWarnings({"unused", "WeakerAccess"})
+    @SuppressWarnings({ "unused", "WeakerAccess" })
     protected void setBlockState(SchematicBlockContext context, Set<JsonRule> rules) {
         blockState = context.blockState;
     }
 
-    @SuppressWarnings({"unused", "WeakerAccess"})
+    @SuppressWarnings({ "unused", "WeakerAccess" })
     protected void setIgnoredProperties(SchematicBlockContext context, Set<JsonRule> rules) {
         ignoredProperties.clear();
-        rules.stream()
-            .map(rule -> rule.ignoredProperties)
-            .filter(Objects::nonNull)
-            .flatMap(List::stream)
-            .flatMap(propertyName ->
-                context.blockState.getProperties().keySet().stream()
-                    .filter(property -> property.getName().equals(propertyName))
-            )
+        rules.stream().map(rule -> rule.ignoredProperties)
+            .filter(Objects::nonNull).flatMap(List::stream).flatMap(propertyName -> context.blockState.getProperties()
+                .keySet().stream().filter(property -> property.getName().equals(propertyName)))
             .forEach(ignoredProperties::add);
     }
 
-    @SuppressWarnings({"unused", "WeakerAccess"})
+    @SuppressWarnings({ "unused", "WeakerAccess" })
     protected void setTileNbt(SchematicBlockContext context, Set<JsonRule> rules) {
         tileNbt = null;
         if (context.block.hasTileEntity(context.blockState)) {
@@ -135,64 +119,46 @@ public class SchematicBlockDefault implements ISchematicBlock<SchematicBlockDefa
         }
     }
 
-    @SuppressWarnings({"unused", "WeakerAccess"})
+    @SuppressWarnings({ "unused", "WeakerAccess" })
     protected void setIgnoredTags(SchematicBlockContext context, Set<JsonRule> rules) {
         ignoredTags.clear();
-        rules.stream()
-            .map(rule -> rule.ignoredTags)
-            .filter(Objects::nonNull)
-            .flatMap(Collection::stream)
+        rules.stream().map(rule -> rule.ignoredTags).filter(Objects::nonNull).flatMap(Collection::stream)
             .forEach(ignoredTags::add);
     }
 
-    @SuppressWarnings({"unused", "WeakerAccess"})
+    @SuppressWarnings({ "unused", "WeakerAccess" })
     protected void setPlaceBlock(SchematicBlockContext context, Set<JsonRule> rules) {
-        placeBlock = rules.stream()
-            .map(rule -> rule.placeBlock)
-            .filter(Objects::nonNull)
-            .findFirst()
-            .map(Block::getBlockFromName)
-            .orElse(context.block);
+        placeBlock = rules.stream().map(rule -> rule.placeBlock).filter(Objects::nonNull).findFirst()
+            .map(Block::getBlockFromName).orElse(context.block);
     }
 
-    @SuppressWarnings({"unused", "WeakerAccess"})
+    @SuppressWarnings({ "unused", "WeakerAccess" })
     protected void setUpdateBlockOffsets(SchematicBlockContext context, Set<JsonRule> rules) {
         updateBlockOffsets.clear();
         if (rules.stream().map(rule -> rule.updateBlockOffsets).anyMatch(Objects::nonNull)) {
-            rules.stream()
-                .map(rule -> rule.updateBlockOffsets)
-                .filter(Objects::nonNull)
-                .flatMap(Collection::stream)
+            rules.stream().map(rule -> rule.updateBlockOffsets).filter(Objects::nonNull).flatMap(Collection::stream)
                 .forEach(updateBlockOffsets::add);
         } else {
-            Stream.of(EnumFacing.VALUES)
-                .map(EnumFacing::getDirectionVec)
-                .map(BlockPos::new)
+            Stream.of(EnumFacing.VALUES).map(EnumFacing::getDirectionVec).map(BlockPos::new)
                 .forEach(updateBlockOffsets::add);
             updateBlockOffsets.add(BlockPos.ORIGIN);
         }
     }
 
-    @SuppressWarnings({"unused", "WeakerAccess"})
+    @SuppressWarnings({ "unused", "WeakerAccess" })
     protected void setCanBeReplacedWithBlocks(SchematicBlockContext context, Set<JsonRule> rules) {
         canBeReplacedWithBlocks.clear();
-        rules.stream()
-            .map(rule -> rule.canBeReplacedWithBlocks)
-            .filter(Objects::nonNull)
-            .flatMap(Collection::stream)
-            .map(Block::getBlockFromName)
-            .forEach(canBeReplacedWithBlocks::add);
+        rules.stream().map(rule -> rule.canBeReplacedWithBlocks).filter(Objects::nonNull).flatMap(Collection::stream)
+            .map(Block::getBlockFromName).forEach(canBeReplacedWithBlocks::add);
         canBeReplacedWithBlocks.add(context.block);
         canBeReplacedWithBlocks.add(placeBlock);
     }
 
-    @SuppressWarnings({"unused", "WeakerAccess"})
-    protected void setRequiredItems(SchematicBlockContext context, Set<JsonRule> rules) {
-    }
+    @SuppressWarnings({ "unused", "WeakerAccess" })
+    protected void setRequiredItems(SchematicBlockContext context, Set<JsonRule> rules) {}
 
-    @SuppressWarnings({"unused", "WeakerAccess"})
-    protected void setRequiredFluids(SchematicBlockContext context, Set<JsonRule> rules) {
-    }
+    @SuppressWarnings({ "unused", "WeakerAccess" })
+    protected void setRequiredFluids(SchematicBlockContext context, Set<JsonRule> rules) {}
 
     @Override
     public void init(SchematicBlockContext context) {
@@ -225,64 +191,37 @@ public class SchematicBlockDefault implements ISchematicBlock<SchematicBlockDefa
     public List<ItemStack> computeRequiredItems(SchematicBlockContext context) {
         Set<JsonRule> rules = RulesLoader.getRules(context.blockState);
         List<ItemStack> requiredItems = new ArrayList<>();
-        requiredItems.add(
-            context.block.getPickBlock(
-                context.blockState,
-                null,
-                context.world,
-                context.pos,
-                null
-            )
-        );
+        requiredItems.add(new ItemStack(context.block, 1, context.block.damageDropped(context.blockState)));
         if (rules.stream().anyMatch(rule -> rule.copyRequiredItemsFromDrops)) {
             requiredItems.clear();
-            requiredItems.addAll(context.block.getDrops(
-                context.world,
-                context.pos,
-                context.blockState,
-                0
-            ));
+            requiredItems.addAll(context.block.getDrops(context.world, context.pos, context.blockState, 0));
         }
         if (rules.stream().noneMatch(rule -> rule.doNotCopyRequiredItemsFromBreakBlockDrops)) {
-            if (context.world instanceof FakeWorld) {
-                requiredItems.addAll(((FakeWorld) context.world).breakBlockAndGetDrops(context.pos));
-            }
+//            if (context.world instanceof FakeWorld) {
+//                requiredItems.addAll(((FakeWorld) context.world).breakBlockAndGetDrops(context.pos));
+//            }
         }
         if (rules.stream().map(rule -> rule.requiredItems).anyMatch(Objects::nonNull)) {
             requiredItems.clear();
-            rules.stream()
-                .map(rule -> rule.requiredItems)
-                .filter(Objects::nonNull)
-                .flatMap(Collection::stream)
+            rules.stream().map(rule -> rule.requiredItems).filter(Objects::nonNull).flatMap(Collection::stream)
                 .forEach(requiredItems::add);
         }
-        rules.stream()
-            .map(rule -> rule.copyRequiredItemsCountFromProperty)
-            .filter(Objects::nonNull)
-            .forEach(propertyName ->
-                context.blockState.getProperties().keySet().stream()
-                    .filter(property -> property.getName().equals(propertyName))
-                    .map(PropertyInteger.class::cast)
-                    .map(context.blockState::getValue)
-                    .findFirst()
-                    .ifPresent(value -> requiredItems.forEach(stack -> stack.setCount(stack.getCount() * value)))
-            );
+        rules.stream().map(rule -> rule.copyRequiredItemsCountFromProperty).filter(Objects::nonNull)
+            .forEach(propertyName -> context.blockState.getProperties().keySet().stream()
+                .filter(property -> property.getName().equals(propertyName)).map(PropertyInteger.class::cast)
+                .map(context.blockState::getValue).findFirst()
+                .ifPresent(value -> requiredItems.forEach(stack -> stack.setCount(stack.getCount() * value))));
         if (context.block.hasTileEntity(context.blockState)) {
             TileEntity tileEntity = context.world.getTileEntity(context.pos);
             if (tileEntity != null) {
-                rules.stream()
-                    .map(rule -> rule.copyRequiredItemsFromItemHandlersOnSides)
-                    .filter(Objects::nonNull)
-                    .flatMap(Collection::stream)
-                    .map(EnumFacing::byName)
+                rules.stream().map(rule -> rule.copyRequiredItemsFromItemHandlersOnSides).filter(Objects::nonNull)
+                    .flatMap(Collection::stream).map(EnumFacing::byName)
                     .filter(side -> tileEntity.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side))
                     .map(side -> tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side))
                     .filter(Objects::nonNull)
-                    .flatMap(itemHandler ->
-                        IntStream.range(0, itemHandler.getSlots()).mapToObj(itemHandler::getStackInSlot)
-                    )
-                    .filter(stack -> !stack.isEmpty())
-                    .forEach(requiredItems::add);
+                    .flatMap(
+                        itemHandler -> IntStream.range(0, itemHandler.getSlots()).mapToObj(itemHandler::getStackInSlot))
+                    .filter(stack -> !stack.isEmpty()).forEach(requiredItems::add);
             }
         }
         requiredItems.removeIf(ItemStack::isEmpty);
@@ -292,18 +231,13 @@ public class SchematicBlockDefault implements ISchematicBlock<SchematicBlockDefa
     @Nonnull
     @Override
     public List<FluidStack> computeRequiredFluids(SchematicBlockContext context) {
-        List<FluidStack> requiredFluids = new ArrayList<>();
-        if (BlockUtil.drainBlock(context.world, context.pos, false) != null) {
-            requiredFluids.add(BlockUtil.drainBlock(context.world, context.pos, false));
-        }
-        return requiredFluids;
+        return BlockUtil.getFluidsContained(context.world, context.pos);
     }
 
     @Override
     public SchematicBlockDefault getRotated(Rotation rotation) {
         SchematicBlockDefault schematicBlock = new SchematicBlockDefault();
-        requiredBlockOffsets.stream()
-            .map(blockPos -> blockPos.rotate(rotation))
+        requiredBlockOffsets.stream().map(blockPos -> blockPos.rotate(rotation))
             .forEach(schematicBlock.requiredBlockOffsets::add);
         schematicBlock.blockState = blockState.withRotation(rotation);
         schematicBlock.ignoredProperties.addAll(ignoredProperties);
@@ -311,8 +245,7 @@ public class SchematicBlockDefault implements ISchematicBlock<SchematicBlockDefa
         schematicBlock.ignoredTags.addAll(ignoredTags);
         schematicBlock.tileRotation = tileRotation.add(rotation);
         schematicBlock.placeBlock = placeBlock;
-        updateBlockOffsets.stream()
-            .map(blockPos -> blockPos.rotate(rotation))
+        updateBlockOffsets.stream().map(blockPos -> blockPos.rotate(rotation))
             .forEach(schematicBlock.updateBlockOffsets::add);
         schematicBlock.canBeReplacedWithBlocks.addAll(canBeReplacedWithBlocks);
         return schematicBlock;
@@ -334,36 +267,24 @@ public class SchematicBlockDefault implements ISchematicBlock<SchematicBlockDefa
             newBlockState = placeBlock.getDefaultState();
             for (IProperty<?> property : blockState.getPropertyKeys()) {
                 if (newBlockState.getPropertyKeys().contains(property)) {
-                    newBlockState = BlockUtil.copyProperty(
-                        property,
-                        newBlockState,
-                        blockState
-                    );
+                    newBlockState = BlockUtil.copyProperty(property, newBlockState, blockState);
                 }
             }
         }
         for (IProperty<?> property : ignoredProperties) {
-            newBlockState = BlockUtil.copyProperty(
-                property,
-                newBlockState,
-                placeBlock.getDefaultState()
-            );
+            newBlockState = BlockUtil.copyProperty(property, newBlockState, placeBlock.getDefaultState());
         }
         if (world.setBlockState(blockPos, newBlockState, 11)) {
-            updateBlockOffsets.stream()
-                .map(blockPos::add)
+            updateBlockOffsets.stream().map(blockPos::add)
                 .forEach(updatePos -> world.notifyNeighborsOfStateChange(updatePos, placeBlock, false));
             if (tileNbt != null && blockState.getBlock().hasTileEntity(blockState)) {
                 NBTTagCompound newTileNbt = new NBTTagCompound();
-                tileNbt.getKeySet().stream()
-                    .map(key -> Pair.of(key, tileNbt.getTag(key)))
+                tileNbt.getKeySet().stream().map(key -> Pair.of(key, tileNbt.getTag(key)))
                     .forEach(kv -> newTileNbt.setTag(kv.getKey(), kv.getValue()));
                 newTileNbt.setInteger("x", blockPos.getX());
                 newTileNbt.setInteger("y", blockPos.getY());
                 newTileNbt.setInteger("z", blockPos.getZ());
-                ignoredTags.stream()
-                    .filter(newTileNbt::hasKey)
-                    .forEach(newTileNbt::removeTag);
+                ignoredTags.stream().filter(newTileNbt::hasKey).forEach(newTileNbt::removeTag);
                 TileEntity tileEntity = TileEntity.create(world, newTileNbt);
                 if (tileEntity != null) {
                     tileEntity.setWorld(world);
@@ -380,92 +301,45 @@ public class SchematicBlockDefault implements ISchematicBlock<SchematicBlockDefa
 
     @Override
     @SuppressWarnings("Duplicates")
-    public boolean buildWithoutChecks(World world, BlockPos blockPos) {
-        if (world.setBlockState(blockPos, blockState, 0)) {
-            if (tileNbt != null && blockState.getBlock().hasTileEntity(blockState)) {
-                NBTTagCompound newTileNbt = new NBTTagCompound();
-                tileNbt.getKeySet().stream()
-                    .map(key -> Pair.of(key, tileNbt.getTag(key)))
-                    .forEach(kv -> newTileNbt.setTag(kv.getKey(), kv.getValue()));
-                newTileNbt.setInteger("x", blockPos.getX());
-                newTileNbt.setInteger("y", blockPos.getY());
-                newTileNbt.setInteger("z", blockPos.getZ());
-                TileEntity tileEntity = TileEntity.create(world, newTileNbt);
-                if (tileEntity != null) {
-                    tileEntity.setWorld(world);
-                    world.setTileEntity(blockPos, tileEntity);
-                    if (tileRotation != Rotation.NONE) {
-                        tileEntity.rotate(tileRotation);
-                    }
-                }
-                return true;
-            }
-        }
-        return false;
+    public boolean buildWithoutChecks(IBuildableRegion world, BlockPos blockPos) {
+        world.setBlockState(blockPos, blockState, tileNbt);
+        return true;
     }
 
     @Override
     public boolean isBuilt(World world, BlockPos blockPos) {
-        return blockState != null &&
-            canBeReplacedWithBlocks.contains(world.getBlockState(blockPos).getBlock()) &&
-            BlockUtil.blockStatesWithoutBlockEqual(blockState, world.getBlockState(blockPos), ignoredProperties);
+        return blockState != null && canBeReplacedWithBlocks.contains(world.getBlockState(blockPos).getBlock())
+            && BlockUtil.blockStatesWithoutBlockEqual(blockState, world.getBlockState(blockPos), ignoredProperties);
     }
 
     @Override
     public NBTTagCompound serializeNBT() {
         NBTTagCompound nbt = new NBTTagCompound();
-        nbt.setTag(
-            "requiredBlockOffsets",
-            NBTUtilBC.writeCompoundList(
-                requiredBlockOffsets.stream()
-                    .map(NBTUtil::createPosTag)
-            )
-        );
+        nbt.setTag("requiredBlockOffsets",
+            NBTUtilBC.writeCompoundList(requiredBlockOffsets.stream().map(NBTUtil::createPosTag)));
         nbt.setTag("blockState", NBTUtil.writeBlockState(new NBTTagCompound(), blockState));
-        nbt.setTag(
-            "ignoredProperties",
-            NBTUtilBC.writeStringList(
-                ignoredProperties.stream()
-                    .map(IProperty::getName)
-            )
-        );
+        nbt.setTag("ignoredProperties", NBTUtilBC.writeStringList(ignoredProperties.stream().map(IProperty::getName)));
         if (tileNbt != null) {
             nbt.setTag("tileNbt", tileNbt);
         }
         nbt.setTag("ignoredTags", NBTUtilBC.writeStringList(ignoredTags.stream()));
         nbt.setTag("tileRotation", NBTUtilBC.writeEnum(tileRotation));
         nbt.setString("placeBlock", Block.REGISTRY.getNameForObject(placeBlock).toString());
-        nbt.setTag(
-            "updateBlockOffsets",
-            NBTUtilBC.writeCompoundList(
-                updateBlockOffsets.stream()
-                    .map(NBTUtil::createPosTag)
-            )
-        );
-        nbt.setTag(
-            "canBeReplacedWithBlocks",
-            NBTUtilBC.writeStringList(
-                canBeReplacedWithBlocks.stream()
-                    .map(Block.REGISTRY::getNameForObject)
-                    .map(Object::toString)
-            )
-        );
+        nbt.setTag("updateBlockOffsets",
+            NBTUtilBC.writeCompoundList(updateBlockOffsets.stream().map(NBTUtil::createPosTag)));
+        nbt.setTag("canBeReplacedWithBlocks", NBTUtilBC.writeStringList(
+            canBeReplacedWithBlocks.stream().map(Block.REGISTRY::getNameForObject).map(Object::toString)));
         return nbt;
     }
 
     @Override
     public void deserializeNBT(NBTTagCompound nbt) throws InvalidInputDataException {
         NBTUtilBC.readCompoundList(nbt.getTagList("requiredBlockOffsets", Constants.NBT.TAG_COMPOUND))
-            .map(NBTUtil::getPosFromTag)
-            .forEach(requiredBlockOffsets::add);
+            .map(NBTUtil::getPosFromTag).forEach(requiredBlockOffsets::add);
         blockState = NBTUtil.readBlockState(nbt.getCompoundTag("blockState"));
         NBTUtilBC.readStringList(nbt.getTagList("ignoredProperties", Constants.NBT.TAG_STRING))
-            .map(propertyName ->
-                blockState.getPropertyKeys().stream()
-                    .filter(property -> property.getName().equals(propertyName))
-                    .findFirst()
-                    .orElse(null)
-            )
+            .map(propertyName -> blockState.getPropertyKeys().stream()
+                .filter(property -> property.getName().equals(propertyName)).findFirst().orElse(null))
             .forEach(ignoredProperties::add);
         if (nbt.hasKey("tileNbt")) {
             tileNbt = nbt.getCompoundTag("tileNbt");
@@ -474,12 +348,9 @@ public class SchematicBlockDefault implements ISchematicBlock<SchematicBlockDefa
         tileRotation = NBTUtilBC.readEnum(nbt.getTag("tileRotation"), Rotation.class);
         placeBlock = Block.REGISTRY.getObject(new ResourceLocation(nbt.getString("placeBlock")));
         NBTUtilBC.readCompoundList(nbt.getTagList("updateBlockOffsets", Constants.NBT.TAG_COMPOUND))
-            .map(NBTUtil::getPosFromTag)
-            .forEach(updateBlockOffsets::add);
+            .map(NBTUtil::getPosFromTag).forEach(updateBlockOffsets::add);
         NBTUtilBC.readStringList(nbt.getTagList("canBeReplacedWithBlocks", Constants.NBT.TAG_STRING))
-            .map(ResourceLocation::new)
-            .map(Block.REGISTRY::getObject)
-            .forEach(canBeReplacedWithBlocks::add);
+            .map(ResourceLocation::new).map(Block.REGISTRY::getObject).forEach(canBeReplacedWithBlocks::add);
     }
 
     @Override
@@ -493,15 +364,12 @@ public class SchematicBlockDefault implements ISchematicBlock<SchematicBlockDefa
 
         SchematicBlockDefault that = (SchematicBlockDefault) o;
 
-        return requiredBlockOffsets.equals(that.requiredBlockOffsets) &&
-            blockState.equals(that.blockState) &&
-            ignoredProperties.equals(that.ignoredProperties) &&
-            (tileNbt != null ? tileNbt.equals(that.tileNbt) : that.tileNbt == null) &&
-            ignoredTags.equals(that.ignoredTags) &&
-            tileRotation == that.tileRotation &&
-            placeBlock.equals(that.placeBlock) &&
-            updateBlockOffsets.equals(that.updateBlockOffsets) &&
-            canBeReplacedWithBlocks.equals(that.canBeReplacedWithBlocks);
+        return requiredBlockOffsets.equals(that.requiredBlockOffsets) && blockState.equals(that.blockState)
+            && ignoredProperties.equals(that.ignoredProperties)
+            && (tileNbt != null ? tileNbt.equals(that.tileNbt) : that.tileNbt == null)
+            && ignoredTags.equals(that.ignoredTags) && tileRotation == that.tileRotation
+            && placeBlock.equals(that.placeBlock) && updateBlockOffsets.equals(that.updateBlockOffsets)
+            && canBeReplacedWithBlocks.equals(that.canBeReplacedWithBlocks);
     }
 
     @Override

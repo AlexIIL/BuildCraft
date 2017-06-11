@@ -30,6 +30,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import net.minecraftforge.fluids.FluidStack;
@@ -80,9 +81,9 @@ public class SchematicEntityDefault implements ISchematicEntity<SchematicEntityD
         Set<JsonRule> rules = RulesLoader.getRules(context.entity);
         List<ItemStack> requiredItems = new ArrayList<>();
         if (rules.stream().noneMatch(rule -> rule.doNotCopyRequiredItemsFromBreakBlockDrops)) {
-            if (context.world instanceof FakeWorld) {
-                requiredItems.addAll(((FakeWorld) context.world).killEntityAndGetDrops(context.entity));
-            }
+//            if (context.world instanceof FakeWorld) {
+//                requiredItems.addAll(((FakeWorld) context.world).killEntityAndGetDrops(context.entity));
+//            }
         }
         if (rules.stream().map(rule -> rule.requiredItems).anyMatch(Objects::nonNull)) {
             requiredItems.clear();
@@ -148,8 +149,8 @@ public class SchematicEntityDefault implements ISchematicEntity<SchematicEntityD
     }
 
     @Override
-    public Entity buildWithoutChecks(World world, BlockPos basePos) {
-        return build(world, basePos);
+    public Entity buildWithoutChecks(IBlockAccess access, BlockPos basePos) {
+        return build(null, basePos);
     }
 
     @Override
