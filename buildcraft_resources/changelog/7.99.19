@@ -12,6 +12,8 @@ Improvements:
   * Newly placed land markers in the corner of an existing box will try to add themselves to it.
 * [#3966] Added config options to tweak the hight of oil spouts (sca)
 * [#4256] Added a config option to change oil's flamibility (sca)
+* Added a subcommand: "/buildcraft alpha" which shows the warning message.
+  * The main message now only shows for 3 times after updating over a breaking version change, or always for prereleases.
 
 Bug fixes:
 

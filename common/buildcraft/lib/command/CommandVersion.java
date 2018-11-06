@@ -1,6 +1,5 @@
 package buildcraft.lib.command;
 
-import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
@@ -15,7 +14,7 @@ import buildcraft.api.core.BCLog;
 
 import buildcraft.lib.BCLib;
 
-public class CommandVersion extends CommandBase {
+public class CommandVersion extends CommandBuildcraftFree {
 
     @Override
     public String getName() {
@@ -25,11 +24,6 @@ public class CommandVersion extends CommandBase {
     @Override
     public String getUsage(ICommandSender sender) {
         return "command.buildcraft.buildcraft.version.help";
-    }
-
-    @Override
-    public int getRequiredPermissionLevel() {
-        return 0;
     }
 
     @Override

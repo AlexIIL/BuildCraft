@@ -26,6 +26,7 @@ import buildcraft.lib.BCLibConfig;
 import buildcraft.lib.BCLibConfig.ChunkLoaderLevel;
 import buildcraft.lib.BCLibConfig.RenderRotation;
 import buildcraft.lib.BCLibConfig.TimeGap;
+import buildcraft.lib.BCLibEventDist;
 import buildcraft.lib.config.EnumRestartRequirement;
 import buildcraft.lib.config.FileConfigManager;
 import buildcraft.lib.misc.ConfigUtil;
@@ -72,6 +73,8 @@ public class BCCoreConfig {
     private static Property propPumpMaxDistance;
     private static Property propNetworkUpdateRate;
     private static Property propMiningMultiplier;
+
+    private static Property propAlphaUpdateWarningString;
 
     public static void preInit(File cfgFolder) {
         config = new Configuration(new File(cfgFolder, "main.cfg"));
@@ -210,6 +213,12 @@ public class BCCoreConfig {
         propMiningMultiplier.setComment("How much power should be required for all mining machines?");
         none.setTo(propMiningMultiplier);
 
+        propAlphaUpdateWarningString = config.get(general, "__alphaWarningHash", "0");
+        propAlphaUpdateWarningString.setShowInGui(false);
+        propAlphaUpdateWarningString.setComment("Tracker for the alpha warning message. Set this to '0' to re-show the "
+            + "warning message once, or set this to 'all' to display the message every launch");
+        game.setTo(propAlphaUpdateWarningString);
+
         reloadConfig(game);
         addReloadListener(BCCoreConfig::reloadConfig);
 
@@ -278,6 +287,7 @@ public class BCCoreConfig {
                 BCLibConfig.useSwappableSprites = propUseSwappableSprites.getBoolean();
             }
         }
+        BCLibEventDist.loadAlphaWarningState(propAlphaUpdateWarningString);
         BCLibConfig.refreshConfigs();
         saveConfigs();
     }

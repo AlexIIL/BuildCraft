@@ -4,35 +4,33 @@
  * distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 package buildcraft.lib;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
-import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.UUID;
+import java.util.function.Consumer;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiNewChat;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.StringUtils;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.event.ClickEvent;
 import net.minecraft.world.WorldServer;
 
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.common.ForgeVersion;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Property;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.ModContainer;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
@@ -49,21 +47,24 @@ import buildcraft.lib.client.render.DetachedRenderer;
 import buildcraft.lib.client.render.fluid.FluidRenderer;
 import buildcraft.lib.client.render.laser.LaserRenderer_BC8;
 import buildcraft.lib.client.sprite.SpriteHolderRegistry;
+import buildcraft.lib.command.CommandAlphaWarning;
 import buildcraft.lib.debug.BCAdvDebugging;
 import buildcraft.lib.debug.ClientDebuggables;
 import buildcraft.lib.item.ItemDebugger;
 import buildcraft.lib.marker.MarkerCache;
 import buildcraft.lib.misc.FakePlayerProvider;
+import buildcraft.lib.misc.HashUtil;
 import buildcraft.lib.misc.MessageUtil;
 import buildcraft.lib.misc.data.ModelVariableData;
 import buildcraft.lib.net.MessageDebugRequest;
 import buildcraft.lib.net.MessageManager;
 import buildcraft.lib.net.cache.BuildCraftObjectCaches;
 
-import buildcraft.core.client.ConfigGuiFactoryBC;
-
 public enum BCLibEventDist {
     INSTANCE;
+
+    private static Property propAlphaWarningState;
+    private static boolean hasIncremented;
 
     @SubscribeEvent
     public static void onEntityJoinWorld(EntityJoinWorldEvent event) {
@@ -83,125 +84,85 @@ public enum BCLibEventDist {
         }
     }
 
+    public static void loadAlphaWarningState(Property property) {
+        propAlphaWarningState = property;
+    }
+
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public static void onConnectToServer(ClientConnectedToServerEvent event) {
         BuildCraftObjectCaches.onClientJoinServer();
-        // Really obnoxious warning
-        if (!BCLib.DEV) {
-            /* If people are in a dev environment or have toggled the flag then they probably already know about this */
-            Runnable r = () -> {
-                try {
-                    Thread.sleep(4000);
-                } catch (InterruptedException e) {
-                    // NO-OP
-                }
+        runAlphaWarningMessageThread();
+    }
 
-                String ver;
-                if (BCLib.VERSION.startsWith("$")) {
-                    ModContainer mod = Loader.instance().getIndexedModList().get(BCLib.MODID);
-                    if (mod == null) {
-                        ver = "[UNKNOWN-MANUAL-BUILD]";
-                    } else {
-                        ver = mod.getDisplayVersion();
-                        if (ver.startsWith("${")) {
-                            // The difference with the above is intentional
-                            ver = "[UNKNOWN_MANUAL_BUILD]";
-                        }
-                    }
-                } else {
-                    ver = BCLib.VERSION;
-                }
+    @SideOnly(Side.CLIENT)
+    private static void runAlphaWarningMessageThread() {
+        Runnable r = () -> {
+            int count = Integer.MAX_VALUE;
+            String current = propAlphaWarningState.getString();
+            if (!"all".equals(current)) {
+                count = 3;
+                UUID uuid = Minecraft.getMinecraft().getSession().getProfile().getId();
+                if (uuid == null) {
+                    // Always fail. (It's probably a dev environment, and they can just toggle this off anyway)
+                    uuid = UUID.randomUUID();
+                } else if (!StringUtils.isNullOrEmpty(current) && current.length() == HashUtil.DIGEST_LENGTH * 2) {
+                    // A list of previous versions that don't have any breaking changes.
+                    // (We only reset the warning message count on badly breaking versions)
+                    String[] safeVersions = {
+                        // Note that pre-releases are *not* present in this list
 
-                ITextComponent componentVersion = new TextComponentString(ver);
-                Style styleVersion = new Style();
-                styleVersion.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, BCLib.VERSION));
-                // styleVersion.setHoverEvent(new HoverEvent(HoverEvent.Action., valueIn));
-                componentVersion.setStyle(styleVersion);
-
-                String bodyText = "<!--\n" //
-                    + "If your issue is more of a question (like how does a machine work or a sugestion), please use our Discord instead: https://discord.gg/BuildCraft\n"//
-                    + "Please fill in all relavant information below.\n"//
-                    + "Please do not put the entire log here, upload it on pastebin (https://pastebin.com/) or gist (https://gist.github.com/) and paste here the link.\n"//
-                    + "-->\n\n" //
-                    + "BuildCraft version: " + BCLib.VERSION + "\n" //
-                    + "Forge version: " + ForgeVersion.getVersion() + "\n" //
-                    + "Link to crash report or log: {none given}\n" //
-                    + "Singleplayer or multiplayer: \n" //
-                    + "Steps to reproduce: \n" //
-                    + "Additional information: \n"//
-                    + "Mod list: \n\n"
-                    + Loader.instance().getCrashInformation().replaceAll("UCHIJA+", "Loaded").replace("\t|", "|");
-
-                String githubIssuesUrl;
-                try {
-                    githubIssuesUrl = "https://github.com/BuildCraft/BuildCraft/issues/new?body="
-                        + URLEncoder.encode(bodyText, "UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    throw new Error("UTF-8 isn't a valid charset? What?", e);
-                }
-                ITextComponent componentGithubLink = new TextComponentString("here");
-                Style styleGithubLink = new Style();
-                styleGithubLink.setUnderlined(Boolean.TRUE);
-                styleGithubLink.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, githubIssuesUrl));
-                componentGithubLink.setStyle(styleGithubLink);
-
-                TextComponentString textWarn = new TextComponentString("WARNING: BuildCraft ");
-                textWarn.appendSibling(componentVersion);
-                textWarn.appendText(" is in ALPHA!");
-
-                TextComponentString textReport = new TextComponentString("  Report BuildCraft bugs you find ");
-                textReport.appendSibling(componentGithubLink);
-
-                TextComponentString textDesc = new TextComponentString("  and include the BuildCraft version ");
-                textDesc.appendSibling(componentVersion);
-                textDesc.appendText(" in the description");
-
-                TextComponentString textLag =
-                    new TextComponentString("  If you have performance problems then try disabling");
-                TextComponentString textConfigLink =
-                    new TextComponentString("everything in the BuildCraft perfomance config section.");
-                textConfigLink.setStyle(new Style() {
-
-                    {
-                        setUnderlined(true);
-                    }
-
-                    @Override
-                    public Style createShallowCopy() {
-                        return this;
-                    }
-
-                    @Override
-                    public Style createDeepCopy() {
-                        return this;
-                    }
-
-                    @Override
-                    @Nullable
-                    public ClickEvent getClickEvent() {
-                        // Very hacky, but it technically works
-                        StackTraceElement[] trace = new Throwable().getStackTrace();
-                        for (StackTraceElement elem : trace) {
-                            if (GuiScreen.class.getName().equals(elem.getClassName())) {
-                                ConfigGuiFactoryBC.GuiConfigManager newGui =
-                                    new ConfigGuiFactoryBC.GuiConfigManager(Minecraft.getMinecraft().currentScreen);
-                                Minecraft.getMinecraft().displayGuiScreen(newGui);
-                                return null;
+                        // Also note that this array should be kept quite short as hashing is kinda expensive.
+                        "7.99.19", //
+                        // For obvious reasons the current version is always in this list
+                        BCLib.VERSION//
+                    };
+                    // Always start from the *newest* version as that's more likely to be the last saved one.
+                    Collections.reverse(Arrays.asList(safeVersions));
+                    match_search: for (String ver : safeVersions) {
+                        for (int c = 0; c <= 3; c++) {
+                            NBTTagCompound nbt = new NBTTagCompound();
+                            nbt.setString("buildcraft-version", ver);
+                            nbt.setInteger("to-show-count", c);
+                            nbt.setLong("UUID-Most", uuid.getMostSignificantBits());
+                            nbt.setLong("UUID-Least", uuid.getLeastSignificantBits());
+                            String str = HashUtil.convertHashToString(HashUtil.computeHash(nbt));
+                            if (str.equals(current)) {
+                                count = c;
+                                break match_search;
                             }
                         }
-                        return null;
                     }
-                });
-
-                ITextComponent[] lines = { textWarn, textReport, textDesc, textLag, textConfigLink };
-                GuiNewChat chat = Minecraft.getMinecraft().ingameGUI.getChatGUI();
-                for (ITextComponent line : lines) {
-                    chat.printChatMessage(line);
                 }
-            };
-            new Thread(r).start();
-        }
+
+                if (!hasIncremented) {
+                    hasIncremented = true;
+                    NBTTagCompound nbt = new NBTTagCompound();
+                    nbt.setString("buildcraft-version", BCLib.VERSION);
+                    nbt.setInteger("to-show-count", Math.max(0, count - 1));
+                    nbt.setLong("UUID-Most", uuid.getMostSignificantBits());
+                    nbt.setLong("UUID-Least", uuid.getLeastSignificantBits());
+                    propAlphaWarningState.set(HashUtil.convertHashToString(HashUtil.computeHash(nbt)));
+
+                    // Hack until we push the BCCoreConfig config object into this class
+                    MinecraftForge.EVENT_BUS.post(new OnConfigChangedEvent(BCLib.MODID, null, true, false));
+                }
+                if (count == 0) {
+                    return;
+                }
+            }
+
+            try {
+                Thread.sleep(4000);
+            } catch (InterruptedException e) {
+                // NO-OP
+            }
+
+            GuiNewChat chat = Minecraft.getMinecraft().ingameGUI.getChatGUI();
+            Consumer<ITextComponent> printer = chat::printChatMessage;
+            CommandAlphaWarning.sendAlphaWarningMessage(count, printer);
+        };
+        new Thread(r).start();
     }
 
     @SubscribeEvent
